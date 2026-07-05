@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Users, Download, LogOut, TrendingUp } from "lucide-react";
+import { Aperture, Bot, Download, LogOut, Rocket } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { useRegistrations } from "../hooks/useRegistrations";
 import StatCards from "./StatCards";
@@ -11,8 +11,8 @@ import Papa from "papaparse";
 import { saveAs } from "file-saver";
 
 const sidebarItems = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "participants", label: "Participants", icon: Users },
+  { id: "overview", label: "Overview", icon: Aperture },
+  { id: "participants", label: "Participants", icon: Bot },
 ];
 
 export default function AdminDashboard() {

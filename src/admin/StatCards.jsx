@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Users, CheckCircle, Clock, Calendar } from "lucide-react";
+import { Bot, Target, Hourglass, Orbit } from "lucide-react";
 
 const statCards = [
-  { label: "Total Registered", value: "total", icon: Users, color: "text-primary" },
-  { label: "Confirmed", value: "confirmed", icon: CheckCircle, color: "text-green-500" },
-  { label: "Pending", value: "pending", icon: Clock, color: "text-yellow-500" },
-  { label: "Today's Signups", value: "today", icon: Calendar, color: "text-accent" },
+  { label: "Total Registered", value: "total", icon: Bot, color: "text-primary" },
+  { label: "Confirmed", value: "confirmed", icon: Target, color: "text-green-500" },
+  { label: "Pending", value: "pending", icon: Hourglass, color: "text-yellow-500" },
+  { label: "Today's Signups", value: "today", icon: Orbit, color: "text-accent" },
 ];
 
 function getStats(registrations) {
@@ -50,10 +50,10 @@ export default function StatCards({ registrations }) {
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <StatCard label="Total Registered" icon={Users} color="text-primary" count={stats.total} />
-        <StatCard label="Confirmed" icon={CheckCircle} color="text-green-500" count={stats.confirmed} />
-        <StatCard label="Pending" icon={Clock} color="text-yellow-500" count={stats.pending} />
-        <StatCard label="Today's Signups" icon={Calendar} color="text-accent" count={stats.today} />
+        <StatCard label="Total Registered" icon={Bot} color="text-primary" count={stats.total} />
+        <StatCard label="Confirmed" icon={Target} color="text-green-500" count={stats.confirmed} />
+        <StatCard label="Pending" icon={Hourglass} color="text-yellow-500" count={stats.pending} />
+        <StatCard label="Today's Signups" icon={Orbit} color="text-accent" count={stats.today} />
       </div>
 
       {Object.keys(stats.byDomain).length > 0 && (

@@ -21,6 +21,8 @@ export default function SmoothScroll({ children }) {
     });
 
     lenisRef.current = lenis;
+    // Expose globally so SingularityOverlay can freeze/restore scroll
+    window.__lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 

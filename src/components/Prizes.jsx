@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Trophy, Medal } from "lucide-react";
+import { Swords, Shield } from "lucide-react";
 
 const prizes = [
-  { rank: "1st", amount: "₹15,000", icon: Trophy },
-  { rank: "2nd", amount: "₹10,000", icon: Medal },
-  { rank: "3rd", amount: "₹5,000", icon: Medal },
+  { rank: "1st", amount: "₹15,000", icon: Swords },
+  { rank: "2nd", amount: "₹10,000", icon: Shield },
+  { rank: "3rd", amount: "₹5,000", icon: Shield },
 ];
 
 const displayOrder = [prizes[2], prizes[0], prizes[1]];

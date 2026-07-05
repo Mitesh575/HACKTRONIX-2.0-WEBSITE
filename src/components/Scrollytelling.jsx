@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Zap, Clock } from "lucide-react";
+import { Zap, Hourglass } from "lucide-react";
 import GlassCard from "./ui/GlassCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,7 +15,7 @@ const scrollySections = [
   {
     title: "24 HOURS",
     subtitle: "Push your limits in an intense high-stakes environment.",
-    icon: Clock,
+    icon: Hourglass,
   },
 ];
 

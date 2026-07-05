@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { ArrowLeft, Check, ChevronRight, Cpu, Layers3, Sparkles, Wrench, Plus, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Bot, Terminal, Zap, Orbit, Plus, X } from "lucide-react";
 import { db } from "../lib/firebase";
 import { sendConfirmationEmail } from "../lib/emailjs";
 import GlassCard from "./ui/GlassCard";
@@ -585,7 +585,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       isHardware ? "!bg-red-600 !text-white" : "!bg-[#00f5ff] !text-black"
                     }`}
                   >
-                    <Sparkles className="h-4 w-4" />
+                    <Zap className="h-4 w-4" />
                     Team Registration
                   </div>
                   <h2
@@ -669,7 +669,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         "AI-powered workflows",
                         "Platform and dashboard ideas",
                       ]}
-                      icon={Layers3}
+                      icon={Terminal}
                       active={selectedTrack === "Software"}
                       onClick={() => chooseTrack("Software")}
                       isDarkPopup={isDarkPopup}
@@ -682,7 +682,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         "Embedded and IoT systems",
                         "Automation and sensing",
                       ]}
-                      icon={Cpu}
+                      icon={Bot}
                       active={selectedTrack === "Hardware"}
                       onClick={() => chooseTrack("Hardware")}
                       isDarkPopup={isDarkPopup}
@@ -728,9 +728,9 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       }`}
                     >
                       {selectedTrack === "Software" ? (
-                        <Layers3 className="h-4 w-4" />
+                        <Terminal className="h-4 w-4" />
                       ) : (
-                        <Wrench className="h-4 w-4" />
+                        <Orbit className="h-4 w-4" />
                       )}
                       {selectedTrack} Track
                     </div>

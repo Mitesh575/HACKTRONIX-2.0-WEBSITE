@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Lightbulb } from "lucide-react";
+import { Radar } from "lucide-react";
 import Galaxy from "../components/Galaxy";
 import TargetCursor from "../components/TargetCursor";
 import GlassCard from "../components/ui/GlassCard";
@@ -37,7 +37,7 @@ export default function ProblemStatementPage() {
         <div className="mx-auto max-w-4xl">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
             <div className="section-badge mb-6">
-              <Lightbulb className="h-4 w-4" />
+              <Radar className="h-4 w-4" />
               Challenge
             </div>
             <h1 className="text-4xl font-black tracking-tight text-white md:text-6xl">

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CircuitBoard, Cpu, Layers3, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Aperture, Bot, Terminal, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import Galaxy from "../components/Galaxy";
 import TargetCursor from "../components/TargetCursor";
@@ -17,7 +17,7 @@ const trackConfig = {
     subtitle: "Design systems, AI tools, and digital products that solve real-world friction with speed and clarity.",
     eyeBrow: "Build products with precision",
     accent: "from-blue-500 to-cyan-400",
-    icon: Layers3,
+    icon: Terminal,
     highlights: [
       { title: "Product Thinking", text: "Shape user journeys, workflows, and interfaces that feel launch-ready." },
       { title: "Intelligent Systems", text: "Use automation, AI, and data layers to create smarter experiences." },
@@ -34,7 +34,7 @@ const trackConfig = {
     subtitle: "Prototype connected devices, embedded systems, and tangible builds that transform physical-world problems.",
     eyeBrow: "Build systems you can touch",
     accent: "from-orange-500 to-amber-400",
-    icon: Cpu,
+    icon: Bot,
     highlights: [
       { title: "Real-world Utility", text: "Turn sensing, actuation, and control into meaningful problem-solving hardware." },
       { title: "Embedded Intelligence", text: "Blend firmware, electronics, and data flow into stable working prototypes." },
@@ -144,9 +144,15 @@ export default function TrackExperiencePage({ track }) {
       <main>
         <section className="relative overflow-hidden px-4 pb-20 pt-24 sm:px-6 lg:px-8 lg:pb-28 lg:pt-32">
           <div className="mx-auto max-w-7xl">
+            <div className="absolute -top-10 -right-10 opacity-10 blur-xl pointer-events-none">
+            <Aperture size={200} className="text-white" />
+          </div>
+          <div className="absolute -bottom-10 -left-10 opacity-10 blur-xl pointer-events-none">
+            <Zap size={200} className="text-white" />
+          </div>
             <div className={`flex flex-col ${!isSoftware ? "items-end text-right ml-auto" : "items-start text-left"}`}>
               <div className={`section-badge mb-5 ${theme.badgeBg}`}>
-                <Sparkles className="h-4 w-4" />
+                <Zap className="h-4 w-4" />
                 {config.badge}
               </div>
               <motion.p

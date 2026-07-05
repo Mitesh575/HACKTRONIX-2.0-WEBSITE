@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 import SmoothScroll from "./components/SmoothScroll";
@@ -9,9 +9,9 @@ import ProblemStatement from "./pages/ProblemStatement";
 import Guidelines from "./pages/Guidelines";
 import FAQPage from "./pages/FAQPage";
 import ExternalRegistration from "./pages/ExternalRegistration";
+import SingularityOverlay from "./components/singularity-transition/SingularityOverlay";
+import { lazy } from "react";
 
-const SoftwarePage = lazy(() => import("./pages/SoftwarePage"));
-const HardwarePage = lazy(() => import("./pages/HardwarePage"));
 const AdminLogin = lazy(() => import("./admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 
@@ -40,6 +40,9 @@ export default function App() {
 
   return (
     <SmoothScroll>
+      {/* Global cinematic transition overlay — above everything */}
+      <SingularityOverlay />
+
       <Suspense
         fallback={
           <div className="min-h-screen bg-bg flex items-center justify-center">
@@ -52,8 +55,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/problem-statement" element={<ProblemStatement />} />
-            {/* <Route path="/software" element={<SoftwarePage />} /> */}
-            {/* <Route path="/hardware" element={<HardwarePage />} /> */}
             <Route path="/team" element={<Team />} />
             <Route path="/guidelines" element={<Guidelines />} />
             <Route path="/faq" element={<FAQPage />} />

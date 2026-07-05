@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import hackLogo from "../images/hack-logo.png";
+import { useSingularityTransition } from "./singularity-transition/engine/useSingularityTransition";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { bind: transitionBind } = useSingularityTransition({
+    destination: "/external-registration",
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -33,7 +38,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 gap-3 md:gap-6 relative">
-          <Link to="/" className="cursor-target flex items-center gap-2 md:gap-3">
+          <Link to="/" className="cursor-target flex items-center gap-2 md:gap-3" data-collapse>
             <img
               id="nav-logo-slot"
               src={hackLogo}
@@ -48,32 +53,36 @@ export default function Navbar() {
           <div className="flex-1 flex items-center justify-end h-full">
             {/* Desktop Links (Right Side) */}
             <div className="hidden md:flex items-center gap-2 md:translate-x-2">
-              {navLinks.map((link, idx) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="group"
-                >
-                  <Link
-                    to={link.href}
-                    className="cursor-target relative block px-4 py-2 text-red-600 hover:text-red-500 transition-all text-[11px] font-bold font-mono tracking-widest uppercase"
+              {navLinks.map((link, idx) => {
+                const isExternal = link.href === "/external-registration";
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="group"
+                    data-collapse
                   >
-                    {link.label}
-                    <span className="absolute bottom-1 left-4 right-4 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      to={link.href}
+                      {...(isExternal ? transitionBind : {})}
+                      className="cursor-target relative block px-4 py-2 text-red-600 hover:text-red-500 transition-all text-[11px] font-bold font-mono tracking-widest uppercase"
+                    >
+                      {link.label}
+                      <span className="absolute bottom-1 left-4 right-4 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-
-
 
           {/* Mobile Toggle */}
           <button
             className="md:hidden p-2 text-gray-300 hover:text-[var(--neon-cyan)] transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
+            data-collapse
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
@@ -96,16 +105,24 @@ export default function Navbar() {
             className="md:hidden bg-[rgba(10,10,14,0.95)] backdrop-blur-xl border-t border-white/6"
           >
             <div className="px-4 py-4 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-red-600 hover:text-red-400 hover:bg-white/5 rounded-sm transition-colors font-mono text-xs tracking-wider uppercase"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isExternal = link.href === "/external-registration";
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={(e) => {
+                      setMobileOpen(false);
+                      if (isExternal) {
+                        transitionBind.onClick(e);
+                      }
+                    }}
+                    className="block px-4 py-3 text-red-600 hover:text-red-400 hover:bg-white/5 rounded-sm transition-colors font-mono text-xs tracking-wider uppercase"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}
@@ -113,3 +130,4 @@ export default function Navbar() {
     </motion.nav>
   );
 }
+

@@ -7,6 +7,7 @@ import { MatrixText } from "./MatrixText";
 import bgNormal from "../images/bg-normal.jpeg";
 import bgHover from "../images/bg-hover.jpeg";
 import ProblemStatementPdf from "../images/HackTronix2_0_ProblemStatements.pdf.pdf";
+import { useSingularityTransition } from "./singularity-transition/engine/useSingularityTransition";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -82,6 +83,7 @@ function FloatingOrb({ className, delay = 0 }) {
 
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
+  const { bind: transitionBind } = useSingularityTransition({ destination: "/external-registration" });
 
   const countdown = useCountdown(EVENT_DATE);
   const containerRef = useRef(null);
@@ -288,6 +290,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="mb-6"
+            data-collapse
           >
             <span className="section-badge border-glow-cyan text-[10px]">
               <span className="w-1 h-1 rounded-full bg-[var(--neon-cyan)] animate-pulse" />
@@ -295,27 +298,27 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 ref={mobileTitleRef} className="text-4xl sm:text-5xl font-extrabold text-white mb-6 tracking-wider crt-flicker" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
+          <h1 ref={mobileTitleRef} className="text-4xl sm:text-5xl font-extrabold text-white mb-6 tracking-wider crt-flicker" style={{ fontFamily: "'Star Jedi', sans-serif" }} data-collapse>
             HackTronix <span className="text-[var(--neon-cyan)]">2.0</span>
           </h1>
 
-          <p className="text-base text-gray-400 mb-10 max-w-sm mx-auto leading-relaxed">
+          <p className="text-base text-gray-400 mb-10 max-w-sm mx-auto leading-relaxed" data-collapse>
             A 24-hour hackathon exploring the upside-down world of technology
           </p>
 
-          <div className="flex flex-col gap-4 mb-12">
+          <div className="flex flex-col gap-4 mb-12" data-collapse>
             <button
-              onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')}
+              {...transitionBind}
               className="btn-sw-primary py-3"
             >
-              <span>Register Now</span>
+              <span>External Registration</span>
             </button>
             <a href={ProblemStatementPdf} download="HackTronix2_0_ProblemStatements.pdf" className="btn-sw-secondary py-3 font-mono text-sm">
               Problem Statement
             </a>
           </div>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4" data-collapse>
             <CountdownItem value={countdown.days} label="Days" />
             <CountdownItem value={countdown.hours} label="Hours" />
             <CountdownItem value={countdown.minutes} label="Min" />
@@ -336,6 +339,7 @@ export default function Hero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="flex flex-col items-end"
+              data-collapse
             >
               <h1 ref={desktopLeftRef} className="text-8xl text-white tracking-[0.1em] mb-4" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
                 HackTr
@@ -367,6 +371,7 @@ export default function Hero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
+              data-collapse
             >
               <h1 ref={desktopRightRef} className="text-8xl text-black tracking-[0.1em] mb-4" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
                 onix 2.0
@@ -392,8 +397,7 @@ export default function Hero() {
 
 
 
-      {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
+      {/* Bottom Fade Removed to prevent shade over background character */}
     </section>
   );
 }

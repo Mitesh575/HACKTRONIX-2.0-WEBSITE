@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Cpu, Layers3 } from "lucide-react";
+import { ArrowRight, Bot, Terminal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import GlassCard from "./ui/GlassCard";
 
@@ -67,14 +67,14 @@ export default function TrackSelectorModal({ isOpen, onClose }) {
                 <TrackOption
                   title="Software"
                   description="Explore platform ideas, AI experiences, automation products, and digital systems."
-                  icon={Layers3}
+                  icon={Terminal}
                   href="/software"
                   onSelect={handleSelect}
                 />
                 <TrackOption
                   title="Hardware"
                   description="Dive into embedded systems, IoT builds, automation, sensing, and physical prototypes."
-                  icon={Cpu}
+                  icon={Bot}
                   href="/hardware"
                   onSelect={handleSelect}
                 />
