@@ -67,7 +67,7 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-bg rounded-lg p-4">
-                <label className="text-gray-400 text-sm">Full Name</label>
+                <label className="text-gray-400 text-sm">Full Name (Team Leader)</label>
                 <p className="text-white">{participant.name}</p>
               </div>
               <div className="bg-bg rounded-lg p-4">
@@ -77,13 +77,13 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
             </div>
 
             <div className="bg-bg rounded-lg p-4">
-              <label className="text-gray-400 text-sm">Email</label>
+              <label className="text-gray-400 text-sm">Email (Team Leader)</label>
               <p className="text-white">{participant.email}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-bg rounded-lg p-4">
-                <label className="text-gray-400 text-sm">Phone</label>
+                <label className="text-gray-400 text-sm">Phone (Team Leader)</label>
                 <p className="text-white">{participant.phone}</p>
               </div>
               <div className="bg-bg rounded-lg p-4">
@@ -115,7 +115,7 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
                 <div className="space-y-3">
                   {participant.members.map((member, idx) => (
                     <div key={idx} className="border-t border-white/5 pt-3 first:border-t-0 first:pt-0">
-                      <p className="text-white font-medium text-sm">Member {idx + 1}</p>
+                      <p className="text-white font-medium text-sm">Member {idx + 2}</p>
                       <div className="mt-1 space-y-1">
                         <p className="text-gray-300 text-sm">{member.name}</p>
                         <p className="text-gray-400 text-xs">{member.email}</p>
