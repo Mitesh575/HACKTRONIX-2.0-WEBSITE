@@ -34,20 +34,30 @@ export default function AdminDashboard() {
   };
 
   const handleExport = () => {
-    const csvData = registrations.map((r) => ({
-      "Reg ID": r.regId,
-      "Name": r.name,
-      "Email": r.email,
-      "Phone": r.phone,
-      "College": r.college,
-      "Team Name": r.teamName,
-      "Track": r.track,
-      "Problem Statement": r.problemStatement || "",
-      "Problem ID": r.problemStatementId || "",
-      "Members": r.members?.map((m) => `${m.name} (${m.email}, ${m.phone})`).join(" | ") || "",
-      "Status": r.status,
-      "Date": r.createdAt?.toLocaleDateString() || "",
-    }));
+    const csvData = registrations.map((r) => {
+      const data = {
+        "Reg ID": r.regId,
+        "Name (Team Leader)": r.name,
+        "Email (Team Leader)": r.email,
+        "Phone (Team Leader)": r.phone ? `'${r.phone}` : "",
+        "College": r.college,
+        "Team Name": r.teamName,
+        "Track": r.track,
+        "Problem Statement": r.problemStatement || "",
+        "Problem ID": r.problemStatementId || "",
+        "Status": r.status,
+        "Date": r.createdAt ? new Date(r.createdAt).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : "",
+      };
+
+      for (let i = 0; i < 3; i++) {
+        const m = r.members && r.members[i] ? r.members[i] : null;
+        data[`Member ${i + 2} Name`] = m ? m.name : "";
+        data[`Member ${i + 2} Email`] = m ? m.email : "";
+        data[`Member ${i + 2} Phone`] = m ? `'${m.phone}` : "";
+      }
+
+      return data;
+    });
 
     const csv = Papa.unparse(csvData);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
