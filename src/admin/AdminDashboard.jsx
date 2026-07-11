@@ -170,66 +170,74 @@ export default function AdminDashboard() {
           <>
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+                <h1 className="text-2xl font-bold text-white">
+                  {activeTab === "overview" ? "Dashboard" : "Participants"}
+                </h1>
                 <p className="muted">
                   {registrations.length} total registration{registrations.length !== 1 ? "s" : ""}
                 </p>
               </div>
             </div>
 
-            <StatCards registrations={registrations} />
+            {activeTab === "overview" && (
+              <StatCards registrations={registrations} />
+            )}
 
-            {/* Bulk Action Bar */}
-            <AnimatePresence>
-              {selectedIds.size > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mb-4 flex items-center gap-3 p-4 bg-surface border border-white/10 rounded-xl"
-                >
-                  <span className="text-white text-sm font-medium">
-                    {selectedIds.size} selected
-                  </span>
-                  <div className="flex-1" />
-                  <button
-                    onClick={() => setBulkAction("confirm")}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600/20 text-green-400 hover:bg-green-600/30 transition-colors text-sm font-medium"
-                  >
-                    <CheckCircle className="w-4 h-4" />
-                    Confirm All
-                  </button>
-                  <button
-                    onClick={() => setBulkAction("reject")}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-600/20 text-yellow-400 hover:bg-yellow-600/30 transition-colors text-sm font-medium"
-                  >
-                    <XCircle className="w-4 h-4" />
-                    Reject All
-                  </button>
-                  <button
-                    onClick={() => setBulkAction("delete")}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600/20 text-red-400 hover:bg-red-600/30 transition-colors text-sm font-medium"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    Delete All
-                  </button>
-                  <button
-                    onClick={() => setSelectedIds(new Set())}
-                    className="px-3 py-2 text-gray-400 hover:text-white text-sm"
-                  >
-                    Clear
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {activeTab === "participants" && (
+              <>
+                {/* Bulk Action Bar */}
+                <AnimatePresence>
+                  {selectedIds.size > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="mb-4 flex items-center gap-3 p-4 bg-surface border border-white/10 rounded-xl"
+                    >
+                      <span className="text-white text-sm font-medium">
+                        {selectedIds.size} selected
+                      </span>
+                      <div className="flex-1" />
+                      <button
+                        onClick={() => setBulkAction("confirm")}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600/20 text-green-400 hover:bg-green-600/30 transition-colors text-sm font-medium"
+                      >
+                        <CheckCircle className="w-4 h-4" />
+                        Confirm All
+                      </button>
+                      <button
+                        onClick={() => setBulkAction("reject")}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-600/20 text-yellow-400 hover:bg-yellow-600/30 transition-colors text-sm font-medium"
+                      >
+                        <XCircle className="w-4 h-4" />
+                        Reject All
+                      </button>
+                      <button
+                        onClick={() => setBulkAction("delete")}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600/20 text-red-400 hover:bg-red-600/30 transition-colors text-sm font-medium"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Delete All
+                      </button>
+                      <button
+                        onClick={() => setSelectedIds(new Set())}
+                        className="px-3 py-2 text-gray-400 hover:text-white text-sm"
+                      >
+                        Clear
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-            <ParticipantsTable
-              registrations={registrations}
-              onRowClick={setSelectedParticipant}
-              selectedIds={selectedIds}
-              onToggleSelect={handleToggleSelect}
-              onSelectAll={handleSelectAll}
-            />
+                <ParticipantsTable
+                  registrations={registrations}
+                  onRowClick={setSelectedParticipant}
+                  selectedIds={selectedIds}
+                  onToggleSelect={handleToggleSelect}
+                  onSelectAll={handleSelectAll}
+                />
+              </>
+            )}
           </>
         )}
       </main>
