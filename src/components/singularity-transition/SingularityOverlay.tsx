@@ -46,10 +46,6 @@ export default function SingularityOverlay() {
       // Hide the overlay temporarily so we don't screenshot the overlay itself if it's visible
       containerRef.current.style.opacity = "0";
       
-      // Hide scrollbar during capture to prevent it from appearing as a glitchy line
-      const originalOverflow = document.documentElement.style.overflow;
-      document.documentElement.style.overflow = "hidden";
-
       const canvasTex = await html2canvas(document.body, {
         scale: 0.25, // Significantly reduced for near-instant capture since it will be distorted anyway
         useCORS: true,
@@ -62,7 +58,6 @@ export default function SingularityOverlay() {
         ignoreElements: (element) => element.id === "singularity-overlay"
       });
       
-      document.documentElement.style.overflow = originalOverflow;
       containerRef.current.style.opacity = "1";
 
       const texture = new THREE.CanvasTexture(canvasTex);
@@ -274,7 +269,8 @@ export default function SingularityOverlay() {
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 9000,
-        backgroundColor: "#020408" // Void background
+        backgroundColor: "#020408", // Void background
+        opacity: 0 // Start hidden so html2canvas can capture without a black flash
       }}
     >
       {/* 2D Layer for Light Burst */}

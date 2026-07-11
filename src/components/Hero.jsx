@@ -244,7 +244,7 @@ export default function Hero() {
       {/* Desktop Only: Background Image Layers with Smooth Transition */}
       <div
         className="hidden md:block absolute inset-0 -z-20 bg-cover bg-center"
-        style={{ 
+        style={{
           backgroundImage: `url(${bgNormal})`,
           maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)"
@@ -319,8 +319,8 @@ export default function Hero() {
             >
               <span>Internal Registration</span>
             </button>
-            <button 
-              {...transitionBind} 
+            <button
+              {...transitionBind}
               className="btn-sw-secondary py-3 font-mono text-sm uppercase"
             >
               External Registration
