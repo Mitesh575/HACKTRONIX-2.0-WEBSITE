@@ -123,12 +123,8 @@ export default function Footer() {
               to="/admin/login"
               className="muted-2 text-xs font-mono hover:text-[var(--neon-cyan)] transition-colors cursor-target"
             >
-              Admin
-            </Link>
-            <span className="muted-2 text-xs">•</span>
-            <p className="muted-2 text-xs font-mono">
               &gt; Developed by Dilli &amp; Mitesh_
-            </p>
+            </Link>
           </div>
         </div>
       </div>
