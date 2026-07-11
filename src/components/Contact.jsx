@@ -20,7 +20,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
 
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 mt-4">
@@ -31,7 +31,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
           {/* Contact Details Box */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -39,9 +39,9 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <GlassCard className="p-6 md:p-8 rounded-sm h-full" style={{ borderColor: 'rgba(0, 245, 255, 0.1)' }}>
+            <GlassCard className="p-5 md:p-8 rounded-xl h-full" style={{ borderColor: 'rgba(0, 245, 255, 0.1)' }}>
               <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
-                <div className="w-10 h-10 rounded-sm bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
                   <User className="w-5 h-5" />
                 </div>
                 <h3 className="text-xl font-bold text-white tracking-widest uppercase font-mono">Contact Details</h3>
@@ -55,7 +55,7 @@ export default function Contact() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className="flex flex-col gap-2 p-3 rounded-sm bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-colors group"
+                    className="flex flex-col gap-2 p-3 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-colors group"
                   >
                     <p className="text-cyan-400 font-bold text-sm uppercase tracking-wider font-mono">{person.name}</p>
                     <div className="space-y-1.5">
@@ -78,7 +78,7 @@ export default function Contact() {
 
               <div className="mt-8 pt-6 border-t border-white/10">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-sm bg-red-500/10 flex items-center justify-center text-red-500">
+                  <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
@@ -96,14 +96,14 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative h-full min-h-[400px]"
+            className="relative h-full min-h-[280px] md:min-h-[400px]"
           >
-            <GlassCard className="overflow-hidden h-full rounded-sm border-white/10" interactive>
+            <GlassCard className="overflow-hidden h-full rounded-xl border-white/10" interactive>
               <iframe
                 src="https://maps.google.com/maps?q=Sri%20Sairam%20Engineering%20College,%20Tambaram&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0, minHeight: "400px" }}
+                style={{ border: 0, minHeight: "280px" }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

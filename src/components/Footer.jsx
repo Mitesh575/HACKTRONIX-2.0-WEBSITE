@@ -58,8 +58,8 @@ export default function Footer() {
       {/* Top holo line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,245,255,0.3)] to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-12">
           {/* Brand */}
           <div>
             <Link to="/" className="cursor-target flex items-center gap-3 mb-4 group">
@@ -102,7 +102,7 @@ export default function Footer() {
                   <a
                     key={social.label}
                     href="#"
-                    className="cursor-target w-10 h-10 rounded-sm border border-white/8 flex items-center justify-center hover:border-[rgba(0,245,255,0.3)] hover:bg-[rgba(0,245,255,0.06)] hover:shadow-[0_0_12px_rgba(0,245,255,0.15)] hover:scale-105 transition-all duration-300 group"
+                    className="cursor-target w-10 h-10 rounded-lg border border-white/8 flex items-center justify-center hover:border-[rgba(0,245,255,0.3)] hover:bg-[rgba(0,245,255,0.06)] hover:shadow-[0_0_12px_rgba(0,245,255,0.15)] hover:scale-105 transition-all duration-300 group"
                     title={social.label}
                   >
                     <Icon className="w-5 h-5 text-gray-400 group-hover:text-[var(--neon-cyan)] transition-colors duration-300" />
@@ -118,9 +118,18 @@ export default function Footer() {
           <p className="muted text-sm font-mono">
             &copy; 2026 <span className="text-[var(--neon-cyan)]">HACKTRONIX</span>. All rights reserved.
           </p>
-          <p className="muted-2 text-xs font-mono">
-            &gt; Developed by Dilli & Mitesh_
-          </p>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/admin/login"
+              className="muted-2 text-xs font-mono hover:text-[var(--neon-cyan)] transition-colors cursor-target"
+            >
+              Admin
+            </Link>
+            <span className="muted-2 text-xs">•</span>
+            <p className="muted-2 text-xs font-mono">
+              &gt; Developed by Dilli &amp; Mitesh_
+            </p>
+          </div>
         </div>
       </div>
     </footer>

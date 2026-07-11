@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, Target, Hourglass, Orbit } from "lucide-react";
-
-const statCards = [
-  { label: "Total Registered", value: "total", icon: Bot, color: "text-primary" },
-  { label: "Confirmed", value: "confirmed", icon: Target, color: "text-green-500" },
-  { label: "Pending", value: "pending", icon: Hourglass, color: "text-yellow-500" },
-  { label: "Today's Signups", value: "today", icon: Orbit, color: "text-accent" },
-];
+import { Bot, Target, Hourglass, Orbit, XCircle } from "lucide-react";
 
 function getStats(registrations) {
   const today = new Date();
@@ -15,17 +8,20 @@ function getStats(registrations) {
   const total = registrations.length;
   const confirmed = registrations.filter((r) => r.status === "confirmed").length;
   const pending = registrations.filter((r) => r.status === "pending").length;
+  const rejected = registrations.filter((r) => r.status === "rejected").length;
   const todaySignups = registrations.filter((r) => {
     const createdAt = r.createdAt;
     return createdAt && createdAt >= today;
   }).length;
 
-  const byDomain = registrations.reduce((acc, r) => {
-    acc[r.domain] = (acc[r.domain] || 0) + 1;
+  const byTrack = registrations.reduce((acc, r) => {
+    if (r.track) {
+      acc[r.track] = (acc[r.track] || 0) + 1;
+    }
     return acc;
   }, {});
 
-  return { total, confirmed, pending, today: todaySignups, byDomain };
+  return { total, confirmed, pending, rejected, today: todaySignups, byTrack };
 }
 
 function StatCard({ label, icon: Icon, color, count }) {
@@ -49,23 +45,28 @@ export default function StatCards({ registrations }) {
 
   return (
     <div className="mb-8">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         <StatCard label="Total Registered" icon={Bot} color="text-primary" count={stats.total} />
         <StatCard label="Confirmed" icon={Target} color="text-green-500" count={stats.confirmed} />
         <StatCard label="Pending" icon={Hourglass} color="text-yellow-500" count={stats.pending} />
+        <StatCard label="Rejected" icon={XCircle} color="text-red-500" count={stats.rejected} />
         <StatCard label="Today's Signups" icon={Orbit} color="text-accent" count={stats.today} />
       </div>
 
-      {Object.keys(stats.byDomain).length > 0 && (
+      {Object.keys(stats.byTrack).length > 0 && (
         <div className="bg-surface border border-white/10 rounded-xl p-6">
-          <h3 className="text-white font-semibold mb-4">By Domain</h3>
+          <h3 className="text-white font-semibold mb-4">By Track</h3>
           <div className="flex flex-wrap gap-3">
-            {Object.entries(stats.byDomain).map(([domain, count]) => (
+            {Object.entries(stats.byTrack).map(([track, count]) => (
               <span
-                key={domain}
-                className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
+                key={track}
+                className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                  track === "Software"
+                    ? "bg-cyan-500/20 text-cyan-400"
+                    : "bg-red-500/20 text-red-400"
+                }`}
               >
-                {domain}: {count}
+                {track}: {count}
               </span>
             ))}
           </div>

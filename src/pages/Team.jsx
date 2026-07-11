@@ -122,22 +122,19 @@ const gradientMap = {
   "from-rose-500 to-pink-400": "linear-gradient(145deg, rgba(244, 63, 94, 0.4) 0%, rgba(236, 72, 153, 0.3) 100%)",
 };
 
-function TeamCard({ member, gradient, index }) {
-  const innerGradient = gradientMap[gradient] || gradientMap["from-cyan-500 to-blue-400"];
-
+function TeamCard({ member, index }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ delay: index * 0.06 }}
-      className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] max-w-[280px]"
+      className="w-full max-w-[320px] sm:w-[calc(50%-12px)] sm:max-w-[280px] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)]"
     >
       <ProfileCard
         avatarUrl={member.image}
         name={member.name}
         title={member.role}
-        innerGradient={innerGradient}
         bgSize={member.bgSize}
         bgPosition={member.bgPosition}
         nameSize={member.nameSize}

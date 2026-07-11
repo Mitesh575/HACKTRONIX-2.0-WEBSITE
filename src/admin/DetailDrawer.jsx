@@ -1,16 +1,35 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { db } from "../lib/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { Trash2 } from "lucide-react";
 
 const statusOptions = ["pending", "confirmed", "rejected"];
 
-export default function DetailDrawer({ participant, onClose }) {
+export default function DetailDrawer({ participant, onClose, onDeleted }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
   const handleStatusChange = async (newStatus) => {
     try {
       const docRef = doc(db, "registrations", participant.id);
       await updateDoc(docRef, { status: newStatus });
     } catch (error) {
       console.error("Error updating status:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await deleteDoc(doc(db, "registrations", participant.id));
+      onDeleted?.();
+      onClose();
+    } catch (error) {
+      console.error("Error deleting registration:", error);
+    } finally {
+      setDeleting(false);
+      setConfirmDelete(false);
     }
   };
 
@@ -69,13 +88,20 @@ export default function DetailDrawer({ participant, onClose }) {
               </div>
               <div className="bg-bg rounded-lg p-4">
                 <label className="text-gray-400 text-sm">Track</label>
-                <p className="text-white">{participant.track}</p>
+                <p className={`font-medium ${participant.track === "Software" ? "text-cyan-400" : "text-red-400"}`}>
+                  {participant.track}
+                </p>
               </div>
             </div>
 
             <div className="bg-bg rounded-lg p-4">
-              <label className="text-gray-400 text-sm">Domain</label>
-              <p className="text-white">{participant.domain}</p>
+              <label className="text-gray-400 text-sm">Problem Statement</label>
+              <div className="mt-1">
+                <span className="inline-block px-2 py-0.5 bg-white/10 text-white/60 text-xs font-mono rounded mr-2">
+                  {participant.problemStatementId}
+                </span>
+                <p className="text-white mt-1">{participant.problemStatement}</p>
+              </div>
             </div>
 
             <div className="bg-bg rounded-lg p-4">
@@ -121,6 +147,40 @@ export default function DetailDrawer({ participant, onClose }) {
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* Delete Registration */}
+            <div className="border-t border-white/10 pt-4">
+              {!confirmDelete ? (
+                <button
+                  onClick={() => setConfirmDelete(true)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Delete Registration
+                </button>
+              ) : (
+                <div className="space-y-3">
+                  <p className="text-red-400 text-sm text-center font-medium">
+                    Are you sure? This cannot be undone.
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => setConfirmDelete(false)}
+                      className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-white hover:bg-white/5 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleDelete}
+                      disabled={deleting}
+                      className="flex-1 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors disabled:opacity-50"
+                    >
+                      {deleting ? "Deleting..." : "Confirm Delete"}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -91,7 +91,7 @@ export default function FAQ({ isFullPage = false }) {
 
         <div className="mt-10 space-y-3">
           {faqItems.map((item, idx) => (
-            <GlassCard key={idx} className="overflow-hidden rounded-sm">
+            <GlassCard key={idx} className="overflow-hidden rounded-xl">
               <button
                 onClick={() => toggleAccordion(idx)}
                 className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-white/[0.02]"

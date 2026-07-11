@@ -12,7 +12,7 @@ import { useSingularityTransition } from "./singularity-transition/engine/useSin
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EVENT_DATE = new Date("2026-04-29T09:00:00");
+const EVENT_DATE = new Date("2026-08-06T09:00:00");
 
 function useCountdown(targetDate) {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -244,13 +244,19 @@ export default function Hero() {
       {/* Desktop Only: Background Image Layers with Smooth Transition */}
       <div
         className="hidden md:block absolute inset-0 -z-20 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgNormal})` }}
+        style={{ 
+          backgroundImage: `url(${bgNormal})`,
+          maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)"
+        }}
       />
       <div
         className="hidden md:block absolute inset-0 -z-10 bg-cover bg-center transition-opacity duration-700 ease-in-out"
         style={{
           backgroundImage: `url(${bgHover})`,
-          opacity: isHovered ? 1 : 0
+          opacity: isHovered ? 1 : 0,
+          maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)"
         }}
       />
 
@@ -308,14 +314,17 @@ export default function Hero() {
 
           <div className="flex flex-col gap-4 mb-12" data-collapse>
             <button
-              {...transitionBind}
+              onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')}
               className="btn-sw-primary py-3"
             >
-              <span>External Registration</span>
+              <span>Internal Registration</span>
             </button>
-            <a href={ProblemStatementPdf} download="HackTronix2_0_ProblemStatements.pdf" className="btn-sw-secondary py-3 font-mono text-sm">
-              Problem Statement
-            </a>
+            <button 
+              {...transitionBind} 
+              className="btn-sw-secondary py-3 font-mono text-sm uppercase"
+            >
+              External Registration
+            </button>
           </div>
 
           <div className="flex justify-center gap-4" data-collapse>
@@ -349,9 +358,9 @@ export default function Hero() {
               </p>
               <button
                 onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')}
-                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-white/90 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
-                Register Now
+                Internal Registration
               </button>
               <div className="flex gap-8">
                 <CountdownItem value={countdown.days} label="Days" variant="white" />
@@ -379,13 +388,12 @@ export default function Hero() {
               <p className="text-xl text-black/80 mb-10 max-w-md font-medium">
                 upside-down world of technology
               </p>
-              <a
-                href={ProblemStatementPdf}
-                download="HackTronix2_0_ProblemStatements.pdf"
-                className="inline-block px-8 py-4 bg-black text-white font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-black/90 transition-all mb-12 shadow-[0_0_20px_rgba(0,0,0,0.2)] border border-white/10"
+              <button
+                {...transitionBind}
+                className="inline-block px-8 py-4 bg-black text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-black/90 transition-all mb-12 shadow-[0_0_20px_rgba(0,0,0,0.2)] border border-white/10"
               >
-                Problem Statement
-              </a>
+                External Registration
+              </button>
               <div className="flex gap-8">
                 <CountdownItem value={countdown.minutes} label="Minutes" variant="black" />
                 <CountdownItem value={countdown.seconds} label="Seconds" variant="black" />

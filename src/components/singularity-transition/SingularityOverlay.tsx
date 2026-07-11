@@ -45,17 +45,24 @@ export default function SingularityOverlay() {
       // 1. Capture Page Screenshot
       // Hide the overlay temporarily so we don't screenshot the overlay itself if it's visible
       containerRef.current.style.opacity = "0";
+      
+      // Hide scrollbar during capture to prevent it from appearing as a glitchy line
+      const originalOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+
       const canvasTex = await html2canvas(document.body, {
         scale: 1, // Reduced to 1 for instant capture (removes the "stuck" delay)
         useCORS: true,
-        allowTaint: true,
+        allowTaint: false, // Prevent WebGL SecurityError from tainted canvas
         backgroundColor: "#020408",
-        width: window.innerWidth,
+        width: document.documentElement.clientWidth,
         height: window.innerHeight,
         x: window.scrollX,
         y: window.scrollY,
         ignoreElements: (element) => element.id === "singularity-overlay"
       });
+      
+      document.documentElement.style.overflow = originalOverflow;
       containerRef.current.style.opacity = "1";
 
       const texture = new THREE.CanvasTexture(canvasTex);

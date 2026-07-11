@@ -83,13 +83,13 @@ function FeatureCard({ title, description, icon: Icon, color, index }) {
         <div className="pgc-hover-border" />
       </div>
 
-      <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-        <div className="w-14 h-14 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(var(--color),0.5)] backdrop-blur-md">
-          <Icon className="w-7 h-7 text-white drop-shadow-[0_0_10px_rgba(var(--color),0.8)]" />
+      <div className="relative z-10 p-5 md:p-8 h-full flex flex-col justify-between">
+        <div className="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(var(--color),0.5)] backdrop-blur-md">
+          <Icon className="w-5 h-5 md:w-7 md:h-7 text-white drop-shadow-[0_0_10px_rgba(var(--color),0.8)]" />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-white mb-2 font-mono uppercase tracking-wide">{title}</h3>
-          <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+          <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 font-mono uppercase tracking-wide">{title}</h3>
+          <p className="text-gray-400 text-xs md:text-sm leading-relaxed">{description}</p>
         </div>
       </div>
     </motion.div>
@@ -198,14 +198,20 @@ export default function WhyJoinUs() {
         .pgc-card { 
             position: relative;
             width: 100%;
-            height: 240px;
-            border-radius: 22px; 
+            height: 180px;
+            border-radius: 16px; 
             overflow: hidden; 
             cursor: pointer; 
             isolation: isolate; 
             border: var(--base-stroke-width) solid rgba(255, 255, 255, var(--base-stroke-opacity));
             box-shadow: 0 0 var(--base-glow-radius) rgba(255, 255, 255, var(--base-glow-opacity));
             transition: filter 0.5s ease, transform 0.4s ease;
+        }
+        @media (min-width: 768px) {
+          .pgc-card {
+            height: 240px;
+            border-radius: 22px;
+          }
         }
 
         .pgc-scene-wrapper:has(.pgc-card:hover) .pgc-card:not(:hover) {
@@ -260,7 +266,7 @@ export default function WhyJoinUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
 
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 mt-4">
@@ -271,13 +277,13 @@ export default function WhyJoinUs() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16">
           {features.map((feature, idx) => (
             <FeatureCard key={feature.title} {...feature} index={idx} />
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {stats.map((stat, idx) => (
             <StatCard key={stat.label} {...stat} index={idx} />
           ))}

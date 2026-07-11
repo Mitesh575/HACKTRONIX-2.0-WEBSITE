@@ -59,6 +59,7 @@ export default function App() {
             <Route path="/guidelines" element={<Guidelines />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/external-registration" element={<ExternalRegistration />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin"
               element={

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const LinkedinIcon = ({ className, size = 24 }) => (
@@ -9,119 +9,113 @@ const LinkedinIcon = ({ className, size = 24 }) => (
   </svg>
 );
 
-const SvgRightCutout = ({ className, style }) => (
-  <svg className={className} style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" overflow="visible" fill="currentColor">
-    <path d="M 6.018 19.789 C 4.705 20 3.137 20 0 20 L 20 20 L 20 0 C 20 3.137 20 4.705 19.789 6.018 C 18.65 13.098 13.098 18.65 6.018 19.789 Z" />
-  </svg>
-);
-
-const SvgLeftCutout = ({ className, style }) => (
-  <svg className={className} style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" overflow="visible" fill="currentColor">
-    <path d="M 13.982 19.789 C 15.295 20 16.863 20 20 20 L 0 20 L 0 0 C 0 3.137 0 4.705 0.211 6.018 C 1.35 13.098 6.902 18.65 13.982 19.789 Z" />
-  </svg>
-);
-
 const ProfileCard = ({
   avatarUrl,
   name = 'Team Member',
   title = 'Member',
   linkedinUrl = '#',
+  bgSize,
+  bgPosition,
+  nameSize,
 }) => {
-  // Theme color for the content block
-  const bgColor = '#121214'; // Very dark gray/black
-  
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const match = window.matchMedia('(hover: none)');
+    setIsTouchDevice(match.matches);
+
+    const handler = (e) => setIsTouchDevice(e.matches);
+    if (match.addEventListener) {
+      match.addEventListener('change', handler);
+      return () => match.removeEventListener('change', handler);
+    } else if (match.addListener) {
+      match.addListener(handler);
+      return () => match.removeListener(handler);
+    }
+  }, []);
+
+  const hasLinkedin = linkedinUrl && linkedinUrl !== '#';
+
   return (
-    <motion.div 
-      className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 group cursor-pointer bg-zinc-900"
-      whileHover="hover"
-      initial="rest"
-      animate="rest"
+    <motion.div
+      className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden group cursor-pointer"
+      whileHover={!isTouchDevice ? "hover" : undefined}
+      initial={isTouchDevice ? "hover" : "rest"}
+      animate={isTouchDevice ? "hover" : "rest"}
+      style={{
+        boxShadow: '0 0 0 1px rgba(255,255,255,0.08), 0 8px 30px rgba(0,0,0,0.4)',
+      }}
     >
-      {/* Background Image */}
-      <motion.img 
-        src={avatarUrl} 
-        alt={name}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out"
+      {/* Background Image — fills entire card */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          backgroundImage: `url(${avatarUrl})`,
+          backgroundSize: bgSize || 'cover',
+          backgroundPosition: bgPosition || 'center top',
+          backgroundRepeat: 'no-repeat',
+        }}
         variants={{
-          rest: { scale: 1, filter: 'grayscale(30%) brightness(0.8)' },
-          hover: { scale: 1.05, filter: 'grayscale(0%) brightness(1.1)' }
+          rest: { scale: 1, filter: 'brightness(0.85)' },
+          hover: { scale: 1.08, filter: 'brightness(1)' },
+        }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      />
+
+      {/* Permanent subtle vignette at bottom for readability */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 35%, transparent 60%)',
         }}
       />
 
-      {/* Main Content Block (bottom) */}
-      <div 
-        className="absolute bottom-0 left-0 w-full flex flex-col justify-end pt-4 pb-5 px-6 z-10"
-        style={{ backgroundColor: bgColor }}
+      {/* Name + Role overlay — slides up on hover (desktop), always shown (mobile) */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 z-10 px-5 pb-5"
+        variants={{
+          rest: { y: 20, opacity: 0 },
+          hover: { y: 0, opacity: 1 },
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 28 }}
       >
-        {/* Right Corner Cutout (Top Right of Bottom Block) */}
-        <SvgRightCutout 
-          className="absolute right-0 top-[-20px] w-5 h-5" 
-          style={{ color: bgColor }} 
-        />
-
-        {/* Subtitle / Role (Always visible or fades in) */}
-        <div className="relative z-20 flex justify-between items-center w-full min-h-[24px]">
-          <motion.p 
-            className="text-gray-400 font-medium text-sm tracking-wide font-mono"
-            variants={{
-              rest: { opacity: 0.6, y: 0 },
-              hover: { opacity: 1, y: 0 }
-            }}
-          >
-            {title}
-          </motion.p>
-          
-          {linkedinUrl && linkedinUrl !== '#' && (
-            <motion.a 
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-[#0a66c2] transition-colors"
-              variants={{
-                rest: { opacity: 0, scale: 0.8 },
-                hover: { opacity: 1, scale: 1 }
-              }}
-            >
-              <LinkedinIcon size={18} />
-            </motion.a>
-          )}
-        </div>
-
-        {/* Title Stack (Slides up on hover) */}
-        <motion.div 
-          className="absolute left-0 right-0 z-10 flex flex-col items-start"
-          variants={{
-            rest: { top: '-20px' },
-            hover: { top: '-56px' }
+        {/* Glassmorphism info panel */}
+        <div
+          className="rounded-xl px-4 py-3 backdrop-blur-md border border-white/10"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)',
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
-          {/* Left Corner Cutout (Top Left of Title Stack) */}
-          <SvgLeftCutout 
-            className="w-5 h-5 ml-0" 
-            style={{ color: bgColor }} 
-          />
-          
-          <div 
-            className="flex items-center px-6 pb-2 pt-2 h-9 w-full overflow-hidden"
-            style={{ backgroundColor: bgColor }}
-          >
-            <motion.h3 
-              className="text-white text-[1.05rem] sm:text-[1.15rem] leading-none font-bold tracking-tight uppercase truncate w-full"
-              variants={{
-                rest: { opacity: 0, filter: 'blur(4px)', y: 5 },
-                hover: { opacity: 1, filter: 'blur(0px)', y: 0 }
-              }}
-              transition={{ duration: 0.2 }}
-            >
-              {name}
-            </motion.h3>
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0 flex-1">
+              <h3
+                className="text-white font-bold leading-tight truncate uppercase tracking-wide"
+                style={{ fontSize: nameSize || '0.95rem' }}
+              >
+                {name}
+              </h3>
+              <p className="text-gray-300/80 text-xs font-mono tracking-wider mt-0.5 truncate">
+                {title}
+              </p>
+            </div>
+
+            {hasLinkedin && (
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0a66c2]/80 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <LinkedinIcon size={16} className="text-white" />
+              </a>
+            )}
           </div>
-        </motion.div>
-      </div>
-      
-      {/* Edge highlight / subtle inner border */}
-      <div className="absolute inset-0 border border-white/5 rounded-t-2xl pointer-events-none z-30" />
+        </div>
+      </motion.div>
+
+      {/* Subtle inner border highlight */}
+      <div className="absolute inset-0 rounded-2xl border border-white/[0.06] pointer-events-none z-20" />
     </motion.div>
   );
 };

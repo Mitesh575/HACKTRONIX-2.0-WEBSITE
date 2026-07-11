@@ -70,17 +70,17 @@ function PrizeCard({ rank, amount, icon: Icon, index }) {
       whileHover={{ scale: 1.02, y: -4 }}
       className="relative"
     >
-      <div className="h-full rounded-sm border border-white/8 bg-[rgba(14,14,20,0.92)] overflow-hidden transition-all duration-300 hover:border-[rgba(0,245,255,0.15)] hover:shadow-[0_0_12px_rgba(0,245,255,0.04)]">
+      <div className="h-full rounded-xl border border-white/8 bg-[rgba(14,14,20,0.92)] overflow-hidden transition-all duration-300 hover:border-[rgba(0,245,255,0.15)] hover:shadow-[0_0_12px_rgba(0,245,255,0.04)]">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,245,255,0.2)] to-transparent" />
         <div className={`absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b ${gradient} opacity-25`} />
         <div className="p-5 md:p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className={`flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-to-r ${gradient}`}>
+            <div className={`flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-r ${gradient}`}>
               <Icon className="w-5 h-5 text-white" />
             </div>
             {isFirst && (
               <span
-                className="rounded-sm px-3 py-1 text-[10px] font-bold font-mono tracking-wider uppercase"
+                className="rounded-full px-3 py-1 text-[10px] font-bold font-mono tracking-wider uppercase"
                 style={{ background: "linear-gradient(90deg, var(--neon-yellow), #ffe600)", color: "#000", boxShadow: "0 0 12px rgba(255,230,0,0.4)" }}
               >
                 WINNER
@@ -114,7 +114,7 @@ export default function Prizes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 mt-4">
             Win Exciting <span className="text-[#ff2d55] font-['Exo_2']">Rewards</span>
@@ -124,7 +124,7 @@ export default function Prizes() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
           {displayOrder.map((prize, idx) => (
             <PrizeCard key={prize.rank} {...prize} index={idx} />
           ))}

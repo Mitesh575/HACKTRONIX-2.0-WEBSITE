@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { ArrowLeft, Check, ChevronRight, Bot, Terminal, Zap, Orbit, Plus, X } from "lucide-react";
 import { db } from "../lib/firebase";
 import { sendConfirmationEmail } from "../lib/emailjs";
@@ -57,7 +57,7 @@ const registrationSchema = z.object({
   }),
   problemStatement: z.string().min(1, "Please select a problem statement"),
   problemStatementId: z.string().min(1, "Please select a problem statement"),
-  members: z.array(memberSchema).min(2, "At least 2 members required").max(5, "Maximum 5 members allowed"),
+  members: z.array(memberSchema).min(2, "At least 2 members required").max(4, "Maximum 4 additional members allowed"),
 });
 
 function ModalShell({ children, onClose, isDarkPopup }) {
@@ -359,7 +359,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
             isDarkPopup ? "text-white" : "text-black"
           }`}
         >
-          Member {index + 1}
+          Member {index + 2}
         </h4>
       </div>
       <div className="grid gap-4 md:grid-cols-3">
@@ -519,9 +519,24 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
     }
   };
 
+  const [duplicateError, setDuplicateError] = useState("");
+
   const onSubmit = async (data) => {
     setSubmitting(true);
+    setDuplicateError("");
     try {
+      // Check for duplicate email
+      const emailQuery = query(
+        collection(db, "registrations"),
+        where("email", "==", data.email)
+      );
+      const existing = await getDocs(emailQuery);
+      if (!existing.empty) {
+        setDuplicateError(`The email "${data.email}" is already registered. Each team lead can only register once.`);
+        setSubmitting(false);
+        return;
+      }
+
       const generatedRegId = `HX${Date.now().toString(36).toUpperCase()}`;
 
       await addDoc(collection(db, "registrations"), {
@@ -806,7 +821,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
 
                       <div className="grid gap-6 md:grid-cols-2">
                         <Field
-                          label="Full Name"
+                          label="Team Leader Name"
                           error={errors.name?.message}
                           isDarkPopup={isDarkPopup}
                         >
@@ -896,7 +911,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <button
                             type="button"
                             onClick={addMember}
-                            disabled={memberCount >= 5}
+                            disabled={memberCount >= 4}
                             className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${
                               isDarkPopup
                                 ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"
@@ -938,6 +953,12 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       {(errors.track || errors.problemStatement) && (
                         <div className="rounded-md border border-red-600 bg-red-600/10 px-4 py-3 text-sm font-bold text-red-600">
                           {errors.track?.message || errors.problemStatement?.message}
+                        </div>
+                      )}
+
+                      {duplicateError && (
+                        <div className="rounded-md border border-red-600 bg-red-600/10 px-4 py-3 text-sm font-bold text-red-600">
+                          {duplicateError}
                         </div>
                       )}
 

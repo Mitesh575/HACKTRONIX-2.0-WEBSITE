@@ -7,10 +7,10 @@ export default function AccentCard({
 }) {
   return (
     <Component
-      className={["group relative rounded-sm", className].join(" ")}
+      className={["group relative rounded-xl", className].join(" ")}
       {...props}
     >
-      <div className="relative overflow-hidden rounded-sm border border-white/8 bg-[rgba(14,14,20,0.92)] transition-colors duration-300 group-hover:border-[rgba(0,245,255,0.15)]">
+      <div className="relative overflow-hidden rounded-xl border border-white/8 bg-[rgba(14,14,20,0.92)] transition-colors duration-300 group-hover:border-[rgba(0,245,255,0.15)]">
         {/* Top holo line */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,245,255,0.3)] to-transparent opacity-50" />
         {/* Left accent strip */}

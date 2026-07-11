@@ -16,9 +16,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import TargetCursor from "../components/TargetCursor";
-
-/* ── Google Form URL ── */
-const GOOGLE_FORM_URL = "#"; // Replace with your actual Google Form URL
+import RegistrationModal from "../components/RegistrationModal";
 
 /* ── Animated starfield canvas ── */
 function Starfield() {
@@ -251,14 +249,12 @@ function EventDetailCard({ icon: Icon, label, value, index }) {
 }
 
 /* ── Glowing CTA button ── */
-function RegisterButton({ loadDelay = 0 }) {
+function RegisterButton({ loadDelay = 0, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.a
-      href={GOOGLE_FORM_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.button
+      onClick={onClick}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: loadDelay + 1.2 }}
@@ -287,7 +283,7 @@ function RegisterButton({ loadDelay = 0 }) {
           <ExternalLink className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
         </span>
       </div>
-    </motion.a>
+    </motion.button>
   );
 }
 
@@ -375,6 +371,7 @@ const eventDetails = [
 /* ── Main component ── */
 export default function ExternalRegistration() {
   const [showScrollHint, setShowScrollHint] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const loadDelay = location.state?.fromSingularity ? 1.8 : 0;
 
@@ -489,7 +486,7 @@ export default function ExternalRegistration() {
           </motion.div>
 
           {/* CTA Button */}
-          <RegisterButton loadDelay={loadDelay} />
+          <RegisterButton loadDelay={loadDelay} onClick={() => setIsModalOpen(true)} />
 
           {/* Scroll hint */}
           <AnimatePresence>
@@ -517,8 +514,7 @@ export default function ExternalRegistration() {
         </div>
       </section>
 
-      {/* ── Holographic Divider ── */}
-      <div className="sw-divider" />
+
 
       {/* ── Event Details Section ── */}
       <section className="relative py-16 md:py-24 overflow-hidden">
@@ -575,8 +571,7 @@ export default function ExternalRegistration() {
         </div>
       </section>
 
-      {/* ── Holographic Divider ── */}
-      <div className="sw-divider" />
+
 
       {/* ── Final CTA Section ── */}
       <section className="relative py-20 md:py-32 overflow-hidden">
@@ -619,7 +614,7 @@ export default function ExternalRegistration() {
               prepare for the ultimate hackathon experience.
             </p>
 
-            <RegisterButton />
+            <RegisterButton onClick={() => setIsModalOpen(true)} />
 
             {/* Footer note */}
             <motion.p
@@ -629,11 +624,13 @@ export default function ExternalRegistration() {
               transition={{ delay: 0.5 }}
               className="mt-8 text-xs text-gray-600 font-mono"
             >
-              Registration redirects to Google Forms • Teams of 2-4 members
+              Registration is now open • Teams of 2-4 members
             </motion.p>
           </motion.div>
         </div>
       </section>
+
+      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

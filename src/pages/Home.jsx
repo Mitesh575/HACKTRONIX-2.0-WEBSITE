@@ -6,6 +6,7 @@ import Prizes from "../components/Prizes";
 import FAQ from "../components/FAQ";
 import WhyJoinUs from "../components/WhyJoinUs";
 import Timeline from "../components/Timeline";
+import Sponsors from "../components/Sponsors";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Galaxy from "../components/Galaxy";
@@ -28,6 +29,7 @@ export default function Home() {
       <Prizes />
 
       <WhyJoinUs />
+      <Sponsors />
       <Timeline />
       <FAQ />
       <Contact />
