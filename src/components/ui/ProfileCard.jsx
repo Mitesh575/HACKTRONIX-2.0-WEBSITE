@@ -70,16 +70,15 @@ const ProfileCard = ({
         }}
       />
 
-      {/* Name + Role overlay — slides up on hover (desktop), always shown (mobile) */}
+      {/* Info panel */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 z-10 px-5 pb-5"
         variants={{
-          rest: { y: 20, opacity: 0 },
-          hover: { y: 0, opacity: 1 },
+          rest: { y: isTouchDevice ? 0 : 28 }, // Push down slightly so role is hidden
+          hover: { y: 0 },
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 28 }}
       >
-        {/* Glassmorphism info panel */}
         <div
           className="rounded-xl px-4 py-3 backdrop-blur-md border border-white/10"
           style={{
@@ -94,21 +93,33 @@ const ProfileCard = ({
               >
                 {name}
               </h3>
-              <p className="text-gray-300/80 text-xs font-mono tracking-wider mt-0.5 truncate">
-                {title}
-              </p>
+              <motion.div
+                variants={{
+                  rest: { opacity: isTouchDevice ? 1 : 0, height: isTouchDevice ? 'auto' : 0, marginTop: 0 },
+                  hover: { opacity: 1, height: 'auto', marginTop: 2 },
+                }}
+                className="overflow-hidden"
+              >
+                <p className="text-gray-300/80 text-xs font-mono tracking-wider truncate">
+                  {title}
+                </p>
+              </motion.div>
             </div>
 
             {hasLinkedin && (
-              <a
+              <motion.a
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0a66c2]/80 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                variants={{
+                  rest: { opacity: isTouchDevice ? 1 : 0, scale: isTouchDevice ? 1 : 0.8 },
+                  hover: { opacity: 1, scale: 1 },
+                }}
+                className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0a66c2]/80 flex items-center justify-center transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
-                <LinkedinIcon size={16} className="text-white" />
-              </a>
+                <LinkedinIcon size={16} className="text-white hover:scale-110 transition-transform" />
+              </motion.a>
             )}
           </div>
         </div>

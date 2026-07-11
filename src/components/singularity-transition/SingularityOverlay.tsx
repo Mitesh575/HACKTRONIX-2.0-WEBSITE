@@ -51,7 +51,7 @@ export default function SingularityOverlay() {
       document.documentElement.style.overflow = "hidden";
 
       const canvasTex = await html2canvas(document.body, {
-        scale: 1, // Reduced to 1 for instant capture (removes the "stuck" delay)
+        scale: 0.25, // Significantly reduced for near-instant capture since it will be distorted anyway
         useCORS: true,
         allowTaint: false, // Prevent WebGL SecurityError from tainted canvas
         backgroundColor: "#020408",
