@@ -33,7 +33,7 @@ export default function About() {
             </h2>
 
             <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 md:mb-10 font-light">
-              Hacktronix 2.0 is a premier 24-hour national-level hackathon designed to bring together the brightest minds in technology. Whether you're a software developer, hardware enthusiast, or problem solver, this is your platform to innovate, collaborate, and build impactful solutions to real-world challenges.
+              Hacktronix 2.0 is a 24-hour national-level hackathon where coders, tinkerers, and problem-solvers come together to turn wild ideas into working projects. Software or hardware — pick your track and ship something real.
             </p>
 
             <div className="flex gap-6">
@@ -86,7 +86,7 @@ export default function About() {
                 <Terminal className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
               </div>
               <span className="block text-gray-500 font-mono text-[10px] md:text-xs mb-1 md:mb-2 tracking-widest uppercase">Software Track</span>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-1 md:mt-2">Architect scalable applications and intelligent systems.</p>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-1 md:mt-2">Build apps, APIs, and smart systems from scratch.</p>
             </div>
 
             {/* Spec Card 4 */}
@@ -95,7 +95,7 @@ export default function About() {
                 <Bot className="w-4 h-4 md:w-5 md:h-5 text-emerald-400" />
               </div>
               <span className="block text-gray-500 font-mono text-[10px] md:text-xs mb-1 md:mb-2 tracking-widest uppercase">Hardware Track</span>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-1 md:mt-2">Engineer physical prototypes and embedded IoT devices.</p>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-1 md:mt-2">Build physical prototypes, circuits, and IoT projects.</p>
             </div>
 
           </motion.div>

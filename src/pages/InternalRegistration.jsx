@@ -320,42 +320,42 @@ const perks = [
   {
     icon: Swords,
     title: "Bounty: ₹30,000+",
-    description: "Secure your share of the massive prize pool across Software and Hardware divisions.",
+    description: "Win your share of the cash prizes in both Software and Hardware tracks.",
     gradient: "from-yellow-500 to-amber-400",
     image: "/cards/prize-pool.png",
   },
   {
     icon: Satellite,
     title: "Alliances",
-    description: "Form squads with top-tier developers and hardware engineers.",
+    description: "Team up with awesome developers and hardware hackers.",
     gradient: "from-blue-500 to-cyan-400",
     image: "/cards/networking.png",
   },
   {
     icon: Zap,
     title: "24-Hour Sprint",
-    description: "A brutal 24-hour marathon of coding, soldering, and deploying.",
+    description: "A fast-paced 24 hours of coding, soldering, and building stuff.",
     gradient: "from-purple-500 to-pink-400",
     image: "/cards/challenge.png",
   },
   {
     icon: Radar,
     title: "Tactical Intel",
-    description: "Direct technical guidance from industry veterans.",
+    description: "Get hands-on help from experienced mentors.",
     gradient: "from-green-500 to-emerald-400",
     image: "/cards/mentorship.png",
   },
   {
     icon: Terminal,
     title: "Software Division",
-    description: "Architect scalable applications and intelligent systems.",
+    description: "Build apps, APIs, and smart systems from scratch.",
     gradient: "from-indigo-500 to-blue-400",
     image: "/cards/software-track.png",
   },
   {
     icon: Bot,
     title: "Hardware Division",
-    description: "Engineer physical prototypes and embedded IoT devices.",
+    description: "Build physical prototypes, circuits, and IoT projects.",
     gradient: "from-red-500 to-rose-400",
     image: "/cards/hardware-track.png",
   },
@@ -496,7 +496,7 @@ export default function InternalRegistration() {
           >
             <p className="text-base md:text-lg text-gray-300 font-mono tracking-wide max-w-2xl mx-auto">
               <TypingText
-                text="Calling all Outer Rim hackers & innovators — join the ultimate battle of code and circuits at HACKTRONIX 2.0"
+                text="Ready to build something cool? Join us for 24 hours of code, circuits, and caffeine at HACKTRONIX 2.0."
                 delay={loadDelay * 1000 + 800}
               />
             </p>
@@ -551,7 +551,7 @@ export default function InternalRegistration() {
               <span className="text-[#ff2d55] font-['Exo_2']">Briefing</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              Everything you need to know before entering the arena
+              Here's what you need to know before you start building
             </p>
           </motion.div>
 
@@ -575,7 +575,7 @@ export default function InternalRegistration() {
               <span className="text-[#ff2d55] font-['Exo_2']">Join</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              The perks of answering the Galactic call
+              Here is what's in it for you
             </p>
           </motion.div>
 
@@ -604,7 +604,7 @@ export default function InternalRegistration() {
               Problem <span className="text-[var(--neon-cyan)] font-['Exo_2']">Statements</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              Choose your challenge. Each problem statement presents a unique opportunity to innovate and create impactful solutions.
+              Pick a problem statement and build something real. Which challenge will you take on?
             </p>
           </motion.div>
 
@@ -680,8 +680,7 @@ export default function InternalRegistration() {
               ?
             </h2>
             <p className="text-gray-400 font-mono text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed">
-              Secure your position in HACKTRONIX 2.0. Fill out the registration form and
-              prepare for the ultimate hackathon experience.
+              Grab your spot in HACKTRONIX 2.0. Fill out the form and get ready to build.
             </p>
 
             <RegisterButton onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')} />

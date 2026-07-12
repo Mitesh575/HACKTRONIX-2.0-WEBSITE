@@ -7,19 +7,19 @@ import GlassCard from "./ui/GlassCard";
 const faqData = [
   {
     question: "What is HackTronix 2.0?",
-    answer: "HackTronix 2.0 is an annual hackathon organized by HACKTRONIX where participants build innovative solutions across software and hardware tracks over a 48-hour period.",
+    answer: "It's a 24-hour hackathon run by HACKTRONIX. You pick a problem statement, form a team, and build a working solution in software or hardware.",
   },
   {
     question: "Is it a remote or an on-site Hackathon?",
-    answer: "The hackathon is a hybrid event. The main building phase can be done remotely, but at least two team members must be physically present for the grand finale round.",
+    answer: "It's hybrid. You can build your project remotely, but at least two team members need to show up in person for the grand finale.",
   },
   {
     question: "Who can participate in the hackathon?",
-    answer: "The hackathon is open to college students, professionals, and tech enthusiasts. There are no restrictions on educational background - anyone with a passion for building can participate.",
+    answer: "College students, working professionals, anyone who likes building stuff. No specific background needed — just bring your skills and curiosity.",
   },
   {
     question: "How many members are allowed in a team?",
-    answer: "Each team must consist of a minimum of 2 members and a maximum of 4 members. Solo teams are not allowed for this edition.",
+    answer: "Min 2, max 5 for external teams (max 3 for internal). No solo entries this time.",
   },
   {
     question: "Where to ask my question?",
@@ -46,7 +46,7 @@ export default function FAQ({ isFullPage = false }) {
     },
     {
       question: "Are pre-built projects allowed?",
-      answer: "No, all solutions must be developed during the hackathon. Teams are permitted to use libraries, frameworks, and open-source code, but pre-developed projects or open-sourced solutions specifically created for this event are not allowed.",
+      answer: "No. You have to build everything during the hackathon. Using open-source libraries and frameworks is fine, but don't bring a pre-built project.",
     },
     {
       question: "What happens in case of plagiarism?",
@@ -58,15 +58,15 @@ export default function FAQ({ isFullPage = false }) {
     },
     {
       question: "What should participants bring?",
-      answer: "Participants must bring their own laptop, hardware components (if required for their problem statement), and college ID card (a photocopy is acceptable) for verification at the grand finale.",
+      answer: "Bring your laptop, any hardware parts your project needs, and your college ID (photocopy works too) for the finale.",
     },
     {
       question: "When should submissions be completed?",
-      answer: "All solutions must be submitted before the specified deadline. Product development must cease once the allotted time is over. Minor debugging and fixes are permitted post-deadline.",
+      answer: "Everything has to be in before the deadline. Once time's up, stop building. Small bug fixes after that are okay.",
     },
     {
       question: "Will hardware be provided?",
-      answer: "No, if the chosen problem statement requires hardware components, participants must bring their own as the organizing team will not provide any hardware.",
+      answer: "Nope. If your problem statement needs hardware, bring your own. We won't be providing any.",
     },
   ] : faqData;
 

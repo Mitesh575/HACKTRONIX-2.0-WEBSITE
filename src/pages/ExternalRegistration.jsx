@@ -319,42 +319,42 @@ const perks = [
   {
     icon: Swords,
     title: "Bounty: ₹30,000+",
-    description: "Secure your share of the massive prize pool across Software and Hardware divisions.",
+    description: "Win your share of the cash prizes in both Software and Hardware tracks.",
     gradient: "from-yellow-500 to-amber-400",
     image: "/cards/prize-pool.png",
   },
   {
     icon: Satellite,
     title: "Alliances",
-    description: "Form squads with top-tier developers and hardware engineers.",
+    description: "Team up with awesome developers and hardware hackers.",
     gradient: "from-blue-500 to-cyan-400",
     image: "/cards/networking.png",
   },
   {
     icon: Zap,
     title: "24-Hour Sprint",
-    description: "A brutal 24-hour marathon of coding, soldering, and deploying.",
+    description: "A fast-paced 24 hours of coding, soldering, and building stuff.",
     gradient: "from-purple-500 to-pink-400",
     image: "/cards/challenge.png",
   },
   {
     icon: Radar,
     title: "Tactical Intel",
-    description: "Direct technical guidance from industry veterans.",
+    description: "Get hands-on help from experienced mentors.",
     gradient: "from-green-500 to-emerald-400",
     image: "/cards/mentorship.png",
   },
   {
     icon: Terminal,
     title: "Software Division",
-    description: "Architect scalable applications and intelligent systems.",
+    description: "Build apps, APIs, and smart systems from scratch.",
     gradient: "from-indigo-500 to-blue-400",
     image: "/cards/software-track.png",
   },
   {
     icon: Bot,
     title: "Hardware Division",
-    description: "Engineer physical prototypes and embedded IoT devices.",
+    description: "Build physical prototypes, circuits, and IoT projects.",
     gradient: "from-red-500 to-rose-400",
     image: "/cards/hardware-track.png",
   },
@@ -371,18 +371,18 @@ const eventDetails = [
 /* ── Track Domains ── */
 const trackDomains = {
   software: [
-    { title: "Artificial Intelligence & Generative AI", desc: "Build intelligent solutions using AI, machine learning, large language models, computer vision, or automation to solve real-world challenges." },
-    { title: "Cybersecurity & Blockchain", desc: "Develop secure, decentralized, and privacy-focused applications that enhance digital trust, data security, and cyber resilience." },
-    { title: "Smart Applications & Digital Innovation", desc: "Create impactful software solutions for domains such as healthcare, education, finance, agriculture, sustainability, and smart cities." },
-    { title: "Cloud Computing & DevOps", desc: "Design scalable, cloud-native applications, automation pipelines, and modern infrastructure solutions for high-performance systems." },
-    { title: "AR/VR & Immersive Technologies", desc: "Build immersive digital experiences using Augmented Reality, Virtual Reality, Mixed Reality, or interactive 3D technologies." }
+    { title: "AI & Machine Learning", desc: "Build something smart using LLMs, computer vision, or data automation." },
+    { title: "Security & Web3", desc: "Create apps that focus on privacy, cryptography, or decentralized networks." },
+    { title: "Smart Apps", desc: "Solve real problems in health, education, or finance with solid software." },
+    { title: "Cloud & Infrastructure", desc: "Set up scalable backends, deployment pipelines, or cloud tools." },
+    { title: "AR/VR & Games", desc: "Make immersive 3D experiences, games, or mixed reality apps." }
   ],
   hardware: [
-    { title: "Robotics & Intelligent Automation", desc: "Develop autonomous robots and intelligent automation systems that improve productivity, safety, and human interaction." },
-    { title: "Drone & UAV Technologies", desc: "Design innovative drone-based solutions for surveillance, agriculture, logistics, disaster response, and autonomous navigation." },
-    { title: "IoT & Smart Embedded Systems", desc: "Create connected devices using sensors, embedded systems, and IoT technologies to enable smarter environments and industries." },
-    { title: "Smart Mobility & Sustainable Energy", desc: "Build technologies that promote intelligent transportation, electric mobility, renewable energy, and sustainable infrastructure." },
-    { title: "Biomedical & Assistive Technologies", desc: "Develop healthcare and assistive hardware solutions that improve accessibility, patient care, and overall quality of life." }
+    { title: "Robotics & Automation", desc: "Build robots or automated systems that actually move and interact." },
+    { title: "Drones & UAVs", desc: "Design custom flying tech for mapping, delivery, or racing." },
+    { title: "IoT & Embedded", desc: "Wire up sensors and microcontrollers to make everyday objects smart." },
+    { title: "Energy & Mobility", desc: "Create hardware for electric transport or clean energy." },
+    { title: "HealthTech & MedTech", desc: "Build physical devices that help people monitor or improve their health." }
   ]
 };
 
@@ -497,7 +497,7 @@ export default function ExternalRegistration() {
           >
             <p className="text-base md:text-lg text-gray-300 font-mono tracking-wide max-w-2xl mx-auto">
               <TypingText
-                text="Calling all Outer Rim hackers & innovators — join the ultimate battle of code and circuits at HACKTRONIX 2.0"
+                text="Ready to build something cool? Join us for 24 hours of code, circuits, and caffeine at HACKTRONIX 2.0."
                 delay={loadDelay * 1000 + 800}
               />
             </p>
@@ -552,7 +552,7 @@ export default function ExternalRegistration() {
               <span className="text-[#ff2d55] font-['Exo_2']">Briefing</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              Everything you need to know before entering the arena
+              Here's what you need to know before you start building
             </p>
           </motion.div>
 
@@ -576,7 +576,7 @@ export default function ExternalRegistration() {
               <span className="text-[#ff2d55] font-['Exo_2']">Join</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              The perks of answering the Galactic call
+              Here is what's in it for you
             </p>
           </motion.div>
 
@@ -599,7 +599,7 @@ export default function ExternalRegistration() {
               Track <span className="text-[var(--neon-cyan)] font-['Exo_2']">Domains</span>
             </h2>
             <p className="muted max-w-xl mx-auto text-lg">
-              Explore the domains you can build your solutions around
+              Here are the main areas you can build in
             </p>
           </motion.div>
 
@@ -690,8 +690,7 @@ export default function ExternalRegistration() {
               ?
             </h2>
             <p className="text-gray-400 font-mono text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed">
-              Secure your position in HACKTRONIX 2.0. Fill out the registration form and
-              prepare for the ultimate hackathon experience.
+              Grab your spot in HACKTRONIX 2.0. Fill out the form and get ready to build.
             </p>
 
             <RegisterButton onClick={() => setIsModalOpen(true)} />

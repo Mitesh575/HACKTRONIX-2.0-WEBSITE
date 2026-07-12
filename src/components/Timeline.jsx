@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 
 const timelineEvents = [
-  { date: "Jul 10", event: "Registrations Open", description: "Registration period begins for all participants", color: "from-cyan-400 to-blue-500" },
+  { date: "Jul 10", event: "Registrations Open", description: "Sign up and grab your spot for the hackathon", color: "from-cyan-400 to-blue-500" },
   { date: "Jul 15", event: "Problem Statement Release", description: "Software and hardware tracks revealed", color: "from-blue-500 to-indigo-500" },
   { date: "Jul 20", event: "Team Formation Deadline", description: "Final day to form teams", color: "from-indigo-500 to-purple-500" },
   { date: "Jul 25", event: "Mentor Connect Round", description: "First round of mentor interactions and guidance", color: "from-purple-500 to-fuchsia-500" },
