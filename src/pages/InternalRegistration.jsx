@@ -390,9 +390,9 @@ const problemStatements = [
 export default function InternalRegistration() {
   const [showScrollHint, setShowScrollHint] = useState(true);
   const location = useLocation();
-  const loadDelay = location.state?.fromSingularity ? 1.8 : 0;
+  const loadDelay = location.state?.fromSingularity || location.state?.fromWhiteHole ? 1.8 : 0;
 
-  // Signal the global SingularityOverlay to play its arrival animation
+  // Signal the global SingularityOverlay or WhiteHoleOverlay to play its arrival animation
   // (reverse the blackhole — exit from hyperspace into this page)
   useEffect(() => {
     // Slight delay so React has painted the DOM before we start revealing it
