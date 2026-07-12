@@ -3,7 +3,7 @@ import TargetCursor from "../components/TargetCursor";
 import GlassCard from "../components/ui/GlassCard";
 
 const generalRules = [
-  "Each team must consist of a minimum of 2 members and a maximum of 4 members.",
+  "Each team must consist of 2 to 3 members (internal registration) or 2 to 5 members (external registration).",
   "Teams are allowed to select and work on only one problem statement.",
   "Inter-college teams: Allowed. Team members can be from the different colleges.",
   "Inter-specialization teams: Allowed. Team members can be from different specializations within the same college.",

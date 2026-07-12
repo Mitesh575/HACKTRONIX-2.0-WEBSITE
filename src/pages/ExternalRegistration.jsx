@@ -364,7 +364,7 @@ const perks = [
 const eventDetails = [
   { icon: Orbit, label: "Duration", value: "24 Hours" },
   { icon: Crosshair, label: "Venue", value: "APPLE HALL - SEC " },
-  { icon: Bot, label: "Team Size", value: "2 – 4 Members" },
+  { icon: Bot, label: "Team Size", value: "2 – 5 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
 ];
 

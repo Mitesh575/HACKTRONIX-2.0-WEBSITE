@@ -365,27 +365,11 @@ const perks = [
 const eventDetails = [
   { icon: Orbit, label: "Duration", value: "24 Hours" },
   { icon: Crosshair, label: "Venue", value: "APPLE HALL - SEC " },
-  { icon: Bot, label: "Team Size", value: "2 – 4 Members" },
+  { icon: Bot, label: "Team Size", value: "2 – 3 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
 ];
 
-/* ── Track Domains ── */
-const trackDomains = {
-  software: [
-    { title: "Artificial Intelligence & Generative AI", desc: "Build intelligent solutions using AI, machine learning, large language models, computer vision, or automation to solve real-world challenges." },
-    { title: "Cybersecurity & Blockchain", desc: "Develop secure, decentralized, and privacy-focused applications that enhance digital trust, data security, and cyber resilience." },
-    { title: "Smart Applications & Digital Innovation", desc: "Create impactful software solutions for domains such as healthcare, education, finance, agriculture, sustainability, and smart cities." },
-    { title: "Cloud Computing & DevOps", desc: "Design scalable, cloud-native applications, automation pipelines, and modern infrastructure solutions for high-performance systems." },
-    { title: "AR/VR & Immersive Technologies", desc: "Build immersive digital experiences using Augmented Reality, Virtual Reality, Mixed Reality, or interactive 3D technologies." }
-  ],
-  hardware: [
-    { title: "Robotics & Intelligent Automation", desc: "Develop autonomous robots and intelligent automation systems that improve productivity, safety, and human interaction." },
-    { title: "Drone & UAV Technologies", desc: "Design innovative drone-based solutions for surveillance, agriculture, logistics, disaster response, and autonomous navigation." },
-    { title: "IoT & Smart Embedded Systems", desc: "Create connected devices using sensors, embedded systems, and IoT technologies to enable smarter environments and industries." },
-    { title: "Smart Mobility & Sustainable Energy", desc: "Build technologies that promote intelligent transportation, electric mobility, renewable energy, and sustainable infrastructure." },
-    { title: "Biomedical & Assistive Technologies", desc: "Develop healthcare and assistive hardware solutions that improve accessibility, patient care, and overall quality of life." }
-  ]
-};
+
 
 const problemStatements = [
   {
