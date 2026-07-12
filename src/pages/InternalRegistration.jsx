@@ -16,6 +16,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import TargetCursor from "../components/TargetCursor";
+import GlassCard from "../components/ui/GlassCard";
 import RegistrationModal from "../components/RegistrationModal";
 
 /* ── Animated starfield canvas ── */
@@ -386,7 +387,22 @@ const trackDomains = {
   ]
 };
 
-/* ── Main component ── */
+const problemStatements = [
+  {
+    id: 1,
+    title: "3D LiDAR-Based Shelter Damage Inspection System",
+    description: "Participants are tasked with designing and implementing a shelter inspection system capable of scanning rectangular shelters using a 3D LiDAR sensor, precisely localising structural damage, and classifying that damage by structural zone - all without human intervention.",
+    link: "https://drive.google.com/file/d/1LwlWeTPbcRv1fw_wZ0SG8I07at4fV2Sj/view",
+  },
+  {
+    id: 2,
+    title: "World Modeling for Autonomous Agents",
+    description: "Most AI agents today work by keeping every observation stuffed into an ever-growing context window. The longer they run, the slower, costlier, and more confused they get. The real problem is the representation. A capable agent does not need to remember every conversation. It needs a structured model of the world it is operating in - updated continuously, queried efficiently, and compact enough to fit inside a small model's context.",
+    link: "https://drive.google.com/file/d/1Zla3J8weI8iNFIuNUz1NoR2KcdTonukL/view",
+  },
+];
+
+/* ── Components ── */
 export default function InternalRegistration() {
   const [showScrollHint, setShowScrollHint] = useState(true);
   const location = useLocation();
@@ -586,6 +602,59 @@ export default function InternalRegistration() {
             ))}
           </div>
 
+          {/* Problem Statements Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mt-20 mb-10"
+          >
+            <div className="flex justify-center mb-4">
+              <div className="section-badge inline-flex items-center gap-2">
+                <Radar className="h-4 w-4" />
+                Challenge
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Problem <span className="text-[var(--neon-cyan)] font-['Exo_2']">Statements</span>
+            </h2>
+            <p className="muted max-w-xl mx-auto text-lg">
+              Choose your challenge. Each problem statement presents a unique opportunity to innovate and create impactful solutions.
+            </p>
+          </motion.div>
+
+          <div className="space-y-8 mb-16">
+            {problemStatements.map((ps, idx) => (
+              <motion.div
+                key={ps.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+              >
+                <GlassCard className="p-6 md:p-8 rounded-xl border border-[rgba(0,245,255,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group">
+                  <div className="flex items-start gap-4 relative z-10">
+                    <span className="flex-shrink-0 w-10 h-10 rounded-sm bg-cyan-500/10 flex items-center justify-center text-sm font-bold text-cyan-400 border border-cyan-500/20">
+                      {ps.id}
+                    </span>
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-white mb-3">{ps.title}</h2>
+                      <p className="text-gray-300 leading-relaxed mb-4">{ps.description}</p>
+                      <a
+                        href={ps.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center text-sm font-mono tracking-wide text-[var(--neon-cyan)] hover:text-cyan-300 underline underline-offset-4"
+                      >
+                        click to view the problem statement
+                      </a>
+                    </div>
+                  </div>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
 
         </div>
       </section>

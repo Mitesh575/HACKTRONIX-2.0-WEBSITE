@@ -5,7 +5,6 @@ import SmoothScroll from "./components/SmoothScroll";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Team from "./pages/Team";
-import ProblemStatement from "./pages/ProblemStatement";
 import Guidelines from "./pages/Guidelines";
 import FAQPage from "./pages/FAQPage";
 import ExternalRegistration from "./pages/ExternalRegistration";
@@ -55,7 +54,6 @@ export default function App() {
         <div className={showNavbar && !isHomePage ? "pt-16 md:pt-20" : ""}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/problem-statement" element={<ProblemStatement />} />
             <Route path="/team" element={<Team />} />
             <Route path="/guidelines" element={<Guidelines />} />
             <Route path="/faq" element={<FAQPage />} />

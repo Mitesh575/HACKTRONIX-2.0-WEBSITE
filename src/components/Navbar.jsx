@@ -19,7 +19,6 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Problem Statement", href: "/problem-statement" },
     { label: "Team", href: "/team" },
     { label: "Guidelines", href: "/guidelines" },
     { label: "FAQ", href: "/faq" },
