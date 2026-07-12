@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import hackLogo from "../images/hack-logo.png";
-import { useSingularityTransition } from "./singularity-transition/engine/useSingularityTransition";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { bind: transitionBind } = useSingularityTransition({
-    destination: "/external-registration",
-  });
+  // useSingularityTransition not needed anymore
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -22,7 +19,6 @@ export default function Navbar() {
     { label: "Team", href: "/team" },
     { label: "Guidelines", href: "/guidelines" },
     { label: "FAQ", href: "/faq" },
-    { label: "External Registration", href: "/external-registration" },
   ];
 
   return (
@@ -53,7 +49,6 @@ export default function Navbar() {
             {/* Desktop Links (Right Side) */}
             <div className="hidden md:flex items-center gap-2 md:translate-x-2">
               {navLinks.map((link, idx) => {
-                const isExternal = link.href === "/external-registration";
                 return (
                   <motion.div
                     key={link.href}
@@ -65,7 +60,6 @@ export default function Navbar() {
                   >
                     <Link
                       to={link.href}
-                      {...(isExternal ? transitionBind : {})}
                       className="cursor-target relative block px-4 py-2 text-red-600 hover:text-red-500 transition-all text-[11px] font-bold font-mono tracking-widest uppercase"
                     >
                       {link.label}
@@ -105,17 +99,11 @@ export default function Navbar() {
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link) => {
-                const isExternal = link.href === "/external-registration";
                 return (
                   <Link
                     key={link.href}
                     to={link.href}
-                    onClick={(e) => {
-                      setMobileOpen(false);
-                      if (isExternal) {
-                        transitionBind.onClick(e);
-                      }
-                    }}
+                    onClick={() => setMobileOpen(false)}
                     className="block px-4 py-3 text-red-600 hover:text-red-400 hover:bg-white/5 rounded-sm transition-colors font-mono text-xs tracking-wider uppercase"
                   >
                     {link.label}
