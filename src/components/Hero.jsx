@@ -9,7 +9,15 @@ import bgNormal from "../images/bg-normal.jpeg";
 import bgHover from "../images/bg-hover.jpeg";
 import ProblemStatementPdf from "../images/HackTronix2_0_ProblemStatements.pdf.pdf";
 import { useSingularityTransition } from "./singularity-transition/engine/useSingularityTransition";
+import { useWhiteHoleTransition } from "./white-hole-transition/engine/useWhiteHoleTransition";
 
+const renderExplodableText = (text) => {
+  return text.split('').map((char, i) => (
+    <span key={i} className="wh-letter inline-block" style={{ whiteSpace: "pre" }}>
+      {char}
+    </span>
+  ));
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,7 +54,7 @@ function CountdownItem({ value, label, variant = "white" }) {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="flex flex-col items-center"
+      className="wh-card flex flex-col items-center"
     >
       <div className="relative">
         <div className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center border overflow-hidden ${isWhite ? "bg-white/10 border-white/20" : "bg-black/10 border-black/20"
@@ -86,6 +94,7 @@ export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { bind: transitionBind } = useSingularityTransition({ destination: "/external-registration" });
+  const { bind: whiteHoleBind } = useWhiteHoleTransition();
 
   const countdown = useCountdown(EVENT_DATE);
   const containerRef = useRef(null);
@@ -307,7 +316,7 @@ export default function Hero() {
           </motion.div>
 
           <h1 ref={mobileTitleRef} className="text-4xl sm:text-5xl font-extrabold text-white mb-6 tracking-wider crt-flicker" style={{ fontFamily: "'Star Jedi', sans-serif" }} data-collapse>
-            HackTronix <span className="text-[var(--neon-cyan)]">2.0</span>
+            {renderExplodableText("HackTronix")} <span className="text-[var(--neon-cyan)]">{renderExplodableText("2.0")}</span>
           </h1>
 
           <p className="text-base text-gray-400 mb-10 max-w-sm mx-auto leading-relaxed" data-collapse>
@@ -316,7 +325,7 @@ export default function Hero() {
 
           <div className="flex flex-col gap-4 mb-12" data-collapse>
             <button
-              onClick={() => navigate('/internal-registration')}
+              {...whiteHoleBind('/internal-registration')}
               className="btn-sw-primary py-3"
             >
               <span>Internal Registration</span>
@@ -353,13 +362,13 @@ export default function Hero() {
               data-collapse
             >
               <h1 ref={desktopLeftRef} className="text-8xl text-white tracking-[0.1em] mb-4" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
-                HackTr
+                {renderExplodableText("HackTr")}
               </h1>
               <p className="text-xl text-white/80 mb-10 max-w-md font-medium">
                 A 24-hour hackathon exploring the
               </p>
               <button
-                onClick={() => navigate('/internal-registration')}
+                {...whiteHoleBind('/internal-registration')}
                 className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
                 Internal Registration
@@ -385,7 +394,7 @@ export default function Hero() {
               data-collapse
             >
               <h1 ref={desktopRightRef} className="text-8xl text-black tracking-[0.1em] mb-4" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
-                onix 2.0
+                {renderExplodableText("onix 2.0")}
               </h1>
               <p className="text-xl text-black/80 mb-10 max-w-md font-medium">
                 upside-down world of technology
