@@ -8,7 +8,6 @@ import WhyJoinUs from "../components/WhyJoinUs";
 import Timeline from "../components/Timeline";
 import Sponsors from "../components/Sponsors";
 import Contact from "../components/Contact";
-import Footer from "../components/Footer";
 import Galaxy from "../components/Galaxy";
 import TargetCursor from "../components/TargetCursor";
 
@@ -33,7 +32,6 @@ export default function Home() {
       <Timeline />
       <FAQ />
       <Contact />
-      <Footer />
     </div>
   );
 }

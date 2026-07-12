@@ -10,6 +10,8 @@ import FAQPage from "./pages/FAQPage";
 import ExternalRegistration from "./pages/ExternalRegistration";
 import InternalRegistration from "./pages/InternalRegistration";
 import SingularityOverlay from "./components/singularity-transition/SingularityOverlay";
+import WhiteHoleOverlay from "./components/white-hole-transition/WhiteHoleOverlay";
+import Footer from "./components/Footer";
 import { lazy } from "react";
 
 const AdminLogin = lazy(() => import("./admin/AdminLogin"));
@@ -42,6 +44,7 @@ export default function App() {
     <SmoothScroll>
       {/* Global cinematic transition overlay — above everything */}
       <SingularityOverlay />
+      <WhiteHoleOverlay />
 
       <Suspense
         fallback={
@@ -70,6 +73,7 @@ export default function App() {
             />
           </Routes>
         </div>
+        {showNavbar && <Footer />}
       </Suspense>
     </SmoothScroll>
   );
