@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const timelineEvents = [
   { date: "Jul 10", event: "Registrations Open", description: "Registration period begins for all participants", color: "from-cyan-400 to-blue-500" },
   { date: "Jul 15", event: "Problem Statement Release", description: "Software and hardware tracks revealed", color: "from-blue-500 to-indigo-500" },
-  { date: "Jul 20", event: "Team Formation Deadline", description: "Final day to form teams of 2-4 members", color: "from-indigo-500 to-purple-500" },
+  { date: "Jul 20", event: "Team Formation Deadline", description: "Final day to form teams", color: "from-indigo-500 to-purple-500" },
   { date: "Jul 25", event: "Mentor Connect Round", description: "First round of mentor interactions and guidance", color: "from-purple-500 to-fuchsia-500" },
   { date: "Jul 30", event: "Progress Checkpoint", description: "Mid-event review and feedback session", color: "from-fuchsia-500 to-pink-500" },
   { date: "Aug 4", event: "Submission Window Opens", description: "Teams can start uploading their projects", color: "from-pink-500 to-rose-500" },

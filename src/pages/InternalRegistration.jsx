@@ -641,7 +641,7 @@ export default function InternalRegistration() {
               transition={{ delay: 0.5 }}
               className="mt-8 text-xs text-gray-600 font-mono"
             >
-              Registration is now open • Teams of 2-4 members
+              Registration is now open • Teams of 2-3 members
             </motion.p>
           </motion.div>
         </div>

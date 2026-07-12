@@ -77,7 +77,7 @@ export default function About() {
                 <Crosshair className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
               </div>
               <span className="block text-gray-500 font-mono text-[10px] md:text-xs mb-1 md:mb-2 tracking-widest uppercase">Coordinates</span>
-              <span className="block text-white font-medium text-sm md:text-lg">SEC - APPLE LAB</span>
+              <span className="block text-white font-medium text-sm md:text-lg">SEC - APPLE HALL</span>
             </div>
 
             {/* Spec Card 3 */}
