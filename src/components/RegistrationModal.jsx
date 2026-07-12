@@ -614,7 +614,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       isDarkPopup ? "text-white/60" : "text-black/60"
                     }`}
                   >
-                    Pick your track, choose a problem statement, then complete your team
+                    Pick your track, choose a domain, then complete your team
                     registration.
                   </p>
                 </div>
@@ -649,7 +649,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 ) : null}
                 <StepBadge
                   index={showTrackStep ? 2 : 1}
-                  label="Problem Statement"
+                  label="Domain"
                   active={step === "problem"}
                   complete={showTrackStep ? stepNumber > 2 : step === "form"}
                   isDarkPopup={isDarkPopup}
@@ -714,7 +714,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           isDarkPopup ? "text-white" : "text-black"
                         }`}
                       >
-                        Choose a {selectedTrack} statement
+                        Choose a {selectedTrack} domain
                       </h3>
                     </div>
                     <button
@@ -787,7 +787,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       }`}
                     >
                       <ArrowLeft className="h-4 w-4" />
-                      Change statement
+                      Change domain
                     </button>
                   </div>
 

@@ -368,6 +368,24 @@ const eventDetails = [
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
 ];
 
+/* ── Track Domains ── */
+const trackDomains = {
+  software: [
+    { title: "Artificial Intelligence & Generative AI", desc: "Build intelligent solutions using AI, machine learning, large language models, computer vision, or automation to solve real-world challenges." },
+    { title: "Cybersecurity & Blockchain", desc: "Develop secure, decentralized, and privacy-focused applications that enhance digital trust, data security, and cyber resilience." },
+    { title: "Smart Applications & Digital Innovation", desc: "Create impactful software solutions for domains such as healthcare, education, finance, agriculture, sustainability, and smart cities." },
+    { title: "Cloud Computing & DevOps", desc: "Design scalable, cloud-native applications, automation pipelines, and modern infrastructure solutions for high-performance systems." },
+    { title: "AR/VR & Immersive Technologies", desc: "Build immersive digital experiences using Augmented Reality, Virtual Reality, Mixed Reality, or interactive 3D technologies." }
+  ],
+  hardware: [
+    { title: "Robotics & Intelligent Automation", desc: "Develop autonomous robots and intelligent automation systems that improve productivity, safety, and human interaction." },
+    { title: "Drone & UAV Technologies", desc: "Design innovative drone-based solutions for surveillance, agriculture, logistics, disaster response, and autonomous navigation." },
+    { title: "IoT & Smart Embedded Systems", desc: "Create connected devices using sensors, embedded systems, and IoT technologies to enable smarter environments and industries." },
+    { title: "Smart Mobility & Sustainable Energy", desc: "Build technologies that promote intelligent transportation, electric mobility, renewable energy, and sustainable infrastructure." },
+    { title: "Biomedical & Assistive Technologies", desc: "Develop healthcare and assistive hardware solutions that improve accessibility, patient care, and overall quality of life." }
+  ]
+};
+
 /* ── Main component ── */
 export default function ExternalRegistration() {
   const [showScrollHint, setShowScrollHint] = useState(true);
@@ -568,10 +586,72 @@ export default function ExternalRegistration() {
               <PerkCard key={perk.title} {...perk} index={idx} />
             ))}
           </div>
+
+          {/* Track Domains Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mt-20 mb-10"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Track <span className="text-[var(--neon-cyan)] font-['Exo_2']">Domains</span>
+            </h2>
+            <p className="muted max-w-xl mx-auto text-lg">
+              Explore the domains you can build your solutions around
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            {/* Software Domains */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="sw-panel p-6 md:p-8 rounded-xl border border-[rgba(0,245,255,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(0,245,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <Terminal className="w-6 h-6 text-[var(--neon-cyan)]" />
+                <h3 className="text-xl font-bold text-white font-mono tracking-wide">SOFTWARE TRACK</h3>
+              </div>
+              <div className="space-y-5 relative z-10">
+                {trackDomains.software.map((domain, idx) => (
+                  <div key={idx} className="group/item">
+                    <h4 className="text-[var(--neon-cyan)] font-semibold text-sm md:text-base mb-1">{idx + 1}. {domain.title}</h4>
+                    <p className="text-sm text-gray-400 group-hover/item:text-gray-300 transition-colors leading-relaxed">{domain.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Hardware Domains */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="sw-panel p-6 md:p-8 rounded-xl border border-[rgba(255,45,85,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,45,85,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <Bot className="w-6 h-6 text-[#ff2d55]" />
+                <h3 className="text-xl font-bold text-white font-mono tracking-wide">HARDWARE TRACK</h3>
+              </div>
+              <div className="space-y-5 relative z-10">
+                {trackDomains.hardware.map((domain, idx) => (
+                  <div key={idx} className="group/item">
+                    <h4 className="text-[#ff2d55] font-semibold text-sm md:text-base mb-1">{idx + 1}. {domain.title}</h4>
+                    <p className="text-sm text-gray-400 group-hover/item:text-gray-300 transition-colors leading-relaxed">{domain.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
-
-
 
       {/* ── Final CTA Section ── */}
       <section className="relative py-20 md:py-32 overflow-hidden">
