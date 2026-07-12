@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -83,6 +84,7 @@ function FloatingOrb({ className, delay = 0 }) {
 
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
   const { bind: transitionBind } = useSingularityTransition({ destination: "/external-registration" });
 
   const countdown = useCountdown(EVENT_DATE);
@@ -314,7 +316,7 @@ export default function Hero() {
 
           <div className="flex flex-col gap-4 mb-12" data-collapse>
             <button
-              onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')}
+              onClick={() => navigate('/internal-registration')}
               className="btn-sw-primary py-3"
             >
               <span>Internal Registration</span>
@@ -357,7 +359,7 @@ export default function Hero() {
                 A 24-hour hackathon exploring the
               </p>
               <button
-                onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')}
+                onClick={() => navigate('/internal-registration')}
                 className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
                 Internal Registration

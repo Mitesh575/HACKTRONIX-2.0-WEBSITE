@@ -57,7 +57,7 @@ const registrationSchema = z.object({
   }),
   problemStatement: z.string().min(1, "Please select a problem statement"),
   problemStatementId: z.string().min(1, "Please select a problem statement"),
-  members: z.array(memberSchema).min(1, "At least 1 additional member required").max(3, "Maximum 3 additional members allowed"),
+  members: z.array(memberSchema).min(1, "At least 1 additional member required").max(4, "Maximum 4 additional members allowed"),
 });
 
 function ModalShell({ children, onClose, isDarkPopup }) {
@@ -426,7 +426,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   const [success, setSuccess] = useState(false);
   const [regId, setRegId] = useState("");
   const [step, setStep] = useState("track");
-  const [memberCount, setMemberCount] = useState(1);
+  const [memberCount, setMemberCount] = useState(2);
 
   const {
     register,
@@ -440,6 +440,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
     resolver: zodResolver(registrationSchema),
     defaultValues: {
       members: [
+        { name: "", email: "", phone: "" },
         { name: "", email: "", phone: "" },
       ],
       track: undefined,
@@ -503,7 +504,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   };
 
   const addMember = () => {
-    if (memberCount < 5) {
+    if (memberCount < 4) {
       const newCount = memberCount + 1;
       setMemberCount(newCount);
       setValue(`members.${newCount - 1}`, { name: "", email: "", phone: "" });
@@ -910,7 +911,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <button
                             type="button"
                             onClick={addMember}
-                            disabled={memberCount >= 3}
+                            disabled={memberCount >= 4}
                             className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${
                               isDarkPopup
                                 ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"

@@ -387,9 +387,8 @@ const trackDomains = {
 };
 
 /* ── Main component ── */
-export default function ExternalRegistration() {
+export default function InternalRegistration() {
   const [showScrollHint, setShowScrollHint] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const loadDelay = location.state?.fromSingularity ? 1.8 : 0;
 
@@ -470,7 +469,7 @@ export default function ExternalRegistration() {
             className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] text-white mb-2"
             style={{ fontFamily: "'Exo 2', sans-serif" }}
           >
-            EXTERNAL
+            INTERNAL
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -504,7 +503,7 @@ export default function ExternalRegistration() {
           </motion.div>
 
           {/* CTA Button */}
-          <RegisterButton loadDelay={loadDelay} onClick={() => setIsModalOpen(true)} />
+          <RegisterButton loadDelay={loadDelay} onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')} />
 
           {/* Scroll hint */}
           <AnimatePresence>
@@ -587,69 +586,7 @@ export default function ExternalRegistration() {
             ))}
           </div>
 
-          {/* Track Domains Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mt-20 mb-10"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Track <span className="text-[var(--neon-cyan)] font-['Exo_2']">Domains</span>
-            </h2>
-            <p className="muted max-w-xl mx-auto text-lg">
-              Explore the domains you can build your solutions around
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {/* Software Domains */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="sw-panel p-6 md:p-8 rounded-xl border border-[rgba(0,245,255,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(0,245,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
-              <div className="flex items-center gap-3 mb-6 relative z-10">
-                <Terminal className="w-6 h-6 text-[var(--neon-cyan)]" />
-                <h3 className="text-xl font-bold text-white font-mono tracking-wide">SOFTWARE TRACK</h3>
-              </div>
-              <div className="space-y-5 relative z-10">
-                {trackDomains.software.map((domain, idx) => (
-                  <div key={idx} className="group/item">
-                    <h4 className="text-[var(--neon-cyan)] font-semibold text-sm md:text-base mb-1">{idx + 1}. {domain.title}</h4>
-                    <p className="text-sm text-gray-400 group-hover/item:text-gray-300 transition-colors leading-relaxed">{domain.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Hardware Domains */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="sw-panel p-6 md:p-8 rounded-xl border border-[rgba(255,45,85,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,45,85,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
-              <div className="flex items-center gap-3 mb-6 relative z-10">
-                <Bot className="w-6 h-6 text-[#ff2d55]" />
-                <h3 className="text-xl font-bold text-white font-mono tracking-wide">HARDWARE TRACK</h3>
-              </div>
-              <div className="space-y-5 relative z-10">
-                {trackDomains.hardware.map((domain, idx) => (
-                  <div key={idx} className="group/item">
-                    <h4 className="text-[#ff2d55] font-semibold text-sm md:text-base mb-1">{idx + 1}. {domain.title}</h4>
-                    <p className="text-sm text-gray-400 group-hover/item:text-gray-300 transition-colors leading-relaxed">{domain.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
@@ -694,7 +631,7 @@ export default function ExternalRegistration() {
               prepare for the ultimate hackathon experience.
             </p>
 
-            <RegisterButton onClick={() => setIsModalOpen(true)} />
+            <RegisterButton onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')} />
 
             {/* Footer note */}
             <motion.p
@@ -704,13 +641,12 @@ export default function ExternalRegistration() {
               transition={{ delay: 0.5 }}
               className="mt-8 text-xs text-gray-600 font-mono"
             >
-              Registration is now open • Teams of 2-5 members
+              Registration is now open • Teams of 2-4 members
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
