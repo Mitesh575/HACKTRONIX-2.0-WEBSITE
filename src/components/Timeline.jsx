@@ -70,7 +70,7 @@ function TimelineDot({ item, index }) {
     <motion.div
       initial={{ scale: 0, opacity: 0, rotate: -45 }}
       whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-10px" }}
       transition={{ delay: index * 0.1, duration: 0.5, type: "spring", bounce: 0.5 }}
       className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[rgba(14,14,20,1)] border-2 ${item.border} flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 cursor-default`}
     >
@@ -117,7 +117,7 @@ export default function Timeline() {
             {timelineEvents.map((item, idx) => (
               <div key={idx} className="relative">
                 {/* Dot */}
-                <div className="absolute -left-[32px] top-2 flex items-center justify-center">
+                <div className="absolute left-[-32px] top-2 w-10 flex items-center justify-center">
                   <TimelineDot item={item} index={idx} />
                 </div>
                 {/* Card */}
