@@ -129,11 +129,10 @@ function ModalShell({ children, onClose, isDarkPopup }) {
       >
         <div
           ref={modalRef}
-          className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 ${isDarkPopup
-            ? "bg-[#0a0a0e] border-white/10 text-white shadow-2xl shadow-black/80"
-            : "bg-white border-black/10 text-black shadow-2xl shadow-black/30"
-            }`}
+          className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 sw-panel bg-[var(--sw-graphite)] border-[var(--sw-holo-bright)] shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white`}
         >
+          {/* Holographic background decoration */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
           {children}
         </div>
       </motion.div>
@@ -146,28 +145,18 @@ function StepBadge({ index, label, active, complete, isDarkPopup }) {
     <div className="flex items-center gap-3">
       <div
         className={`flex h-8 w-8 items-center justify-center rounded-md border text-sm font-semibold transition-all ${complete
-          ? isDarkPopup
-            ? "bg-white text-black border-white"
-            : "bg-black text-white border-black"
-          : active
-            ? isDarkPopup
-              ? "bg-white text-black border-white"
-              : "bg-black text-white border-black"
-            : isDarkPopup
-              ? "border-white/10 bg-white/5 text-white/40"
-              : "border-black/10 bg-black/5 text-black/40"
+            ? "bg-[var(--neon-cyan)] text-black border-[var(--neon-cyan)] shadow-[0_0_10px_var(--neon-cyan)]"
+            : active
+              ? "bg-transparent text-[var(--neon-cyan)] border-[var(--neon-cyan)] shadow-[inset_0_0_10px_rgba(0,245,255,0.2)]"
+              : "border-white/10 bg-white/5 text-white/40"
           }`}
       >
         {complete ? <Check className="h-4 w-4" /> : index}
       </div>
       <span
-        className={`text-sm font-medium ${active || complete
-          ? isDarkPopup
-            ? "text-white"
-            : "text-black"
-          : isDarkPopup
-            ? "text-white/40"
-            : "text-black/40"
+        className={`text-sm font-bold tracking-wider font-mono uppercase ${active || complete
+            ? "text-[var(--neon-cyan)]"
+            : "text-white/40"
           }`}
       >
         {label}
@@ -182,24 +171,16 @@ function TrackCard({ title, description, bullets, icon: Icon, active, onClick, i
       as="button"
       type="button"
       onClick={onClick}
-      className={`cursor-target group w-full p-6 text-left shadow-lg transition-all ${isDarkPopup
-        ? "bg-white/5 border-white/10 text-white"
-        : "bg-black/5 border-black/10 text-black"
-        } ${active
-          ? isDarkPopup
-            ? "border-white bg-white/10"
-            : "border-black bg-black/10"
-          : isDarkPopup
-            ? "hover:border-white/30"
-            : "hover:border-black/30"
+      className={`cursor-target group w-full p-6 text-left transition-all duration-300 sw-panel bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)] text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
+          ? "border-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,245,255,0.3)] bg-[rgba(0,245,255,0.1)]"
+          : "hover:border-[var(--neon-cyan)]"
         }`}
       interactive
     >
       <div className="relative">
         <div className="mb-5 flex items-center justify-between">
           <div
-            className={`flex h-12 w-12 items-center justify-center rounded-md ${isDarkPopup ? "bg-white text-black" : "bg-black text-white"
-              }`}
+            className={`flex h-12 w-12 items-center justify-center rounded-md border border-[var(--sw-holo-bright)] bg-black/50 text-[var(--neon-cyan)] shadow-[inset_0_0_10px_rgba(0,245,255,0.2)]`}
           >
             <Icon className="h-6 w-6" />
           </div>
@@ -212,10 +193,10 @@ function TrackCard({ title, description, bullets, icon: Icon, active, onClick, i
             </div>
           )}
         </div>
-        <h3 className={`mb-2 text-2xl font-semibold ${isDarkPopup ? "text-white" : "text-black"}`}>
+        <h3 className={`mb-2 text-2xl font-semibold font-['Exo_2'] tracking-wide text-white`}>
           {title}
         </h3>
-        <p className={`mb-5 text-sm leading-6 ${isDarkPopup ? "text-white/60" : "text-black/60"}`}>
+        <p className={`mb-5 text-sm leading-6 text-white/60`}>
           {description}
         </p>
         <div className="space-y-2">
@@ -238,16 +219,9 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
       as="button"
       type="button"
       onClick={onSelect}
-      className={`cursor-target group w-full p-5 text-left shadow-lg transition-all ${isDarkPopup
-        ? "bg-white/5 border-white/10 text-white"
-        : "bg-black/5 border-black/10 text-black"
-        } ${active
-          ? isDarkPopup
-            ? "border-white bg-white/10"
-            : "border-black bg-black/10"
-          : isDarkPopup
-            ? "hover:border-white/30"
-            : "hover:border-black/30"
+      className={`cursor-target group w-full p-5 text-left transition-all duration-300 sw-panel bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)] text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
+          ? "border-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,245,255,0.3)] bg-[rgba(0,245,255,0.1)]"
+          : "hover:border-[var(--neon-cyan)]"
         }`}
       interactive
     >
@@ -265,12 +239,8 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
         </div>
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${active
-            ? isDarkPopup
-              ? "bg-white text-black border-white"
-              : "bg-black text-white border-black"
-            : isDarkPopup
-              ? "border-white/10 bg-white/5 text-white/40"
-              : "border-black/10 bg-black/5 text-black/40"
+            ? "bg-[var(--neon-cyan)] text-black border-[var(--neon-cyan)] shadow-[0_0_10px_var(--neon-cyan)]"
+            : "border-white/10 bg-white/5 text-white/40"
             }`}
         >
           {active ? <Check className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
@@ -296,15 +266,12 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
 
 function Field({ label, error, children, isDarkPopup }) {
   return (
-    <div className="space-y-2">
-      <label
-        className={`block text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/60" : "text-black/60"
-          }`}
-      >
+    <div className="space-y-2 relative">
+      <label className="sw-label block mb-1">
         {label}
       </label>
       {children}
-      {error ? <p className="text-sm font-medium text-red-500">{error}</p> : null}
+      {error ? <p className="text-sm font-medium text-[var(--sw-red)] mt-1">{error}</p> : null}
     </div>
   );
 }
@@ -313,16 +280,14 @@ function SummaryPill({ label, value, isDarkPopup, track }) {
   const isRed = track === "Hardware";
   return (
     <div
-      className={`rounded-md border p-4 md:p-5 ${isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
-        }`}
+      className="rounded-md border p-4 md:p-5 sw-panel bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)]"
     >
       <p
-        className={`mb-1 text-[10px] uppercase font-bold tracking-[0.2em] ${isDarkPopup ? "text-white/40" : "text-black/40"
-          }`}
+        className="mb-1 text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--neon-cyan)] opacity-70"
       >
         {label}
       </p>
-      <p className={`text-sm font-bold uppercase ${isRed ? "text-red-600" : "text-[#00f5ff]"}`}>
+      <p className="text-sm font-bold uppercase text-[var(--neon-cyan)]">
         {value}
       </p>
     </div>
@@ -330,15 +295,11 @@ function SummaryPill({ label, value, isDarkPopup, track }) {
 }
 
 function MemberBlock({ index, error, theme, isDarkPopup, register }) {
-  const inputClass = `w-full rounded-md border px-4 py-3 font-medium outline-none transition-all ${isDarkPopup
-    ? "border-white/10 bg-black text-white focus:border-white"
-    : "border-black/10 bg-white text-black focus:border-black"
-    }`;
+  const inputClass = `w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]`;
 
   return (
     <div
-      className={`rounded-md border p-4 ${isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
-        }`}
+      className={`rounded-md border p-4 bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)]`}
     >
       <div className="flex items-center justify-between mb-4">
         <h4
@@ -351,8 +312,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
       <div className="grid gap-4 md:grid-cols-3">
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
-              }`}
+            className="sw-label block mb-1"
           >
             Name
           </label>
@@ -367,8 +327,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
         </div>
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
-              }`}
+            className="sw-label block mb-1"
           >
             Email
           </label>
@@ -384,8 +343,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
         </div>
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
-              }`}
+            className="sw-label block mb-1"
           >
             Phone
           </label>
@@ -565,7 +523,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   const showTrackStep = !initialTrack;
   const theme = modalTheme[selectedTrack] || modalTheme.neutral;
   const isHardware = selectedTrack === "Hardware";
-  const isDarkPopup = isHardware;
+  const isDarkPopup = true; // Forced Dark Theme
 
   return (
     <AnimatePresence>
@@ -619,10 +577,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 </div>
                 <button
                   onClick={onClose}
-                  className={`cursor-target rounded-md border p-2 transition-all ${isDarkPopup
-                    ? "border-white/20 text-white hover:bg-white/10"
-                    : "border-black/20 text-black hover:bg-black/10"
-                    }`}
+                  className="cursor-target rounded-md border border-[var(--sw-holo-bright)] p-2 text-white/60 transition-all hover:bg-[rgba(0,245,255,0.1)] hover:text-[var(--neon-cyan)] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                 >
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -716,10 +671,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => (showTrackStep ? setStep("track") : onClose())}
-                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
-                        ? "border-white/20 text-white hover:bg-white/5"
-                        : "border-black/20 text-black hover:bg-black/5"
-                        }`}
+                      className="cursor-target inline-flex items-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       {showTrackStep ? "Back" : "Close"}
@@ -772,10 +724,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => setStep("problem")}
-                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
-                        ? "border-white/20 text-white hover:bg-white/5"
-                        : "border-black/20 text-black hover:bg-black/5"
-                        }`}
+                      className="cursor-target inline-flex items-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       Change domain
@@ -816,10 +765,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         >
                           <input
                             {...register("name")}
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                             placeholder="Enter your full name"
                           />
                         </Field>
@@ -827,10 +773,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("email")}
                             type="email"
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                             placeholder="Enter your email"
                           />
                         </Field>
@@ -845,10 +788,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("phone")}
                             type="tel"
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                             placeholder="Enter phone number"
                           />
                         </Field>
@@ -859,10 +799,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         >
                           <input
                             {...register("college")}
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                             placeholder="Enter college name"
                           />
                         </Field>
@@ -877,10 +814,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <div className="relative">
                             <select
                               {...register("department")}
-                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all appearance-none ${isDarkPopup
-                                  ? "border-white/10 bg-black text-white focus:border-white"
-                                  : "border-black/10 bg-white text-black focus:border-black"
-                                }`}
+                              className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all appearance-none focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                             >
                               <option value="">Select Department</option>
                               <option value="AI&DS">AI&DS</option>
@@ -910,10 +844,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           >
                             <input
                               {...register("otherDepartment")}
-                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                                  ? "border-white/10 bg-black text-white focus:border-white"
-                                  : "border-black/10 bg-white text-black focus:border-black"
-                                }`}
+                              className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                               placeholder="Enter your department"
                             />
                           </Field>
@@ -927,10 +858,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       >
                         <input
                           {...register("teamName")}
-                          className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                            ? "border-white/10 bg-black text-white focus:border-white"
-                            : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                          className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                           placeholder="Enter team name"
                         />
                       </Field>
@@ -957,10 +885,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             {...register("pptFile")}
                             type="file"
                             accept=".ppt,.pptx,.pdf"
-                            className={`w-full rounded-md border px-4 py-3 font-medium outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 focus:border-[var(--neon-cyan)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
                           />
                         </div>
                       </Field>
@@ -968,8 +893,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
                           <label
-                            className={`block text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/60" : "text-black/60"
-                              }`}
+                            className="sw-label block"
                           >
                             Team Members
                           </label>
@@ -977,10 +901,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             type="button"
                             onClick={addMember}
                             disabled={memberCount >= 4}
-                            className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${isDarkPopup
-                              ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"
-                              : "border-black/20 text-black hover:bg-black/5 disabled:opacity-30 disabled:cursor-not-allowed"
-                              }`}
+                            className="inline-flex items-center gap-1 rounded-md border border-[var(--sw-holo-bright)] bg-[rgba(0,245,255,0.1)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.2)] disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <Plus className="h-3.5 w-3.5" />
                             Add Member
@@ -1000,10 +921,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                               <button
                                 type="button"
                                 onClick={removeMember}
-                                className={`absolute top-3 right-3 p-1 rounded-md transition-all ${isDarkPopup
-                                  ? "text-white/40 hover:text-red-400 hover:bg-white/10"
-                                  : "text-black/40 hover:text-red-600 hover:bg-black/10"
-                                  }`}
+                                className="absolute top-3 right-3 p-1 rounded-md transition-all text-white/40 hover:text-[var(--sw-red)] hover:bg-[rgba(204,17,34,0.1)]"
                                 title="Remove member"
                               >
                                 <X className="h-4 w-4" />
@@ -1032,10 +950,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <button
                           type="button"
                           onClick={() => (showTrackStep ? setStep("problem") : onClose())}
-                          className={`cursor-target inline-flex items-center justify-center gap-2 rounded-md border px-8 py-4 text-xs font-bold uppercase transition-all ${isDarkPopup
-                            ? "border-white/20 text-white hover:bg-white/5"
-                            : "border-black/20 text-black hover:bg-black/5"
-                            }`}
+                          className="cursor-target inline-flex items-center justify-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-8 py-4 text-xs font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_20px_rgba(0,245,255,0.2)]"
                         >
                           <ArrowLeft className="h-4 w-4" />
                           {showTrackStep ? "Back" : "Close"}
@@ -1043,10 +958,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <button
                           type="submit"
                           disabled={submitting}
-                          className={`cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase transition-all ${isHardware
-                            ? "bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/20"
-                            : "bg-[#00f5ff] text-black hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
-                            } disabled:opacity-50`}
+                          className="cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase tracking-widest transition-all bg-[var(--neon-cyan)] text-black hover:bg-[#00e5ff] shadow-[0_0_15px_var(--neon-cyan)] hover:shadow-[0_0_25px_var(--neon-cyan)] disabled:opacity-50"
                         >
                           {submitting ? "Submitting..." : "Submit Registration"}
                         </button>
