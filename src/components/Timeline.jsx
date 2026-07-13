@@ -27,7 +27,7 @@ function TimelineCard({ item, index, isLeft }) {
     <motion.div
       initial={{ opacity: 0, x: isLeft ? -20 : 20, y: 10 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
       className="w-full max-w-sm"
     >
@@ -53,7 +53,7 @@ function TimelineOppositeContent({ item, index, isLeft }) {
     <motion.div
       initial={{ opacity: 0, x: isLeft ? 20 : -20 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
       className={`hidden md:flex w-full items-center ${isLeft ? 'justify-start pl-8' : 'justify-end pr-8'}`}
     >
@@ -70,7 +70,7 @@ function TimelineDot({ item, index }) {
     <motion.div
       initial={{ scale: 0, opacity: 0, rotate: -45 }}
       whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-      viewport={{ once: true, margin: "-10px" }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5, type: "spring", bounce: 0.5 }}
       className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[rgba(14,14,20,1)] border-2 ${item.border} flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 cursor-default`}
     >

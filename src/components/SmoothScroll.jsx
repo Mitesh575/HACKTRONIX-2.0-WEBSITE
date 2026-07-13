@@ -16,8 +16,9 @@ export default function SmoothScroll({ children }) {
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
+      smoothTouch: false,
       wheelMultiplier: 1,
-      touchMultiplier: 1.4,
+      touchMultiplier: 1,
     });
 
     lenisRef.current = lenis;

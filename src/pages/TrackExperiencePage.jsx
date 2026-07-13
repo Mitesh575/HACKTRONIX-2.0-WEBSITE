@@ -200,7 +200,7 @@ export default function TrackExperiencePage({ track }) {
                   key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.08, duration: 0.45 }}
                 >
                   <div className={`h-full rounded-sm border ${theme.cardBorder} ${theme.cardBg} p-6 transition-all duration-300 ${theme.cardHoverBorder} hover:shadow-[0_0_16px_rgba(0,245,255,0.04)]`}>
@@ -234,7 +234,7 @@ export default function TrackExperiencePage({ track }) {
                   key={item.title}
                   initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.55 }}
                 >
                   <div className={`h-full rounded-sm border ${theme.cardBorder} ${theme.cardBg} p-6 transition-all duration-300 ${theme.cardHoverBorder} hover:shadow-[0_0_16px_rgba(0,245,255,0.04)]`}>

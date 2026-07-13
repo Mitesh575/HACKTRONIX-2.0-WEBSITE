@@ -127,7 +127,7 @@ function TeamCard({ member, index }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.06 }}
       className="w-full max-w-[320px] sm:w-[calc(50%-12px)] sm:max-w-[280px] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)]"
     >
@@ -171,7 +171,7 @@ export default function TeamPage() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true }}
               className="mb-8 text-2xl font-bold text-white md:text-3xl text-center font-['Exo_2']"
             >
               {section.title}
