@@ -33,19 +33,19 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 gap-3 md:gap-6 relative">
-          <Link to="/" className="wh-nav cursor-target flex items-center gap-2 md:gap-3 min-w-0" data-collapse>
+          <Link to="/" className="wh-nav cursor-target flex items-center gap-2 md:gap-3 whitespace-nowrap" data-collapse>
             <img
               id="nav-logo-slot"
               src={hackLogo}
               alt="HackTronix 2.0"
               className="h-10 w-auto sm:h-12 md:h-16 shrink-0 object-contain"
             />
-            <span className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.08em] truncate" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+            <span className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.08em]" style={{ fontFamily: "'Exo 2', sans-serif" }}>
               HACKTRONIX 2.0
             </span>
           </Link>
 
-          <div className="flex-1 flex items-center justify-end h-full">
+          <div className="flex items-center justify-end h-full">
             {/* Desktop Links (Right Side) */}
             <div className="hidden md:flex items-center gap-2 md:translate-x-2">
               {navLinks.map((link, idx) => {
