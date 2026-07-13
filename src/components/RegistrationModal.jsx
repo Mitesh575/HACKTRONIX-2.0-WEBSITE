@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ArrowLeft, Check, ChevronRight, Bot, Terminal, Zap, Orbit, Plus, X, Upload } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, ChevronDown, Bot, Terminal, Zap, Orbit, Plus, X, Upload } from "lucide-react";
 import { db, storage } from "../lib/firebase";
 import { sendConfirmationEmail } from "../lib/emailjs";
 import GlassCard from "./ui/GlassCard";
@@ -52,6 +52,8 @@ const registrationSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone must be at least 10 digits"),
   college: z.string().min(2, "College name is required"),
+  department: z.string().min(1, "Department is required"),
+  otherDepartment: z.string().optional(),
   teamName: z.string().min(2, "Team name is required"),
   track: z.enum(["Software", "Hardware"], {
     errorMap: () => ({ message: "Please select a track" }),
@@ -127,11 +129,10 @@ function ModalShell({ children, onClose, isDarkPopup }) {
       >
         <div
           ref={modalRef}
-          className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 ${
-            isDarkPopup
+          className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 ${isDarkPopup
               ? "bg-[#0a0a0e] border-white/10 text-white shadow-2xl shadow-black/80"
               : "bg-white border-black/10 text-black shadow-2xl shadow-black/30"
-          }`}
+            }`}
         >
           {children}
         </div>
@@ -144,32 +145,30 @@ function StepBadge({ index, label, active, complete, isDarkPopup }) {
   return (
     <div className="flex items-center gap-3">
       <div
-        className={`flex h-8 w-8 items-center justify-center rounded-md border text-sm font-semibold transition-all ${
-          complete
+        className={`flex h-8 w-8 items-center justify-center rounded-md border text-sm font-semibold transition-all ${complete
             ? isDarkPopup
               ? "bg-white text-black border-white"
               : "bg-black text-white border-black"
             : active
-            ? isDarkPopup
-              ? "bg-white text-black border-white"
-              : "bg-black text-white border-black"
-            : isDarkPopup
-            ? "border-white/10 bg-white/5 text-white/40"
-            : "border-black/10 bg-black/5 text-black/40"
-        }`}
+              ? isDarkPopup
+                ? "bg-white text-black border-white"
+                : "bg-black text-white border-black"
+              : isDarkPopup
+                ? "border-white/10 bg-white/5 text-white/40"
+                : "border-black/10 bg-black/5 text-black/40"
+          }`}
       >
         {complete ? <Check className="h-4 w-4" /> : index}
       </div>
       <span
-        className={`text-sm font-medium ${
-          active || complete
+        className={`text-sm font-medium ${active || complete
             ? isDarkPopup
               ? "text-white"
               : "text-black"
             : isDarkPopup
-            ? "text-white/40"
-            : "text-black/40"
-        }`}
+              ? "text-white/40"
+              : "text-black/40"
+          }`}
       >
         {label}
       </span>
@@ -183,35 +182,31 @@ function TrackCard({ title, description, bullets, icon: Icon, active, onClick, i
       as="button"
       type="button"
       onClick={onClick}
-      className={`cursor-target group w-full p-6 text-left shadow-lg transition-all ${
-        isDarkPopup
+      className={`cursor-target group w-full p-6 text-left shadow-lg transition-all ${isDarkPopup
           ? "bg-white/5 border-white/10 text-white"
           : "bg-black/5 border-black/10 text-black"
-      } ${
-        active
+        } ${active
           ? isDarkPopup
             ? "border-white bg-white/10"
             : "border-black bg-black/10"
           : isDarkPopup
-          ? "hover:border-white/30"
-          : "hover:border-black/30"
-      }`}
+            ? "hover:border-white/30"
+            : "hover:border-black/30"
+        }`}
       interactive
     >
       <div className="relative">
         <div className="mb-5 flex items-center justify-between">
           <div
-            className={`flex h-12 w-12 items-center justify-center rounded-md ${
-              isDarkPopup ? "bg-white text-black" : "bg-black text-white"
-            }`}
+            className={`flex h-12 w-12 items-center justify-center rounded-md ${isDarkPopup ? "bg-white text-black" : "bg-black text-white"
+              }`}
           >
             <Icon className="h-6 w-6" />
           </div>
           {active && (
             <div
-              className={`rounded-md px-3 py-1 text-xs font-bold tracking-wider uppercase ${
-                title === "Hardware" ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
-              }`}
+              className={`rounded-md px-3 py-1 text-xs font-bold tracking-wider uppercase ${title === "Hardware" ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
+                }`}
             >
               Selected
             </div>
@@ -243,27 +238,24 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
       as="button"
       type="button"
       onClick={onSelect}
-      className={`cursor-target group w-full p-5 text-left shadow-lg transition-all ${
-        isDarkPopup
+      className={`cursor-target group w-full p-5 text-left shadow-lg transition-all ${isDarkPopup
           ? "bg-white/5 border-white/10 text-white"
           : "bg-black/5 border-black/10 text-black"
-      } ${
-        active
+        } ${active
           ? isDarkPopup
             ? "border-white bg-white/10"
             : "border-black bg-black/10"
           : isDarkPopup
-          ? "hover:border-white/30"
-          : "hover:border-black/30"
-      }`}
+            ? "hover:border-white/30"
+            : "hover:border-black/30"
+        }`}
       interactive
     >
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
           <div
-            className={`mb-2 inline-flex rounded-md px-3 py-1 text-xs font-bold tracking-wide uppercase ${
-              isRed ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
-            }`}
+            className={`mb-2 inline-flex rounded-md px-3 py-1 text-xs font-bold tracking-wide uppercase ${isRed ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
+              }`}
           >
             {item.id}
           </div>
@@ -272,15 +264,14 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
           </h3>
         </div>
         <div
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${
-            active
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${active
               ? isDarkPopup
                 ? "bg-white text-black border-white"
                 : "bg-black text-white border-black"
               : isDarkPopup
-              ? "border-white/10 bg-white/5 text-white/40"
-              : "border-black/10 bg-black/5 text-black/40"
-          }`}
+                ? "border-white/10 bg-white/5 text-white/40"
+                : "border-black/10 bg-black/5 text-black/40"
+            }`}
         >
           {active ? <Check className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
         </div>
@@ -292,9 +283,8 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
         {item.tags.map((tag) => (
           <span
             key={tag}
-            className={`rounded-md px-3 py-1 text-[10px] uppercase font-bold tracking-wider ${
-              isDarkPopup ? "bg-white/5 text-white/50" : "bg-black/5 text-black/50"
-            }`}
+            className={`rounded-md px-3 py-1 text-[10px] uppercase font-bold tracking-wider ${isDarkPopup ? "bg-white/5 text-white/50" : "bg-black/5 text-black/50"
+              }`}
           >
             {tag}
           </span>
@@ -308,9 +298,8 @@ function Field({ label, error, children, isDarkPopup }) {
   return (
     <div className="space-y-2">
       <label
-        className={`block text-sm font-bold uppercase tracking-wider ${
-          isDarkPopup ? "text-white/60" : "text-black/60"
-        }`}
+        className={`block text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/60" : "text-black/60"
+          }`}
       >
         {label}
       </label>
@@ -324,14 +313,12 @@ function SummaryPill({ label, value, isDarkPopup, track }) {
   const isRed = track === "Hardware";
   return (
     <div
-      className={`rounded-md border p-4 md:p-5 ${
-        isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
-      }`}
+      className={`rounded-md border p-4 md:p-5 ${isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
+        }`}
     >
       <p
-        className={`mb-1 text-[10px] uppercase font-bold tracking-[0.2em] ${
-          isDarkPopup ? "text-white/40" : "text-black/40"
-        }`}
+        className={`mb-1 text-[10px] uppercase font-bold tracking-[0.2em] ${isDarkPopup ? "text-white/40" : "text-black/40"
+          }`}
       >
         {label}
       </p>
@@ -343,23 +330,20 @@ function SummaryPill({ label, value, isDarkPopup, track }) {
 }
 
 function MemberBlock({ index, error, theme, isDarkPopup, register }) {
-  const inputClass = `w-full rounded-md border px-4 py-3 font-medium outline-none transition-all ${
-    isDarkPopup
+  const inputClass = `w-full rounded-md border px-4 py-3 font-medium outline-none transition-all ${isDarkPopup
       ? "border-white/10 bg-black text-white focus:border-white"
       : "border-black/10 bg-white text-black focus:border-black"
-  }`;
+    }`;
 
   return (
     <div
-      className={`rounded-md border p-4 ${
-        isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
-      }`}
+      className={`rounded-md border p-4 ${isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
+        }`}
     >
       <div className="flex items-center justify-between mb-4">
         <h4
-          className={`text-sm font-bold uppercase tracking-wider ${
-            isDarkPopup ? "text-white" : "text-black"
-          }`}
+          className={`text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white" : "text-black"
+            }`}
         >
           Member {index + 2}
         </h4>
@@ -367,9 +351,8 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
       <div className="grid gap-4 md:grid-cols-3">
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${
-              isDarkPopup ? "text-white/50" : "text-black/50"
-            }`}
+            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
+              }`}
           >
             Name
           </label>
@@ -384,9 +367,8 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
         </div>
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${
-              isDarkPopup ? "text-white/50" : "text-black/50"
-            }`}
+            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
+              }`}
           >
             Email
           </label>
@@ -402,9 +384,8 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
         </div>
         <div className="space-y-1">
           <label
-            className={`block text-xs font-bold uppercase tracking-wider ${
-              isDarkPopup ? "text-white/50" : "text-black/50"
-            }`}
+            className={`block text-xs font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/50" : "text-black/50"
+              }`}
           >
             Phone
           </label>
@@ -452,6 +433,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   });
 
   const selectedTrack = watch("track");
+  const selectedDepartment = watch("department");
   const selectedProblemStatement = watch("problemStatement");
   const currentProblems = useMemo(
     () => (selectedTrack ? problemStatements[selectedTrack] : []),
@@ -469,6 +451,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         email: "",
         phone: "",
         college: "",
+        department: "",
+        otherDepartment: "",
         teamName: "",
         members: [
           { name: "", email: "", phone: "" },
@@ -550,11 +534,13 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         pptUrl = await getDownloadURL(storageRef);
       }
 
-      // Remove pptFile from payload before saving
-      const { pptFile, ...submitData } = data;
+      // Remove pptFile and otherDepartment from payload before saving
+      const { pptFile, otherDepartment, department, ...submitData } = data;
+      const finalDepartment = department === "Other" ? (otherDepartment || "Other") : department;
 
       await addDoc(collection(db, "registrations"), {
         ...submitData,
+        department: finalDepartment,
         pptUrl,
         regId: generatedRegId,
         status: "pending",
@@ -611,24 +597,21 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
               <div className="mb-8 flex items-start justify-between gap-4">
                 <div>
                   <div
-                    className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-bold uppercase tracking-wider mb-4 ${
-                      isHardware ? "!bg-red-600 !text-white" : "!bg-[#00f5ff] !text-black"
-                    }`}
+                    className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-bold uppercase tracking-wider mb-4 ${isHardware ? "!bg-red-600 !text-white" : "!bg-[#00f5ff] !text-black"
+                      }`}
                   >
                     <Zap className="h-4 w-4" />
                     Team Registration
                   </div>
                   <h2
-                    className={`text-2xl md:text-3xl font-black uppercase tracking-tight ${
-                      isDarkPopup ? "text-white" : "text-black"
-                    }`}
+                    className={`text-2xl md:text-3xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
+                      }`}
                   >
                     Register for HACKTRONIX
                   </h2>
                   <p
-                    className={`mt-2 max-w-2xl text-sm md:text-base font-medium ${
-                      isDarkPopup ? "text-white/60" : "text-black/60"
-                    }`}
+                    className={`mt-2 max-w-2xl text-sm md:text-base font-medium ${isDarkPopup ? "text-white/60" : "text-black/60"
+                      }`}
                   >
                     Pick your track, choose a domain, then complete your team
                     registration.
@@ -636,11 +619,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 </div>
                 <button
                   onClick={onClose}
-                  className={`cursor-target rounded-md border p-2 transition-all ${
-                    isDarkPopup
+                  className={`cursor-target rounded-md border p-2 transition-all ${isDarkPopup
                       ? "border-white/20 text-white hover:bg-white/10"
                       : "border-black/20 text-black hover:bg-black/10"
-                  }`}
+                    }`}
                 >
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -683,9 +665,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 <div>
                   <div className="mb-6 max-w-2xl">
                     <h3
-                      className={`text-xl font-black uppercase tracking-tight ${
-                        isDarkPopup ? "text-white" : "text-black"
-                      }`}
+                      className={`text-xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
+                        }`}
                     >
                       Choose your track
                     </h3>
@@ -726,9 +707,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <h3
-                        className={`text-xl font-black uppercase tracking-tight ${
-                          isDarkPopup ? "text-white" : "text-black"
-                        }`}
+                        className={`text-xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
+                          }`}
                       >
                         Choose a {selectedTrack} domain
                       </h3>
@@ -736,11 +716,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => (showTrackStep ? setStep("track") : onClose())}
-                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${
-                        isDarkPopup
+                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
                           ? "border-white/20 text-white hover:bg-white/5"
                           : "border-black/20 text-black hover:bg-black/5"
-                      }`}
+                        }`}
                     >
                       <ArrowLeft className="h-4 w-4" />
                       {showTrackStep ? "Back" : "Close"}
@@ -748,14 +727,12 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                   </div>
 
                   <div
-                    className={`rounded-md border p-4 mb-6 ${
-                      isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
-                    }`}
+                    className={`rounded-md border p-4 mb-6 ${isDarkPopup ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
+                      }`}
                   >
                     <div
-                      className={`inline-flex items-center gap-2 rounded-md px-3 py-1 text-xs font-bold uppercase tracking-widest ${
-                        isHardware ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
-                      }`}
+                      className={`inline-flex items-center gap-2 rounded-md px-3 py-1 text-xs font-bold uppercase tracking-widest ${isHardware ? "bg-red-600 text-white" : "bg-[#00f5ff] text-black"
+                        }`}
                     >
                       {selectedTrack === "Software" ? (
                         <Terminal className="h-4 w-4" />
@@ -786,9 +763,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <h3
-                        className={`text-xl font-black uppercase tracking-tight ${
-                          isDarkPopup ? "text-white" : "text-black"
-                        }`}
+                        className={`text-xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
+                          }`}
                       >
                         Complete registration
                       </h3>
@@ -796,11 +772,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => setStep("problem")}
-                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${
-                        isDarkPopup
+                      className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
                           ? "border-white/20 text-white hover:bg-white/5"
                           : "border-black/20 text-black hover:bg-black/5"
-                      }`}
+                        }`}
                     >
                       <ArrowLeft className="h-4 w-4" />
                       Change domain
@@ -823,11 +798,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                   </div>
 
                   <div
-                    className={`rounded-md border p-6 md:p-8 ${
-                      isDarkPopup
+                    className={`rounded-md border p-6 md:p-8 ${isDarkPopup
                         ? "bg-white/5 border-white/10 shadow-inner"
                         : "bg-black/5 border-black/10 shadow-inner"
-                    }`}
+                      }`}
                   >
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                       <input type="hidden" {...register("track")} />
@@ -842,11 +816,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         >
                           <input
                             {...register("name")}
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                              isDarkPopup
+                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                                 ? "border-white/10 bg-black text-white focus:border-white"
                                 : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                              }`}
                             placeholder="Enter your full name"
                           />
                         </Field>
@@ -854,11 +827,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("email")}
                             type="email"
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                              isDarkPopup
+                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                                 ? "border-white/10 bg-black text-white focus:border-white"
                                 : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                              }`}
                             placeholder="Enter your email"
                           />
                         </Field>
@@ -873,11 +845,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("phone")}
                             type="tel"
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                              isDarkPopup
+                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                                 ? "border-white/10 bg-black text-white focus:border-white"
                                 : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                              }`}
                             placeholder="Enter phone number"
                           />
                         </Field>
@@ -888,14 +859,67 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         >
                           <input
                             {...register("college")}
-                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                              isDarkPopup
+                            className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                                 ? "border-white/10 bg-black text-white focus:border-white"
                                 : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                              }`}
                             placeholder="Enter college name"
                           />
                         </Field>
+                      </div>
+
+                      <div className="grid gap-6 md:grid-cols-2">
+                        <Field
+                          label="Department"
+                          error={errors.department?.message}
+                          isDarkPopup={isDarkPopup}
+                        >
+                          <div className="relative">
+                            <select
+                              {...register("department")}
+                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all appearance-none ${
+                                isDarkPopup
+                                  ? "border-white/10 bg-black text-white focus:border-white"
+                                  : "border-black/10 bg-white text-black focus:border-black"
+                              }`}
+                            >
+                              <option value="">Select Department</option>
+                              <option value="AI&DS">AI&DS</option>
+                              <option value="CSE">CSE</option>
+                              <option value="ECE">ECE</option>
+                              <option value="AIML">AIML</option>
+                              <option value="EEE">EEE</option>
+                              <option value="MECH">MECH</option>
+                              <option value="I&E">I&E</option>
+                              <option value="MECH&AUTO">MECH&AUTO</option>
+                              <option value="IOT">IOT</option>
+                              <option value="CIVIL">CIVIL</option>
+                              <option value="Cyber Security">Cyber Security</option>
+                              <option value="M.TECH CSC">M.TECH CSC</option>
+                              <option value="Other">Other</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                              <ChevronDown className="h-4 w-4 opacity-50" />
+                            </div>
+                          </div>
+                        </Field>
+                        {selectedDepartment === "Other" && (
+                          <Field
+                            label="Please Specify Department"
+                            error={errors.otherDepartment?.message}
+                            isDarkPopup={isDarkPopup}
+                          >
+                            <input
+                              {...register("otherDepartment")}
+                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
+                                isDarkPopup
+                                  ? "border-white/10 bg-black text-white focus:border-white"
+                                  : "border-black/10 bg-white text-black focus:border-black"
+                              }`}
+                              placeholder="Enter your department"
+                            />
+                          </Field>
+                        )}
                       </div>
 
                       <Field
@@ -905,17 +929,16 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       >
                         <input
                           {...register("teamName")}
-                          className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                            isDarkPopup
+                          className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                               ? "border-white/10 bg-black text-white focus:border-white"
                               : "border-black/10 bg-white text-black focus:border-black"
-                          }`}
+                            }`}
                           placeholder="Enter team name"
                         />
                       </Field>
 
                       <Field
-                        label="Presentation / Idea Document (Optional)"
+                        label="PPT Upload"
                         error={errors.pptFile?.message}
                         isDarkPopup={isDarkPopup}
                       >
@@ -924,11 +947,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             {...register("pptFile")}
                             type="file"
                             accept=".ppt,.pptx,.pdf"
-                            className={`w-full rounded-md border px-4 py-3 font-medium outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 ${
-                              isDarkPopup
+                            className={`w-full rounded-md border px-4 py-3 font-medium outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 ${isDarkPopup
                                 ? "border-white/10 bg-black text-white focus:border-white"
                                 : "border-black/10 bg-white text-black focus:border-black"
-                            }`}
+                              }`}
                           />
                         </div>
                       </Field>
@@ -936,9 +958,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
                           <label
-                            className={`block text-sm font-bold uppercase tracking-wider ${
-                              isDarkPopup ? "text-white/60" : "text-black/60"
-                            }`}
+                            className={`block text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white/60" : "text-black/60"
+                              }`}
                           >
                             Team Members
                           </label>
@@ -946,11 +967,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             type="button"
                             onClick={addMember}
                             disabled={memberCount >= 4}
-                            className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${
-                              isDarkPopup
+                            className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${isDarkPopup
                                 ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"
                                 : "border-black/20 text-black hover:bg-black/5 disabled:opacity-30 disabled:cursor-not-allowed"
-                            }`}
+                              }`}
                           >
                             <Plus className="h-3.5 w-3.5" />
                             Add Member
@@ -970,11 +990,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                               <button
                                 type="button"
                                 onClick={removeMember}
-                                className={`absolute top-3 right-3 p-1 rounded-md transition-all ${
-                                  isDarkPopup
+                                className={`absolute top-3 right-3 p-1 rounded-md transition-all ${isDarkPopup
                                     ? "text-white/40 hover:text-red-400 hover:bg-white/10"
                                     : "text-black/40 hover:text-red-600 hover:bg-black/10"
-                                }`}
+                                  }`}
                                 title="Remove member"
                               >
                                 <X className="h-4 w-4" />
@@ -997,18 +1016,16 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       )}
 
                       <div
-                        className={`flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between ${
-                          isDarkPopup ? "border-white/10" : "border-black/10"
-                        }`}
+                        className={`flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between ${isDarkPopup ? "border-white/10" : "border-black/10"
+                          }`}
                       >
                         <button
                           type="button"
                           onClick={() => (showTrackStep ? setStep("problem") : onClose())}
-                          className={`cursor-target inline-flex items-center justify-center gap-2 rounded-md border px-8 py-4 text-xs font-bold uppercase transition-all ${
-                            isDarkPopup
+                          className={`cursor-target inline-flex items-center justify-center gap-2 rounded-md border px-8 py-4 text-xs font-bold uppercase transition-all ${isDarkPopup
                               ? "border-white/20 text-white hover:bg-white/5"
                               : "border-black/20 text-black hover:bg-black/5"
-                          }`}
+                            }`}
                         >
                           <ArrowLeft className="h-4 w-4" />
                           {showTrackStep ? "Back" : "Close"}
@@ -1016,11 +1033,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <button
                           type="submit"
                           disabled={submitting}
-                          className={`cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase transition-all ${
-                            isHardware
+                          className={`cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase transition-all ${isHardware
                               ? "bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/20"
                               : "bg-[#00f5ff] text-black hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
-                          } disabled:opacity-50`}
+                            } disabled:opacity-50`}
                         >
                           {submitting ? "Submitting..." : "Submit Registration"}
                         </button>
