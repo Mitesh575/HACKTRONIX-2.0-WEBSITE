@@ -454,15 +454,20 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
     if (memberCount < 4) {
       const newCount = memberCount + 1;
       setMemberCount(newCount);
-      setValue(`members.${newCount - 1}`, { name: "", email: "", phone: "" });
+      const currentMembers = getValues("members") || [];
+      setValue("members", [...currentMembers, { name: "", email: "", phone: "" }], { shouldValidate: true });
     }
   };
 
-  const removeMember = () => {
+  const removeMember = (indexToRemove) => {
     if (memberCount > 1) {
       const newCount = memberCount - 1;
       setMemberCount(newCount);
-      setValue(`members.${newCount}`, undefined);
+      const currentMembers = getValues("members") || [];
+      // If no index provided (from old button), remove the last one.
+      const targetIndex = typeof indexToRemove === "number" ? indexToRemove : currentMembers.length - 1;
+      const newMembers = currentMembers.filter((_, i) => i !== targetIndex);
+      setValue("members", newMembers, { shouldValidate: true });
     }
   };
 
@@ -942,7 +947,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             {i >= 1 && (
                               <button
                                 type="button"
-                                onClick={removeMember}
+                                onClick={() => removeMember(i)}
                                 className="absolute top-3 right-3 p-1 rounded-md transition-all text-white/40 hover:text-[var(--sw-red)] hover:bg-[rgba(204,17,34,0.1)]"
                                 title="Remove member"
                               >
