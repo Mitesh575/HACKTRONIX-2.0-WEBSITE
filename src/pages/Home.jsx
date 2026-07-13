@@ -1,7 +1,6 @@
 import Hero from "../components/Hero";
 import About from "../components/About";
 
-import Prizes from "../components/Prizes";
 
 import FAQ from "../components/FAQ";
 import WhyJoinUs from "../components/WhyJoinUs";
@@ -23,9 +22,6 @@ export default function Home() {
       <Hero />
       <div className="h-20 md:h-40" /> {/* Spacer after hero */}
       <About />
-
-
-      <Prizes />
 
       <WhyJoinUs />
       <Sponsors />
