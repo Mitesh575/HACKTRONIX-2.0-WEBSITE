@@ -360,6 +360,10 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
             className={inputClass}
             placeholder="Member phone"
           />
+          {error?.phone?.message && (
+            <p className="text-xs font-medium text-red-500">{error.phone.message}</p>
+          )}
+        </div>
         <div className="space-y-1">
           <label className="sw-label block mb-1">Department</label>
           <div className="relative">
