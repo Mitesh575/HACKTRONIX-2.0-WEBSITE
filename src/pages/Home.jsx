@@ -20,7 +20,6 @@ export default function Home() {
 
       <TargetCursor />
       <Hero />
-      <div className="h-20 md:h-40" /> {/* Spacer after hero */}
       <About />
 
       <WhyJoinUs />
