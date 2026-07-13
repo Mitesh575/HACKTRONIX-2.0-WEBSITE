@@ -129,7 +129,12 @@ function ModalShell({ children, onClose, isDarkPopup }) {
       >
         <div
           ref={modalRef}
-          className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 sw-panel bg-[var(--sw-graphite)] border-[var(--sw-holo-bright)] shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white`}
+          className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg transition-colors duration-500 sw-panel shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)]`}
+          style={{
+            backgroundImage: "linear-gradient(rgba(10, 10, 15, 0.8), rgba(10, 10, 15, 0.95)), url('/src/assets/bg-normal.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           {/* Holographic background decoration */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
@@ -148,7 +153,7 @@ function StepBadge({ index, label, active, complete, isDarkPopup }) {
             ? "bg-[var(--neon-cyan)] text-black border-[var(--neon-cyan)] shadow-[0_0_10px_var(--neon-cyan)]"
             : active
               ? "bg-transparent text-[var(--neon-cyan)] border-[var(--neon-cyan)] shadow-[inset_0_0_10px_rgba(0,245,255,0.2)]"
-              : "border-white/10 bg-white/5 text-white/40"
+              : "border-[var(--sw-holo-bright)] bg-transparent text-white/40"
           }`}
       >
         {complete ? <Check className="h-4 w-4" /> : index}
@@ -171,9 +176,9 @@ function TrackCard({ title, description, bullets, icon: Icon, active, onClick, i
       as="button"
       type="button"
       onClick={onClick}
-      className={`cursor-target group w-full p-6 text-left transition-all duration-300 sw-panel bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)] text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
+      className={`cursor-target group w-full p-6 text-left transition-all duration-300 sw-panel text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
           ? "border-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,245,255,0.3)] bg-[rgba(0,245,255,0.1)]"
-          : "hover:border-[var(--neon-cyan)]"
+          : ""
         }`}
       interactive
     >
@@ -219,9 +224,9 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
       as="button"
       type="button"
       onClick={onSelect}
-      className={`cursor-target group w-full p-5 text-left transition-all duration-300 sw-panel bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)] text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
+      className={`cursor-target group w-full p-5 text-left transition-all duration-300 sw-panel text-white hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] ${active
           ? "border-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,245,255,0.3)] bg-[rgba(0,245,255,0.1)]"
-          : "hover:border-[var(--neon-cyan)]"
+          : ""
         }`}
       interactive
     >
@@ -299,12 +304,11 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
 
   return (
     <div
-      className={`rounded-md border p-4 bg-[rgba(20,25,30,0.8)] border-[var(--sw-holo-bright)]`}
+      className="sw-panel p-4 mb-4 text-white shadow-[0_0_15px_rgba(0,245,255,0.05)]"
     >
       <div className="flex items-center justify-between mb-4">
         <h4
-          className={`text-sm font-bold uppercase tracking-wider ${isDarkPopup ? "text-white" : "text-black"
-            }`}
+          className="text-sm font-exo text-[var(--neon-cyan)] tracking-widest uppercase opacity-80"
         >
           Member {index + 2}
         </h4>
@@ -537,12 +541,12 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
               >
                 <Check className="h-8 w-8" />
               </div>
-              <h3 className={`mb-2 text-2xl font-bold ${isDarkPopup ? "text-white" : "text-black"}`}>Registration Successful</h3>
-              <p className={`mb-4 ${isDarkPopup ? "text-gray-400" : "text-black/60"}`}>Your registration ID is</p>
+              <h3 className="mb-2 text-3xl font-exo text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">Registration Successful</h3>
+              <p className="mb-4 text-gray-400">Your registration ID is</p>
               <p className="mb-6 text-2xl font-bold font-mono" style={{ color: theme.accent }}>
                 {regId}
               </p>
-              <p className={`mx-auto mb-8 max-w-md text-sm leading-6 ${isDarkPopup ? "text-gray-400" : "text-black/60"}`}>
+              <p className="mx-auto mb-8 max-w-md text-sm leading-6 text-gray-400">
                 Save this ID for future reference. You can always replace the placeholder problem
                 statements later.
               </p>
@@ -562,14 +566,12 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     Team Registration
                   </div>
                   <h2
-                    className={`text-2xl md:text-3xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
-                      }`}
+                    className="text-3xl md:text-4xl font-starjedi text-white drop-shadow-[0_0_15px_rgba(0,245,255,0.5)]"
                   >
                     Register for HACKTRONIX
                   </h2>
                   <p
-                    className={`mt-2 max-w-2xl text-sm md:text-base font-medium ${isDarkPopup ? "text-white/60" : "text-black/60"
-                      }`}
+                    className="mt-4 max-w-2xl text-sm md:text-base font-mono text-[var(--neon-cyan)] opacity-80"
                   >
                     Pick your track, choose a domain, then complete your team
                     registration.
@@ -620,8 +622,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 <div>
                   <div className="mb-6 max-w-2xl">
                     <h3
-                      className={`text-xl font-black uppercase tracking-tight ${isDarkPopup ? "text-white" : "text-black"
-                        }`}
+                      className="text-2xl font-exo text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                     >
                       Choose your track
                     </h3>
@@ -671,7 +672,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => (showTrackStep ? setStep("track") : onClose())}
-                      className="cursor-target inline-flex items-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+                      className="btn-sw-secondary !px-4 !py-2 !text-[10px]"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       {showTrackStep ? "Back" : "Close"}
@@ -724,7 +725,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     <button
                       type="button"
                       onClick={() => setStep("problem")}
-                      className="cursor-target inline-flex items-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+                      className="btn-sw-secondary !px-4 !py-2 !text-[10px]"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       Change domain
@@ -747,11 +748,9 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                   </div>
 
                   <div
-                    className={`rounded-md border p-6 md:p-8 ${isDarkPopup
-                      ? "bg-white/5 border-white/10 shadow-inner"
-                      : "bg-black/5 border-black/10 shadow-inner"
-                      }`}
+                    className="relative p-6 md:p-8 sw-panel border border-[var(--sw-holo-bright)] shadow-[0_0_30px_rgba(0,245,255,0.1)] overflow-hidden"
                   >
+                    <div className="absolute inset-0 bg-[url('/src/assets/bg-normal.jpeg')] bg-cover bg-center opacity-10 mix-blend-screen pointer-events-none"></div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                       <input type="hidden" {...register("track")} />
                       <input type="hidden" {...register("problemStatement")} />
@@ -901,7 +900,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             type="button"
                             onClick={addMember}
                             disabled={memberCount >= 4}
-                            className="inline-flex items-center gap-1 rounded-md border border-[var(--sw-holo-bright)] bg-[rgba(0,245,255,0.1)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.2)] disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="btn-sw-secondary !px-3 !py-1.5 !text-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <Plus className="h-3.5 w-3.5" />
                             Add Member
@@ -950,7 +949,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <button
                           type="button"
                           onClick={() => (showTrackStep ? setStep("problem") : onClose())}
-                          className="cursor-target inline-flex items-center justify-center gap-2 rounded-md border border-[var(--sw-holo-bright)] bg-transparent px-8 py-4 text-xs font-bold uppercase tracking-widest text-[var(--neon-cyan)] transition-all hover:bg-[rgba(0,245,255,0.1)] hover:shadow-[0_0_20px_rgba(0,245,255,0.2)]"
+                          className="btn-sw-secondary"
                         >
                           <ArrowLeft className="h-4 w-4" />
                           {showTrackStep ? "Back" : "Close"}
@@ -958,9 +957,9 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <button
                           type="submit"
                           disabled={submitting}
-                          className="cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase tracking-widest transition-all bg-[var(--neon-cyan)] text-black hover:bg-[#00e5ff] shadow-[0_0_15px_var(--neon-cyan)] hover:shadow-[0_0_25px_var(--neon-cyan)] disabled:opacity-50"
+                          className="btn-sw-primary disabled:opacity-50"
                         >
-                          {submitting ? "Submitting..." : "Submit Registration"}
+                          <span>{submitting ? "Submitting..." : "Submit Registration"}</span>
                         </button>
                       </div>
                     </form>

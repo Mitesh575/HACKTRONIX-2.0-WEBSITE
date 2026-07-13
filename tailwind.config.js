@@ -15,6 +15,11 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        starjedi: ["'Star Jedi'", "sans-serif"],
+        exo: ["'Exo 2'", "sans-serif"],
+        distantgalaxy: ["'SF Distant Galaxy'", "sans-serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
+        orbitron: ["'Orbitron'", "sans-serif"],
       },
     },
   },
