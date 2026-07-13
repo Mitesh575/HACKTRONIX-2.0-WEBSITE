@@ -507,15 +507,44 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       const generatedRegId = `HX${Date.now().toString(36).toUpperCase()}`;
 
       let pptUrl = "";
-      if (data.pptFile && data.pptFile.length > 0 && storage) {
+      if (data.pptFile && data.pptFile.length > 0) {
         const file = data.pptFile[0];
-        const storageRef = ref(storage, `presentations/${generatedRegId}_${file.name}`);
-        await withTimeout(
-          uploadBytes(storageRef, file),
-          30000,
-          "Failed to upload presentation. Make sure Firebase Storage is enabled."
+        const googleScriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+        
+        if (!googleScriptUrl) {
+          throw new Error("VITE_GOOGLE_SCRIPT_URL is missing in your .env file! Please add your Google Apps Script Web App URL.");
+        }
+
+        // Convert file to Base64
+        const base64Data = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
+
+        // Upload to Google Drive via Apps Script
+        // We use default fetch headers (text/plain) to avoid CORS preflight issues with Apps Script
+        const uploadPromise = fetch(googleScriptUrl, {
+          method: "POST",
+          body: JSON.stringify({
+            filename: `${generatedRegId}_${file.name}`,
+            mimetype: file.type || "application/vnd.ms-powerpoint",
+            base64: base64Data
+          })
+        }).then(res => res.json());
+
+        const result = await withTimeout(
+          uploadPromise,
+          45000,
+          "Failed to upload presentation to Google Drive. It took too long."
         );
-        pptUrl = await getDownloadURL(storageRef);
+
+        if (result.status === "success") {
+          pptUrl = result.url;
+        } else {
+          throw new Error(result.message || "Failed to upload to Google Drive");
+        }
       }
 
       // Remove pptFile and otherDepartment from payload before saving
