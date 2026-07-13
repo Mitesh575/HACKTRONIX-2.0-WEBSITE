@@ -418,6 +418,13 @@ export default function ExternalRegistration() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Cloud Video Background */}
         <video
+          ref={(el) => {
+            if (el) {
+              el.play().catch(() => {
+                // iOS Low Power Mode might block autoPlay. Silently catch the error.
+              });
+            }
+          }}
           autoPlay
           loop
           muted

@@ -43,21 +43,37 @@ export default function WhiteHoleOverlay() {
       // 1. Capture Page Background
       containerRef.current.style.opacity = "0";
       
-      const canvasTex = await html2canvas(document.body, {
-        scale: 0.25, // Lower scale for performance and natural blur during distortion
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: "#020408",
-        width: document.documentElement.clientWidth,
-        height: window.innerHeight,
-        x: window.scrollX,
-        y: window.scrollY,
-        ignoreElements: (element) => {
-          return element.id === "whitehole-overlay" || 
-                 element.id === "singularity-overlay" ||
-                 element.hasAttribute("data-wh-ignore");
+      const isMobile = window.innerWidth < 768 || navigator.maxTouchPoints > 0;
+      let canvasTex;
+
+      if (isMobile) {
+        // Fallback for mobile: skip heavy DOM screenshot, use a solid dark background
+        const dummyCanvas = document.createElement("canvas");
+        dummyCanvas.width = 16;
+        dummyCanvas.height = 16;
+        const ctx = dummyCanvas.getContext("2d");
+        if (ctx) {
+          ctx.fillStyle = "#020408";
+          ctx.fillRect(0, 0, 16, 16);
         }
-      });
+        canvasTex = dummyCanvas;
+      } else {
+        canvasTex = await html2canvas(document.body, {
+          scale: 0.25, // Lower scale for performance and natural blur during distortion
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: "#020408",
+          width: document.documentElement.clientWidth,
+          height: window.innerHeight,
+          x: window.scrollX,
+          y: window.scrollY,
+          ignoreElements: (element) => {
+            return element.id === "whitehole-overlay" || 
+                   element.id === "singularity-overlay" ||
+                   element.hasAttribute("data-wh-ignore");
+          }
+        });
+      }
       
       containerRef.current.style.opacity = "1";
 

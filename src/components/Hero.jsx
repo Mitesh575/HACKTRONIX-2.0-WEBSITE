@@ -223,6 +223,9 @@ export default function Hero() {
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!containerRef.current || frameRef.current) return;
+      
+      // Skip parallax on touch devices to improve scrolling performance
+      if (window.matchMedia("(max-width: 768px)").matches || navigator.maxTouchPoints > 0) return;
 
       frameRef.current = requestAnimationFrame(() => {
         const rect = containerRef.current.getBoundingClientRect();
@@ -234,7 +237,7 @@ export default function Hero() {
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       if (frameRef.current) {

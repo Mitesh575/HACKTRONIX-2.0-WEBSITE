@@ -46,17 +46,33 @@ export default function SingularityOverlay() {
       // Hide the overlay temporarily so we don't screenshot the overlay itself if it's visible
       containerRef.current.style.opacity = "0";
       
-      const canvasTex = await html2canvas(document.body, {
-        scale: 0.25, // Significantly reduced for near-instant capture since it will be distorted anyway
-        useCORS: true,
-        allowTaint: false, // Prevent WebGL SecurityError from tainted canvas
-        backgroundColor: "#020408",
-        width: document.documentElement.clientWidth,
-        height: window.innerHeight,
-        x: window.scrollX,
-        y: window.scrollY,
-        ignoreElements: (element) => element.id === "singularity-overlay"
-      });
+      const isMobile = window.innerWidth < 768 || navigator.maxTouchPoints > 0;
+      let canvasTex;
+
+      if (isMobile) {
+        // Fallback for mobile: skip heavy DOM screenshot, use a solid dark background
+        const dummyCanvas = document.createElement("canvas");
+        dummyCanvas.width = 16;
+        dummyCanvas.height = 16;
+        const ctx = dummyCanvas.getContext("2d");
+        if (ctx) {
+          ctx.fillStyle = "#020408";
+          ctx.fillRect(0, 0, 16, 16);
+        }
+        canvasTex = dummyCanvas;
+      } else {
+        canvasTex = await html2canvas(document.body, {
+          scale: 0.25, // Significantly reduced for near-instant capture since it will be distorted anyway
+          useCORS: true,
+          allowTaint: false, // Prevent WebGL SecurityError from tainted canvas
+          backgroundColor: "#020408",
+          width: document.documentElement.clientWidth,
+          height: window.innerHeight,
+          x: window.scrollX,
+          y: window.scrollY,
+          ignoreElements: (element) => element.id === "singularity-overlay"
+        });
+      }
       
       containerRef.current.style.opacity = "1";
 

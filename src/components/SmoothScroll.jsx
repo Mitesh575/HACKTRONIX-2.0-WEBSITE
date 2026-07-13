@@ -10,6 +10,15 @@ export default function SmoothScroll({ children }) {
   const rafRef = useRef(null);
 
   useEffect(() => {
+    // Detect mobile/touch devices
+    const isMobile = typeof window !== "undefined" && 
+      (window.matchMedia("(max-width: 768px)").matches || navigator.maxTouchPoints > 0);
+
+    // Skip Lenis on mobile to guarantee native, smooth scrolling without locking
+    if (isMobile) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
