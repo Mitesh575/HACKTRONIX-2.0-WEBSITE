@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
-import { ArrowLeft, Check, ChevronRight, Bot, Terminal, Zap, Orbit, Plus, X } from "lucide-react";
-import { db } from "../lib/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ArrowLeft, Check, ChevronRight, Bot, Terminal, Zap, Orbit, Plus, X, Upload } from "lucide-react";
+import { db, storage } from "../lib/firebase";
 import { sendConfirmationEmail } from "../lib/emailjs";
 import GlassCard from "./ui/GlassCard";
 import { problemStatements } from "../data/problemStatements";
@@ -57,6 +58,7 @@ const registrationSchema = z.object({
   }),
   problemStatement: z.string().min(1, "Please select a problem statement"),
   problemStatementId: z.string().min(1, "Please select a problem statement"),
+  pptFile: z.any().optional(),
   members: z.array(memberSchema).min(1, "At least 1 additional member required").max(4, "Maximum 4 additional members allowed"),
 });
 
@@ -475,6 +477,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         track: initialTrack || undefined,
         problemStatement: "",
         problemStatementId: "",
+        pptFile: undefined,
       });
     }
   }, [isOpen, reset, initialTrack]);
@@ -539,15 +542,27 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
 
       const generatedRegId = `HX${Date.now().toString(36).toUpperCase()}`;
 
+      let pptUrl = "";
+      if (data.pptFile && data.pptFile.length > 0 && storage) {
+        const file = data.pptFile[0];
+        const storageRef = ref(storage, `presentations/${generatedRegId}_${file.name}`);
+        await uploadBytes(storageRef, file);
+        pptUrl = await getDownloadURL(storageRef);
+      }
+
+      // Remove pptFile from payload before saving
+      const { pptFile, ...submitData } = data;
+
       await addDoc(collection(db, "registrations"), {
-        ...data,
+        ...submitData,
+        pptUrl,
         regId: generatedRegId,
         status: "pending",
         hackathonYear: "2.0",
         createdAt: serverTimestamp(),
       });
 
-      sendConfirmationEmail({ ...data, regId: generatedRegId }).catch((e) =>
+      sendConfirmationEmail({ ...submitData, regId: generatedRegId }).catch((e) =>
         console.warn("Email send failed:", e)
       );
 
@@ -897,6 +912,25 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           }`}
                           placeholder="Enter team name"
                         />
+                      </Field>
+
+                      <Field
+                        label="Presentation / Idea Document (Optional)"
+                        error={errors.pptFile?.message}
+                        isDarkPopup={isDarkPopup}
+                      >
+                        <div className="relative">
+                          <input
+                            {...register("pptFile")}
+                            type="file"
+                            accept=".ppt,.pptx,.pdf"
+                            className={`w-full rounded-md border px-4 py-3 font-medium outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 ${
+                              isDarkPopup
+                                ? "border-white/10 bg-black text-white focus:border-white"
+                                : "border-black/10 bg-white text-black focus:border-black"
+                            }`}
+                          />
+                        </div>
                       </Field>
 
                       <div className="space-y-4">
