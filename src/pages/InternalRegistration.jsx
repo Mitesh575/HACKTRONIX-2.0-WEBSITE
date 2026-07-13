@@ -235,8 +235,7 @@ function EventDetailCard({ icon: Icon, label, value, index }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-      className="flex items-center gap-4 sw-panel p-4 rounded-lg"
+      className="flex items-center gap-3 sm:gap-4 sw-panel p-3 sm:p-4 rounded-lg"
     >
       <div className="w-10 h-10 rounded-lg bg-[rgba(0,245,255,0.08)] border border-[rgba(0,245,255,0.15)] flex items-center justify-center flex-shrink-0">
         <Icon className="w-5 h-5 text-[var(--neon-cyan)]" />
@@ -319,7 +318,7 @@ function FloatingParticle({ delay, x, y, size = 2 }) {
 const perks = [
   {
     icon: Swords,
-    title: "Bounty: ₹30,000+",
+    title: "Bounty: ₹70,000+",
     description: "Win your share of the cash prizes in both Software and Hardware tracks.",
     gradient: "from-yellow-500 to-amber-400",
     image: "/cards/prize-pool.png",
@@ -466,7 +465,7 @@ export default function InternalRegistration() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: loadDelay + 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] text-white mb-2"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] text-white mb-2"
             style={{ fontFamily: "'Exo 2', sans-serif" }}
           >
             INTERNAL
@@ -475,7 +474,7 @@ export default function InternalRegistration() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: loadDelay + 0.35 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] mb-6"
             style={{
               fontFamily: "'Exo 2', sans-serif",
               background: "linear-gradient(135deg, var(--neon-cyan), var(--color-primary), var(--color-secondary))",
@@ -617,8 +616,8 @@ export default function InternalRegistration() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
               >
-                <GlassCard className="p-6 md:p-8 rounded-xl border border-[rgba(0,245,255,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group">
-                  <div className="flex items-start gap-4 relative z-10">
+                <GlassCard className="p-5 md:p-8 rounded-xl border border-[rgba(0,245,255,0.15)] bg-[rgba(14,14,20,0.6)] backdrop-blur-xl relative group">
+                  <div className="flex flex-col sm:flex-row items-start gap-4 relative z-10">
                     <span className="flex-shrink-0 w-10 h-10 rounded-sm bg-cyan-500/10 flex items-center justify-center text-sm font-bold text-cyan-400 border border-cyan-500/20">
                       {ps.id}
                     </span>
@@ -664,7 +663,7 @@ export default function InternalRegistration() {
             </div>
 
             <h2
-              className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-[0.04em]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-[0.04em]"
               style={{ fontFamily: "'Exo 2', sans-serif" }}
             >
               Ready to{" "}

@@ -234,8 +234,7 @@ function EventDetailCard({ icon: Icon, label, value, index }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-      className="flex items-center gap-4 sw-panel p-4 rounded-lg"
+      className="flex items-center gap-3 sm:gap-4 sw-panel p-3 sm:p-4 rounded-lg"
     >
       <div className="w-10 h-10 rounded-lg bg-[rgba(0,245,255,0.08)] border border-[rgba(0,245,255,0.15)] flex items-center justify-center flex-shrink-0">
         <Icon className="w-5 h-5 text-[var(--neon-cyan)]" />
@@ -467,7 +466,7 @@ export default function ExternalRegistration() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: loadDelay + 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] text-white mb-2"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] text-white mb-2"
             style={{ fontFamily: "'Exo 2', sans-serif" }}
           >
             EXTERNAL
@@ -476,7 +475,7 @@ export default function ExternalRegistration() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: loadDelay + 0.35 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.06em] mb-6"
             style={{
               fontFamily: "'Exo 2', sans-serif",
               background: "linear-gradient(135deg, var(--neon-cyan), var(--color-primary), var(--color-secondary))",
@@ -674,7 +673,7 @@ export default function ExternalRegistration() {
             </div>
 
             <h2
-              className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-[0.04em]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-[0.04em]"
               style={{ fontFamily: "'Exo 2', sans-serif" }}
             >
               Ready to{" "}
