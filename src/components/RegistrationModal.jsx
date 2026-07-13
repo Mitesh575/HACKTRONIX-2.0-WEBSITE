@@ -566,9 +566,9 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                     Team Registration
                   </div>
                   <h2
-                    className="text-3xl md:text-4xl font-starjedi text-white drop-shadow-[0_0_15px_rgba(0,245,255,0.5)]"
+                    className="text-3xl md:text-4xl font-starjedi text-white drop-shadow-[0_0_15px_rgba(0,245,255,0.5)] lowercase"
                   >
-                    Register for HACKTRONIX
+                    register for hacktronix
                   </h2>
                   <p
                     className="mt-4 max-w-2xl text-sm md:text-base font-mono text-[var(--neon-cyan)] opacity-80"
