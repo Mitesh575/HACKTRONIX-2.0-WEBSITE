@@ -318,8 +318,8 @@ function FloatingParticle({ delay, x, y, size = 2 }) {
 const perks = [
   {
     icon: Swords,
-    title: "Bounty: ₹70,000+",
-    description: "Win your share of the cash prizes in both Software and Hardware tracks.",
+    title: "Bounty: ₹30,000",
+    description: "1st Prize: ₹15,000 | 2nd Prize: ₹10,000 | 3rd Prize: ₹5,000",
     gradient: "from-yellow-500 to-amber-400",
     image: "/cards/prize-pool.png",
   },
