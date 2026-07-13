@@ -130,8 +130,8 @@ function ModalShell({ children, onClose, isDarkPopup }) {
         <div
           ref={modalRef}
           className={`w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg border transition-colors duration-500 ${isDarkPopup
-              ? "bg-[#0a0a0e] border-white/10 text-white shadow-2xl shadow-black/80"
-              : "bg-white border-black/10 text-black shadow-2xl shadow-black/30"
+            ? "bg-[#0a0a0e] border-white/10 text-white shadow-2xl shadow-black/80"
+            : "bg-white border-black/10 text-black shadow-2xl shadow-black/30"
             }`}
         >
           {children}
@@ -146,28 +146,28 @@ function StepBadge({ index, label, active, complete, isDarkPopup }) {
     <div className="flex items-center gap-3">
       <div
         className={`flex h-8 w-8 items-center justify-center rounded-md border text-sm font-semibold transition-all ${complete
+          ? isDarkPopup
+            ? "bg-white text-black border-white"
+            : "bg-black text-white border-black"
+          : active
             ? isDarkPopup
               ? "bg-white text-black border-white"
               : "bg-black text-white border-black"
-            : active
-              ? isDarkPopup
-                ? "bg-white text-black border-white"
-                : "bg-black text-white border-black"
-              : isDarkPopup
-                ? "border-white/10 bg-white/5 text-white/40"
-                : "border-black/10 bg-black/5 text-black/40"
+            : isDarkPopup
+              ? "border-white/10 bg-white/5 text-white/40"
+              : "border-black/10 bg-black/5 text-black/40"
           }`}
       >
         {complete ? <Check className="h-4 w-4" /> : index}
       </div>
       <span
         className={`text-sm font-medium ${active || complete
-            ? isDarkPopup
-              ? "text-white"
-              : "text-black"
-            : isDarkPopup
-              ? "text-white/40"
-              : "text-black/40"
+          ? isDarkPopup
+            ? "text-white"
+            : "text-black"
+          : isDarkPopup
+            ? "text-white/40"
+            : "text-black/40"
           }`}
       >
         {label}
@@ -183,8 +183,8 @@ function TrackCard({ title, description, bullets, icon: Icon, active, onClick, i
       type="button"
       onClick={onClick}
       className={`cursor-target group w-full p-6 text-left shadow-lg transition-all ${isDarkPopup
-          ? "bg-white/5 border-white/10 text-white"
-          : "bg-black/5 border-black/10 text-black"
+        ? "bg-white/5 border-white/10 text-white"
+        : "bg-black/5 border-black/10 text-black"
         } ${active
           ? isDarkPopup
             ? "border-white bg-white/10"
@@ -239,8 +239,8 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
       type="button"
       onClick={onSelect}
       className={`cursor-target group w-full p-5 text-left shadow-lg transition-all ${isDarkPopup
-          ? "bg-white/5 border-white/10 text-white"
-          : "bg-black/5 border-black/10 text-black"
+        ? "bg-white/5 border-white/10 text-white"
+        : "bg-black/5 border-black/10 text-black"
         } ${active
           ? isDarkPopup
             ? "border-white bg-white/10"
@@ -265,12 +265,12 @@ function ProblemCard({ item, active, onSelect, isDarkPopup, track }) {
         </div>
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${active
-              ? isDarkPopup
-                ? "bg-white text-black border-white"
-                : "bg-black text-white border-black"
-              : isDarkPopup
-                ? "border-white/10 bg-white/5 text-white/40"
-                : "border-black/10 bg-black/5 text-black/40"
+            ? isDarkPopup
+              ? "bg-white text-black border-white"
+              : "bg-black text-white border-black"
+            : isDarkPopup
+              ? "border-white/10 bg-white/5 text-white/40"
+              : "border-black/10 bg-black/5 text-black/40"
             }`}
         >
           {active ? <Check className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
@@ -331,8 +331,8 @@ function SummaryPill({ label, value, isDarkPopup, track }) {
 
 function MemberBlock({ index, error, theme, isDarkPopup, register }) {
   const inputClass = `w-full rounded-md border px-4 py-3 font-medium outline-none transition-all ${isDarkPopup
-      ? "border-white/10 bg-black text-white focus:border-white"
-      : "border-black/10 bg-white text-black focus:border-black"
+    ? "border-white/10 bg-black text-white focus:border-white"
+    : "border-black/10 bg-white text-black focus:border-black"
     }`;
 
   return (
@@ -620,8 +620,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                 <button
                   onClick={onClose}
                   className={`cursor-target rounded-md border p-2 transition-all ${isDarkPopup
-                      ? "border-white/20 text-white hover:bg-white/10"
-                      : "border-black/20 text-black hover:bg-black/10"
+                    ? "border-white/20 text-white hover:bg-white/10"
+                    : "border-black/20 text-black hover:bg-black/10"
                     }`}
                 >
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -717,8 +717,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       type="button"
                       onClick={() => (showTrackStep ? setStep("track") : onClose())}
                       className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
-                          ? "border-white/20 text-white hover:bg-white/5"
-                          : "border-black/20 text-black hover:bg-black/5"
+                        ? "border-white/20 text-white hover:bg-white/5"
+                        : "border-black/20 text-black hover:bg-black/5"
                         }`}
                     >
                       <ArrowLeft className="h-4 w-4" />
@@ -773,8 +773,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       type="button"
                       onClick={() => setStep("problem")}
                       className={`cursor-target inline-flex items-center gap-2 rounded-md border px-5 py-2 text-xs font-bold uppercase transition-all ${isDarkPopup
-                          ? "border-white/20 text-white hover:bg-white/5"
-                          : "border-black/20 text-black hover:bg-black/5"
+                        ? "border-white/20 text-white hover:bg-white/5"
+                        : "border-black/20 text-black hover:bg-black/5"
                         }`}
                     >
                       <ArrowLeft className="h-4 w-4" />
@@ -799,8 +799,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
 
                   <div
                     className={`rounded-md border p-6 md:p-8 ${isDarkPopup
-                        ? "bg-white/5 border-white/10 shadow-inner"
-                        : "bg-black/5 border-black/10 shadow-inner"
+                      ? "bg-white/5 border-white/10 shadow-inner"
+                      : "bg-black/5 border-black/10 shadow-inner"
                       }`}
                   >
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -817,8 +817,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("name")}
                             className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                                ? "border-white/10 bg-black text-white focus:border-white"
-                                : "border-black/10 bg-white text-black focus:border-black"
+                              ? "border-white/10 bg-black text-white focus:border-white"
+                              : "border-black/10 bg-white text-black focus:border-black"
                               }`}
                             placeholder="Enter your full name"
                           />
@@ -828,8 +828,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             {...register("email")}
                             type="email"
                             className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                                ? "border-white/10 bg-black text-white focus:border-white"
-                                : "border-black/10 bg-white text-black focus:border-black"
+                              ? "border-white/10 bg-black text-white focus:border-white"
+                              : "border-black/10 bg-white text-black focus:border-black"
                               }`}
                             placeholder="Enter your email"
                           />
@@ -846,8 +846,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             {...register("phone")}
                             type="tel"
                             className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                                ? "border-white/10 bg-black text-white focus:border-white"
-                                : "border-black/10 bg-white text-black focus:border-black"
+                              ? "border-white/10 bg-black text-white focus:border-white"
+                              : "border-black/10 bg-white text-black focus:border-black"
                               }`}
                             placeholder="Enter phone number"
                           />
@@ -860,8 +860,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <input
                             {...register("college")}
                             className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                                ? "border-white/10 bg-black text-white focus:border-white"
-                                : "border-black/10 bg-white text-black focus:border-black"
+                              ? "border-white/10 bg-black text-white focus:border-white"
+                              : "border-black/10 bg-white text-black focus:border-black"
                               }`}
                             placeholder="Enter college name"
                           />
@@ -877,11 +877,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           <div className="relative">
                             <select
                               {...register("department")}
-                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all appearance-none ${
-                                isDarkPopup
+                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all appearance-none ${isDarkPopup
                                   ? "border-white/10 bg-black text-white focus:border-white"
                                   : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                                }`}
                             >
                               <option value="">Select Department</option>
                               <option value="AI&DS">AI&DS</option>
@@ -911,11 +910,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           >
                             <input
                               {...register("otherDepartment")}
-                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${
-                                isDarkPopup
+                              className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
                                   ? "border-white/10 bg-black text-white focus:border-white"
                                   : "border-black/10 bg-white text-black focus:border-black"
-                              }`}
+                                }`}
                               placeholder="Enter your department"
                             />
                           </Field>
@@ -930,15 +928,27 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         <input
                           {...register("teamName")}
                           className={`w-full rounded-md border px-4 py-4 font-medium outline-none transition-all ${isDarkPopup
-                              ? "border-white/10 bg-black text-white focus:border-white"
-                              : "border-black/10 bg-white text-black focus:border-black"
+                            ? "border-white/10 bg-black text-white focus:border-white"
+                            : "border-black/10 bg-white text-black focus:border-black"
                             }`}
                           placeholder="Enter team name"
                         />
                       </Field>
 
                       <Field
-                        label="PPT Upload"
+                        label={
+                          <>
+                            PPT Upload{" "}
+                            <a
+                              href="https://docs.google.com/presentation/d/1QruGJ4kA4G-QTM7ozqO1cci-7jzy2mCEVwumGuRhrsE/edit?usp=sharing"
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-[var(--neon-cyan)] hover:underline ml-1"
+                            >
+                              (PPT Template)
+                            </a>
+                          </>
+                        }
                         error={errors.pptFile?.message}
                         isDarkPopup={isDarkPopup}
                       >
@@ -948,8 +958,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             type="file"
                             accept=".ppt,.pptx,.pdf"
                             className={`w-full rounded-md border px-4 py-3 font-medium outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--neon-cyan)] file:text-black hover:file:bg-cyan-400 ${isDarkPopup
-                                ? "border-white/10 bg-black text-white focus:border-white"
-                                : "border-black/10 bg-white text-black focus:border-black"
+                              ? "border-white/10 bg-black text-white focus:border-white"
+                              : "border-black/10 bg-white text-black focus:border-black"
                               }`}
                           />
                         </div>
@@ -968,8 +978,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                             onClick={addMember}
                             disabled={memberCount >= 4}
                             className={`inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-bold uppercase transition-all ${isDarkPopup
-                                ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"
-                                : "border-black/20 text-black hover:bg-black/5 disabled:opacity-30 disabled:cursor-not-allowed"
+                              ? "border-white/20 text-white hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed"
+                              : "border-black/20 text-black hover:bg-black/5 disabled:opacity-30 disabled:cursor-not-allowed"
                               }`}
                           >
                             <Plus className="h-3.5 w-3.5" />
@@ -991,8 +1001,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                                 type="button"
                                 onClick={removeMember}
                                 className={`absolute top-3 right-3 p-1 rounded-md transition-all ${isDarkPopup
-                                    ? "text-white/40 hover:text-red-400 hover:bg-white/10"
-                                    : "text-black/40 hover:text-red-600 hover:bg-black/10"
+                                  ? "text-white/40 hover:text-red-400 hover:bg-white/10"
+                                  : "text-black/40 hover:text-red-600 hover:bg-black/10"
                                   }`}
                                 title="Remove member"
                               >
@@ -1023,8 +1033,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           type="button"
                           onClick={() => (showTrackStep ? setStep("problem") : onClose())}
                           className={`cursor-target inline-flex items-center justify-center gap-2 rounded-md border px-8 py-4 text-xs font-bold uppercase transition-all ${isDarkPopup
-                              ? "border-white/20 text-white hover:bg-white/5"
-                              : "border-black/20 text-black hover:bg-black/5"
+                            ? "border-white/20 text-white hover:bg-white/5"
+                            : "border-black/20 text-black hover:bg-black/5"
                             }`}
                         >
                           <ArrowLeft className="h-4 w-4" />
@@ -1034,8 +1044,8 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           type="submit"
                           disabled={submitting}
                           className={`cursor-target rounded-md px-10 py-4 text-xs font-bold uppercase transition-all ${isHardware
-                              ? "bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/20"
-                              : "bg-[#00f5ff] text-black hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
+                            ? "bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/20"
+                            : "bg-[#00f5ff] text-black hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
                             } disabled:opacity-50`}
                         >
                           {submitting ? "Submitting..." : "Submit Registration"}

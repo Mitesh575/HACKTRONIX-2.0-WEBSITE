@@ -509,8 +509,26 @@ export default function ExternalRegistration() {
             </p>
           </motion.div>
 
-          {/* CTA Button */}
-          <RegisterButton loadDelay={loadDelay} onClick={() => setIsModalOpen(true)} />
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 z-20 relative">
+            <RegisterButton loadDelay={loadDelay} onClick={() => setIsModalOpen(true)} />
+            <motion.a
+              href="https://docs.google.com/presentation/d/1QruGJ4kA4G-QTM7ozqO1cci-7jzy2mCEVwumGuRhrsE/edit?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: loadDelay + 1.4 }}
+              className="group relative inline-flex items-center gap-3 cursor-target"
+            >
+              <div className="relative px-8 py-4 md:px-10 md:py-5 text-sm md:text-base flex items-center gap-3 rounded-lg border border-[var(--neon-cyan)] bg-[var(--neon-cyan)]/10 text-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)]/20 transition-all shadow-[0_0_15px_rgba(0,245,255,0.2)] hover:shadow-[0_0_25px_rgba(0,245,255,0.4)]">
+                <span className="relative z-10 flex items-center gap-2 font-bold tracking-wider">
+                  <ExternalLink className="w-5 h-5" />
+                  PPT TEMPLATE
+                </span>
+              </div>
+            </motion.a>
+          </div>
 
           {/* Scroll hint */}
           <AnimatePresence>
