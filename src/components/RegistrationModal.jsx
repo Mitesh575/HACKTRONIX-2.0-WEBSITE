@@ -129,7 +129,7 @@ function ModalShell({ children, onClose, isDarkPopup }) {
       >
         <div
           ref={modalRef}
-          className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg transition-colors duration-500 sw-panel shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)]`}
+          className={`relative w-full max-w-5xl max-h-[90vh] !overflow-y-auto overscroll-contain rounded-lg transition-colors duration-500 sw-panel shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)]`}
           style={{
             backgroundImage: "linear-gradient(rgba(10, 10, 15, 0.8), rgba(10, 10, 15, 0.95)), url('/src/assets/bg-normal.jpeg')",
             backgroundSize: "cover",
