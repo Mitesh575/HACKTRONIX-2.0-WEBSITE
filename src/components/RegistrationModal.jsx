@@ -371,7 +371,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   const [success, setSuccess] = useState(false);
   const [regId, setRegId] = useState("");
   const [step, setStep] = useState("track");
-  const [memberCount, setMemberCount] = useState(2);
+  const [memberCount, setMemberCount] = useState(1);
 
   const {
     register,
@@ -385,7 +385,6 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
     resolver: zodResolver(registrationSchema),
     defaultValues: {
       members: [
-        { name: "", email: "", phone: "" },
         { name: "", email: "", phone: "" },
       ],
       track: undefined,
@@ -407,7 +406,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       setSuccess(false);
       setRegId("");
       setStep(initialTrack ? "problem" : "track");
-      setMemberCount(2);
+      setMemberCount(1);
       reset({
         name: "",
         email: "",
@@ -417,7 +416,6 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         otherDepartment: "",
         teamName: "",
         members: [
-          { name: "", email: "", phone: "" },
           { name: "", email: "", phone: "" },
         ],
         track: initialTrack || undefined,
@@ -461,7 +459,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   };
 
   const removeMember = () => {
-    if (memberCount > 2) {
+    if (memberCount > 1) {
       const newCount = memberCount - 1;
       setMemberCount(newCount);
       setValue(`members.${newCount}`, undefined);
