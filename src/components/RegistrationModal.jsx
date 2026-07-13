@@ -870,9 +870,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                               href="https://docs.google.com/presentation/d/1QruGJ4kA4G-QTM7ozqO1cci-7jzy2mCEVwumGuRhrsE/edit?usp=sharing"
                               target="_blank"
                               rel="noreferrer"
-                              className="text-[var(--neon-cyan)] hover:underline ml-1"
+                              className="text-[var(--neon-cyan)] font-bold underline underline-offset-4 decoration-2 hover:text-white hover:drop-shadow-[0_0_8px_rgba(0,245,255,0.8)] transition-all ml-2"
+                              title="Download the required PPT template"
                             >
-                              (PPT Template)
+                              [Click for PPT Template]
                             </a>
                           </>
                         }
