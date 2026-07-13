@@ -430,7 +430,7 @@ export default function InternalRegistration() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-70"
         >
-          <source src="/cockpit-hero.mp4" type="video/mp4" />
+          <source src="/internal-hero.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay to blend video with the dark theme and ensure text remains readable */}
