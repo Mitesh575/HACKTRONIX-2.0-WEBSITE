@@ -25,7 +25,7 @@ const features = [
 
 const stats = [
   { value: "100+", label: "Participants", icon: Bot, gradient: "from-primary to-secondary" },
-  { value: "₹30,000", label: "Prize Pool", icon: Swords, gradient: "from-green-500 to-emerald-400" },
+  { value: "₹70,000", label: "Prize Pool", icon: Swords, gradient: "from-green-500 to-emerald-400" },
   { value: "2", label: "Domains", icon: Orbit, gradient: "from-blue-500 to-cyan-400" },
   { value: "24", label: "Hours", icon: Hourglass, gradient: "from-purple-500 to-pink-400" },
 ];
@@ -73,11 +73,11 @@ function FeatureCard({ title, description, icon: Icon, color, index }) {
       <div className="pgc-card-base" />
       <div className="pgc-card-blob" />
       <div className="pgc-card-blob2" />
-      
+
       <div className="pgc-card-is pgc-card-is1" />
       <div className="pgc-card-is pgc-card-is2" />
       <div className="pgc-card-is pgc-card-is3" />
-      
+
       <div className="pgc-hover-layer">
         <div className="pgc-hover-fill" />
         <div className="pgc-hover-border" />
@@ -162,22 +162,22 @@ export default function WhyJoinUs() {
 
         const W = card.offsetWidth;
         const H = card.offsetHeight;
-        
+
         const offset1 = index * 2.5;
         const offset2 = index * 1.8;
-        
+
         const b1x = (W / 2) + Math.sin(time + offset1) * (W * 0.25) - (blob.offsetWidth / 2);
         const b1y = (H / 2) + Math.cos(time * 0.8 + offset1) * (H * 0.25) - (blob.offsetHeight / 2);
-        
+
         const b2x = (W / 2) + Math.cos(time * 1.2 + offset2) * (W * 0.3) - (blob2.offsetWidth / 2);
         const b2y = (H / 2) + Math.sin(time * 0.9 + offset2) * (H * 0.3) - (blob2.offsetHeight / 2);
-        
+
         blob.style.transform = `translate(${b1x}px, ${b1y}px)`;
         blob2.style.transform = `translate(${b2x}px, ${b2y}px)`;
       });
       animationFrameId = requestAnimationFrame(animateBlobs);
     };
-    
+
     animateBlobs();
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
@@ -257,7 +257,7 @@ export default function WhyJoinUs() {
             background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--color), 0.04), transparent 60%); 
         }
       `}</style>
-      
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pgc-scene-wrapper" ref={containerRef} onMouseMove={handleMouseMove}>

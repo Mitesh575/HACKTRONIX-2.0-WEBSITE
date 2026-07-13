@@ -48,7 +48,7 @@ export default function About() {
               </div>
               <div className="w-[1px] bg-white/10" />
               <div className="flex flex-col">
-                <span className="text-white font-mono text-2xl font-bold">₹30K</span>
+                <span className="text-white font-mono text-2xl font-bold">₹70K</span>
                 <span className="text-gray-500 text-xs uppercase tracking-widest mt-1">Bounty</span>
               </div>
             </div>
