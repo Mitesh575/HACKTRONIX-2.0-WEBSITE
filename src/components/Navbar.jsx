@@ -38,9 +38,9 @@ export default function Navbar() {
               id="nav-logo-slot"
               src={hackLogo}
               alt="HackTronix 2.0"
-              className="h-16 w-auto md:h-20 shrink-0 object-contain"
+              className="h-10 w-auto sm:h-12 md:h-16 shrink-0 object-contain"
             />
-            <span className="text-white text-2xl md:text-4xl font-bold tracking-[0.08em]" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+            <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-[0.08em] whitespace-nowrap" style={{ fontFamily: "'Exo 2', sans-serif" }}>
               HACKTRONIX 2.0
             </span>
           </Link>
