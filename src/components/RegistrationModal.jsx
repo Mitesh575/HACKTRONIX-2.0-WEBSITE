@@ -473,13 +473,28 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
   const onSubmit = async (data) => {
     setSubmitting(true);
     setDuplicateError("");
+
+    const withTimeout = (promise, ms, errorMsg) => {
+      return Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error(errorMsg)), ms))
+      ]);
+    };
+
     try {
+      if (!db || !storage) {
+        throw new Error("Firebase is not configured. Please check your .env file and restart the server.");
+      }
       // Check for duplicate email
       const emailQuery = query(
         collection(db, "registrations"),
         where("email", "==", data.email)
       );
-      const existing = await getDocs(emailQuery);
+      const existing = await withTimeout(
+        getDocs(emailQuery),
+        15000,
+        "Failed to connect to database. Make sure Firestore is enabled in your Firebase Console."
+      );
       if (!existing.empty) {
         setDuplicateError(`The email "${data.email}" is already registered. Each team lead can only register once.`);
         setSubmitting(false);
@@ -492,7 +507,11 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       if (data.pptFile && data.pptFile.length > 0 && storage) {
         const file = data.pptFile[0];
         const storageRef = ref(storage, `presentations/${generatedRegId}_${file.name}`);
-        await uploadBytes(storageRef, file);
+        await withTimeout(
+          uploadBytes(storageRef, file),
+          30000,
+          "Failed to upload presentation. Make sure Firebase Storage is enabled."
+        );
         pptUrl = await getDownloadURL(storageRef);
       }
 
@@ -500,15 +519,19 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       const { pptFile, otherDepartment, department, ...submitData } = data;
       const finalDepartment = department === "Other" ? (otherDepartment || "Other") : department;
 
-      await addDoc(collection(db, "registrations"), {
-        ...submitData,
-        department: finalDepartment,
-        pptUrl,
-        regId: generatedRegId,
-        status: "pending",
-        hackathonYear: "2.0",
-        createdAt: serverTimestamp(),
-      });
+      await withTimeout(
+        addDoc(collection(db, "registrations"), {
+          ...submitData,
+          department: finalDepartment,
+          pptUrl,
+          regId: generatedRegId,
+          status: "pending",
+          hackathonYear: "2.0",
+          createdAt: serverTimestamp(),
+        }),
+        15000,
+        "Failed to save registration. Make sure Firestore is enabled and rules allow writing."
+      );
 
       sendConfirmationEmail({ ...submitData, regId: generatedRegId }).catch((e) =>
         console.warn("Email send failed:", e)
@@ -518,6 +541,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       setSuccess(true);
     } catch (error) {
       console.error("Registration error:", error);
+      setDuplicateError(error.message || "Failed to submit registration. Please try again.");
     } finally {
       setSubmitting(false);
     }
