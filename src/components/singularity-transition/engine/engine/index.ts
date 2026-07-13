@@ -373,6 +373,19 @@ export function createEngine({
         0.1
       );
 
+      // Restore collapsed elements dynamically
+      tl.to(
+        "img, [data-collapse]",
+        {
+          opacity: 1,
+          scale: 1,
+          duration: TIMING.arrivalOpen * 0.8,
+          ease: "power2.out",
+          clearProps: "all",
+        },
+        0.1
+      );
+
       tl.to(
         sceneWrapper.camera.position,
         {
