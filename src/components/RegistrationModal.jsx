@@ -45,6 +45,8 @@ const memberSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone must be at least 10 digits"),
+  department: z.string().min(1, "Department is required"),
+  year: z.string().min(1, "Year is required"),
 });
 
 const registrationSchema = z.object({
@@ -53,6 +55,7 @@ const registrationSchema = z.object({
   phone: z.string().min(10, "Phone must be at least 10 digits"),
   college: z.string().min(2, "College name is required"),
   department: z.string().min(1, "Department is required"),
+  year: z.string().min(1, "Year is required"),
   otherDepartment: z.string().optional(),
   teamName: z.string().min(2, "Team name is required"),
   track: z.enum(["Software", "Hardware"], {
@@ -313,7 +316,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
           Member {index + 2}
         </h4>
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div className="space-y-1">
           <label
             className="sw-label block mb-1"
@@ -357,8 +360,55 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
             className={inputClass}
             placeholder="Member phone"
           />
-          {error?.phone?.message && (
-            <p className="text-xs font-medium text-red-500">{error.phone.message}</p>
+        <div className="space-y-1">
+          <label className="sw-label block mb-1">Department</label>
+          <div className="relative">
+            <select
+              {...register(`members.${index}.department`)}
+              className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all appearance-none focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+            >
+              <option value="">Select Department</option>
+              <option value="AI&DS">AI&DS</option>
+              <option value="CSE">CSE</option>
+              <option value="ECE">ECE</option>
+              <option value="AIML">AIML</option>
+              <option value="EEE">EEE</option>
+              <option value="MECH">MECH</option>
+              <option value="I&E">I&E</option>
+              <option value="MECH&AUTO">MECH&AUTO</option>
+              <option value="IOT">IOT</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="Cyber Security">Cyber Security</option>
+              <option value="M.TECH CSC">M.TECH CSC</option>
+              <option value="Other">Other</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </div>
+          </div>
+          {error?.department?.message && (
+            <p className="text-xs font-medium text-red-500">{error.department.message}</p>
+          )}
+        </div>
+        <div className="space-y-1">
+          <label className="sw-label block mb-1">Year</label>
+          <div className="relative">
+            <select
+              {...register(`members.${index}.year`)}
+              className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all appearance-none focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+            >
+              <option value="">Select Year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </div>
+          </div>
+          {error?.year?.message && (
+            <p className="text-xs font-medium text-red-500">{error.year.message}</p>
           )}
         </div>
       </div>
@@ -385,7 +435,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
     resolver: zodResolver(registrationSchema),
     defaultValues: {
       members: [
-        { name: "", email: "", phone: "" },
+        { name: "", email: "", phone: "", department: "", year: "" },
       ],
       track: undefined,
       problemStatement: "",
@@ -413,10 +463,11 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         phone: "",
         college: "",
         department: "",
+        year: "",
         otherDepartment: "",
         teamName: "",
         members: [
-          { name: "", email: "", phone: "" },
+          { name: "", email: "", phone: "", department: "", year: "" },
         ],
         track: initialTrack || undefined,
         problemStatement: "",
@@ -924,17 +975,40 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                         )}
                       </div>
 
-                      <Field
-                        label="Team Name"
-                        error={errors.teamName?.message}
-                        isDarkPopup={isDarkPopup}
-                      >
-                        <input
-                          {...register("teamName")}
-                          className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
-                          placeholder="Enter team name"
-                        />
-                      </Field>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        <Field
+                          label="Team Name"
+                          error={errors.teamName?.message}
+                          isDarkPopup={isDarkPopup}
+                        >
+                          <input
+                            {...register("teamName")}
+                            className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all placeholder-cyan-900/50 focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+                            placeholder="Enter team name"
+                          />
+                        </Field>
+                        <Field
+                          label="Year (Team Leader)"
+                          error={errors.year?.message}
+                          isDarkPopup={isDarkPopup}
+                        >
+                          <div className="relative">
+                            <select
+                              {...register("year")}
+                              className="w-full rounded-md border border-[var(--sw-holo-bright)] bg-black/40 px-4 py-3 font-mono text-sm text-[var(--neon-cyan)] outline-none transition-all appearance-none focus:border-[var(--neon-cyan)] focus:bg-[rgba(0,245,255,0.05)] focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
+                            >
+                              <option value="">Select Year</option>
+                              <option value="1st Year">1st Year</option>
+                              <option value="2nd Year">2nd Year</option>
+                              <option value="3rd Year">3rd Year</option>
+                              <option value="4th Year">4th Year</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                              <ChevronDown className="h-4 w-4 opacity-50" />
+                            </div>
+                          </div>
+                        </Field>
+                      </div>
 
                       <Field
                         label={
