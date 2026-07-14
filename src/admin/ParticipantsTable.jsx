@@ -138,8 +138,8 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-300 truncate max-w-[150px]">{r.college}</td>
-                  <td className="px-4 py-3 text-gray-400 text-sm">
-                    {r.createdAt?.toLocaleDateString() || "-"}
+                  <td className="px-4 py-3 text-gray-400 text-sm whitespace-nowrap">
+                    {r.createdAt?.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }) || "-"}
                   </td>
                   <td className="px-4 py-3">
                     <span

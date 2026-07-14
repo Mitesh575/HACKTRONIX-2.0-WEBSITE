@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, query, where, getDocs, runTransaction, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ArrowLeft, Check, ChevronRight, ChevronDown, Bot, Terminal, Zap, Orbit, Plus, X, Upload } from "lucide-react";
 import { db, storage } from "../lib/firebase";
@@ -559,7 +559,22 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         return;
       }
 
-      const generatedRegId = `HX${Date.now().toString(36).toUpperCase()}`;
+      const generatedRegId = await withTimeout(
+        runTransaction(db, async (transaction) => {
+          const counterRef = doc(db, "metadata", "registrationCounter");
+          const counterDoc = await transaction.get(counterRef);
+          let nextCount = 1;
+          if (counterDoc.exists()) {
+            nextCount = counterDoc.data().count + 1;
+            transaction.update(counterRef, { count: nextCount });
+          } else {
+            transaction.set(counterRef, { count: nextCount });
+          }
+          return `HX-${nextCount.toString().padStart(4, '0')}`;
+        }),
+        15000,
+        "Failed to generate Registration ID. Please check your connection."
+      );
 
       let pptUrl = "";
       if (data.pptFile && data.pptFile.length > 0) {

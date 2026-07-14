@@ -128,9 +128,9 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
             )}
 
             <div className="bg-bg rounded-lg p-4">
-              <label className="text-gray-400 text-sm">Registration Date</label>
+              <label className="text-gray-400 text-sm">Registration Date & Time</label>
               <p className="text-white">
-                {participant.createdAt?.toLocaleDateString() || "-"}
+                {participant.createdAt?.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }) || "-"}
               </p>
             </div>
 
