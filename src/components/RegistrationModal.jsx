@@ -588,7 +588,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         const uploadPromise = fetch(googleScriptUrl, {
           method: "POST",
           body: JSON.stringify({
-            filename: `${generatedRegId}_${file.name}`,
+            filename: `${data.teamName}_${file.name}`,
             mimetype: file.type || "application/vnd.ms-powerpoint",
             base64: base64Data
           })
