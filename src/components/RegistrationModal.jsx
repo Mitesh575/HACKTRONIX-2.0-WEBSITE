@@ -77,40 +77,9 @@ function ModalShell({ children, onClose, isDarkPopup }) {
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-    const el = modalRef.current;
-    if (!el) return;
-
-    const handleWheel = (e) => {
-      e.stopPropagation();
-      const isAtTop = el.scrollTop <= 0;
-      const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-      const scrollingUp = e.deltaY < 0;
-      const scrollingDown = e.deltaY > 0;
-      if ((isAtTop && scrollingUp) || (isAtBottom && scrollingDown)) {
-        e.preventDefault();
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      e.stopPropagation();
-      const isAtTop = el.scrollTop <= 0;
-      const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-      const scrollingUp = e.touches[0].clientY > (el._lastTouchY || 0);
-      const scrollingDown = e.touches[0].clientY < (el._lastTouchY || 0);
-      el._lastTouchY = e.touches[0].clientY;
-      if ((isAtTop && scrollingUp) || (isAtBottom && scrollingDown)) {
-        e.preventDefault();
-      }
-    };
-
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    el.addEventListener("touchmove", handleTouchMove, { passive: false });
-
     return () => {
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
-      el.removeEventListener("wheel", handleWheel);
-      el.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
 

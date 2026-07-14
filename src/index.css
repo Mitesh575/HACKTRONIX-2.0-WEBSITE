@@ -82,6 +82,7 @@ body {
   background-color: var(--color-bg);
   color: #e5e5e5;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
