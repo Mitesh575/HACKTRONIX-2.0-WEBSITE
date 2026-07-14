@@ -37,23 +37,27 @@ export default function AdminDashboard() {
     const csvData = registrations.map((r) => {
       const data = {
         "Reg ID": r.regId,
-        "Name (Team Leader)": r.name,
-        "Email (Team Leader)": r.email,
-        "Phone (Team Leader)": r.phone ? `'${r.phone}` : "",
-        "College": r.college,
         "Team Name": r.teamName,
+        "College": r.college,
         "Track": r.track,
-        "Problem Statement": r.problemStatement || "",
         "Problem ID": r.problemStatementId || "",
+        "Problem Statement": r.problemStatement || "",
         "Status": r.status,
-        "Date": r.createdAt ? new Date(r.createdAt).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : "",
+        "Registration Date": r.createdAt ? new Date(r.createdAt).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : "",
+        "Leader Name": r.name,
+        "Leader Email": r.email,
+        "Leader Phone": r.phone ? `'${r.phone}` : "",
+        "Leader Department": r.department === "Other" && r.otherDepartment ? r.otherDepartment : (r.department || ""),
+        "Leader Year": r.year || "",
       };
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         const m = r.members && r.members[i] ? r.members[i] : null;
         data[`Member ${i + 2} Name`] = m ? m.name : "";
         data[`Member ${i + 2} Email`] = m ? m.email : "";
         data[`Member ${i + 2} Phone`] = m ? `'${m.phone}` : "";
+        data[`Member ${i + 2} Department`] = m ? m.department : "";
+        data[`Member ${i + 2} Year`] = m ? m.year : "";
       }
 
       return data;
