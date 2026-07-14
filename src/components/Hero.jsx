@@ -340,16 +340,16 @@ export default function Hero() {
             A 24-hour hackathon exploring the upside-down world of technology
           </p>
 
-          <div className="flex flex-col gap-4 mb-12" data-collapse>
+          <div className="flex flex-col gap-4 mb-12 w-full max-w-[280px] mx-auto px-4" data-collapse>
             <button
               {...whiteHoleBind('/internal-registration')}
-              className="btn-sw-primary py-3"
+              className="w-full px-6 py-3.5 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
             >
-              <span>Internal Registration</span>
+              Internal Registration
             </button>
             <button
               {...transitionBind}
-              className="btn-sw-secondary py-3 font-mono text-sm uppercase"
+              className="w-full px-6 py-3.5 bg-transparent border border-white/30 text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/10 transition-all"
             >
               External Registration
             </button>
