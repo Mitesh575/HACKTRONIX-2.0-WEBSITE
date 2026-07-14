@@ -559,22 +559,12 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
         return;
       }
 
-      const generatedRegId = await withTimeout(
-        runTransaction(db, async (transaction) => {
-          const counterRef = doc(db, "metadata", "registrationCounter");
-          const counterDoc = await transaction.get(counterRef);
-          let nextCount = 1;
-          if (counterDoc.exists()) {
-            nextCount = counterDoc.data().count + 1;
-            transaction.update(counterRef, { count: nextCount });
-          } else {
-            transaction.set(counterRef, { count: nextCount });
-          }
-          return `HX-${nextCount.toString().padStart(4, '0')}`;
-        }),
-        15000,
-        "Failed to generate Registration ID. Please check your connection."
-      );
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let randomPart = '';
+      for (let i = 0; i < 6; i++) {
+        randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      const generatedRegId = `HX-${randomPart}`;
 
       let pptUrl = "";
       if (data.pptFile && data.pptFile.length > 0) {
