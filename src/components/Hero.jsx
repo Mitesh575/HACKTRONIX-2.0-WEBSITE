@@ -340,16 +340,16 @@ export default function Hero() {
             A 24-hour hackathon exploring the upside-down world of technology
           </p>
 
-          <div className="flex flex-col gap-4 mb-12 w-full max-w-[280px] mx-auto px-4" data-collapse>
+          <div className="flex flex-col gap-4 mb-12 w-full max-w-xs mx-auto px-4" data-collapse>
             <button
               {...whiteHoleBind('/internal-registration')}
-              className="w-full px-6 py-3.5 bg-white/10 border border-white/20 backdrop-blur-md text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              className="w-full px-4 py-3.5 bg-white/10 border border-white/20 backdrop-blur-md text-white font-bold uppercase tracking-wider text-sm whitespace-nowrap rounded-lg hover:bg-white/20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
               Internal Registration
             </button>
             <button
               {...transitionBind}
-              className="w-full px-6 py-3.5 bg-black/30 border border-white/10 backdrop-blur-md text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-black/50 hover:border-white/20 transition-all shadow-[0_0_20px_rgba(0,0,0,0.2)]"
+              className="w-full px-4 py-3.5 bg-white/5 border border-white/10 backdrop-blur-md text-white font-bold uppercase tracking-wider text-sm whitespace-nowrap rounded-lg hover:bg-white/15 transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)]"
             >
               External Registration
             </button>
