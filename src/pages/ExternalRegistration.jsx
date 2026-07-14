@@ -411,7 +411,7 @@ export default function ExternalRegistration() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-bg overflow-hidden">
+    <div className="relative min-h-screen bg-bg overflow-x-hidden">
       <TargetCursor variant="cyan" />
 
       {/* ── Hero Section ── */}
