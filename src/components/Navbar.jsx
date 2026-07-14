@@ -70,13 +70,17 @@ export default function Navbar() {
                       onClick={(e) => {
                         if (link.href.startsWith('#')) {
                           e.preventDefault();
-                          const element = document.getElementById(link.href.substring(1));
-                          if (element) {
-                            const offset = 80;
-                            const elementPosition = element.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - offset;
-                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                          }
+                          setMobileOpen(false);
+                          setTimeout(() => {
+                            const element = document.getElementById(link.href.substring(1));
+                            if (element) {
+                              const offset = 80;
+                              const elementPosition = element.getBoundingClientRect().top;
+                              const offsetPosition = elementPosition + window.pageYOffset - offset;
+                              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                            }
+                          }, 50);
+                        } else {
                           setMobileOpen(false);
                         }
                       }}
@@ -125,15 +129,19 @@ export default function Navbar() {
                     onClick={(e) => {
                       if (link.href.startsWith('#')) {
                         e.preventDefault();
-                        const element = document.getElementById(link.href.substring(1));
-                        if (element) {
-                          const offset = 80;
-                          const elementPosition = element.getBoundingClientRect().top;
-                          const offsetPosition = elementPosition + window.pageYOffset - offset;
-                          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                        }
+                        setMobileOpen(false);
+                        setTimeout(() => {
+                          const element = document.getElementById(link.href.substring(1));
+                          if (element) {
+                            const offset = 80;
+                            const elementPosition = element.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - offset;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                          }
+                        }, 50);
+                      } else {
+                        setMobileOpen(false);
                       }
-                      setMobileOpen(false);
                     }}
                     className="block px-4 py-3 text-red-600 hover:text-red-400 hover:bg-white/5 rounded-sm transition-colors font-mono text-xs tracking-wider uppercase"
                   >
