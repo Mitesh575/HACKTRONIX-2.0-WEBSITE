@@ -38,7 +38,7 @@ export default function Navbar() {
           <motion.div 
             initial={{ opacity: 1 }} 
             animate={{ opacity: 1 }} 
-            className="wh-nav"
+            className="brand-logo-nav"
           >
             <Link to="/" className="cursor-target flex items-center gap-2 md:gap-3">
               <img
@@ -93,7 +93,7 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
-            className="wh-nav md:hidden p-2 text-gray-300 hover:text-[var(--neon-cyan)] transition-colors"
+            className="md:hidden p-2 text-gray-300 hover:text-[var(--neon-cyan)] transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
