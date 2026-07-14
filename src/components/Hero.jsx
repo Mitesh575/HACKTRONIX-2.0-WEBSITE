@@ -10,7 +10,6 @@ import bgHover from "../images/bg-hover.jpeg";
 import ProblemStatementPdf from "../images/HackTronix2_0_ProblemStatements.pdf.pdf";
 import { useSingularityTransition } from "./singularity-transition/engine/useSingularityTransition";
 import { useWhiteHoleTransition } from "./white-hole-transition/engine/useWhiteHoleTransition";
-import { SiGooglegemini } from "react-icons/si";
 
 const renderExplodableText = (text) => {
   return text.split('').map((char, i) => (
@@ -361,13 +360,6 @@ export default function Hero() {
             <CountdownItem value={countdown.hours} label="Hours" />
             <CountdownItem value={countdown.minutes} label="Min" />
             <CountdownItem value={countdown.seconds} label="Sec" />
-          </div>
-
-          {/* Gemini Logo Decorative Row */}
-          <div className="w-full flex justify-between items-center mt-12 opacity-40 px-4" data-collapse>
-            {[...Array(7)].map((_, i) => (
-              <SiGooglegemini key={i} className="w-5 h-5 text-[var(--neon-cyan)] animate-pulse" style={{ animationDelay: `${i * 0.15}s` }} />
-            ))}
           </div>
         </div>
 
