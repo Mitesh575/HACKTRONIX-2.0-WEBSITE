@@ -35,17 +35,23 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 gap-3 md:gap-6 relative">
-          <Link to="/" className="wh-nav cursor-target flex items-center gap-2 md:gap-3">
-            <img
-              id="nav-logo-slot"
-              src={hackLogo}
-              alt="HackTronix 2.0"
-              className="h-10 w-auto sm:h-12 md:h-16 shrink-0 object-contain"
-            />
-            <span className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.08em] whitespace-nowrap" style={{ fontFamily: "'Exo 2', sans-serif", minWidth: "150px", display: "inline-block" }}>
-              HACKTRONIX 2.0
-            </span>
-          </Link>
+          <motion.div 
+            initial={{ opacity: 1 }} 
+            animate={{ opacity: 1 }} 
+            className="wh-nav"
+          >
+            <Link to="/" className="cursor-target flex items-center gap-2 md:gap-3">
+              <img
+                id="nav-logo-slot"
+                src={hackLogo}
+                alt="HackTronix 2.0"
+                className="h-10 w-auto sm:h-12 md:h-16 shrink-0 object-contain"
+              />
+              <span className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.08em] whitespace-nowrap" style={{ fontFamily: "'Exo 2', sans-serif", minWidth: "150px", display: "inline-block" }}>
+                HACKTRONIX 2.0
+              </span>
+            </Link>
+          </motion.div>
 
           <div className="flex items-center justify-end h-full">
             {/* Desktop Links (Right Side) */}
