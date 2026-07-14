@@ -27,11 +27,8 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+    <nav
+      className={`fixed top-0 left-0 right-0 z-[9990] transform-gpu translate-z-0 transition-all duration-500 ${scrolled
         ? "bg-[rgba(10,10,14,0.88)] backdrop-blur-xl shadow-[0_0_30px_rgba(0,245,255,0.03)] border-b border-[rgba(0,245,255,0.06)]"
         : "bg-transparent"
         }`}
@@ -142,7 +139,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }
 
