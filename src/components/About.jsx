@@ -76,8 +76,8 @@ export default function About() {
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-4 md:mb-12 group-hover:bg-orange-500/20 transition-colors">
                 <Crosshair className="w-4 h-4 md:w-5 md:h-5 text-orange-400" />
               </div>
-              <span className="block text-gray-500 font-mono text-[10px] md:text-xs mb-1 md:mb-2 tracking-widest uppercase">Coordinates</span>
-              <span className="block text-white font-medium text-sm md:text-lg">SEC - APPLE HALL</span>
+              <span className="block text-gray-500 font-mono text-[10px] md:text-xs mb-1 md:mb-2 tracking-widest uppercase">Venue</span>
+              <span className="block text-white font-medium text-sm md:text-lg">REVEALING SOON..</span>
             </div>
 
             {/* Spec Card 3 */}

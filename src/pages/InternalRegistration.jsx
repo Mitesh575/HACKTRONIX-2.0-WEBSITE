@@ -359,7 +359,7 @@ const perks = [
 /* ── Event details ── */
 const eventDetails = [
   { icon: Orbit, label: "Duration", value: "24 Hours" },
-  { icon: Crosshair, label: "Venue", value: "APPLE HALL - SEC " },
+  { icon: Crosshair, label: "Venue", value: "REVEALING SOON.." },
   { icon: Bot, label: "Team Size", value: "2 – 3 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
 ];
@@ -515,7 +515,7 @@ export default function InternalRegistration() {
             className="mt-6"
           >
             <p className="text-sm font-mono text-gray-400 bg-black/40 border border-[#ff2d55]/30 inline-block px-4 py-2 rounded-md shadow-[0_0_15px_rgba(255,45,85,0.1)]">
-              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration. 
+              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration.
               Shortlisted teams must pay a registration fee of <span className="text-white font-bold">₹500 per team</span>.
             </p>
           </motion.div>
@@ -592,7 +592,7 @@ export default function InternalRegistration() {
             <p className="muted max-w-xl mx-auto text-lg mb-10">
               Total Bounty: ₹30,000
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {/* 2nd Prize */}
               <GlassCard className="flex flex-col items-center justify-center p-8 border border-gray-400/50 hover:border-gray-300 transition-colors md:order-1 order-2 md:mt-8 bg-black/40">
@@ -602,7 +602,7 @@ export default function InternalRegistration() {
                   ₹10,000
                 </p>
               </GlassCard>
-              
+
               {/* 1st Prize */}
               <GlassCard className="flex flex-col items-center justify-center p-8 border border-yellow-500/80 hover:border-yellow-400 border-2 shadow-[0_0_30px_rgba(234,179,8,0.2)] md:order-2 order-1 transform md:-translate-y-4 bg-black/50">
                 <Trophy className="w-20 h-20 text-yellow-400 mb-4 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)]" />

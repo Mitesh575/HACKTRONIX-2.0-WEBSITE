@@ -362,7 +362,7 @@ const perks = [
 /* ── Event details ── */
 const eventDetails = [
   { icon: Orbit, label: "Duration", value: "24 Hours" },
-  { icon: Crosshair, label: "Venue", value: "APPLE HALL - SEC " },
+  { icon: Crosshair, label: "Venue", value: "REVEALING SOON.." },
   { icon: Bot, label: "Team Size", value: "2 – 5 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
 ];
@@ -538,7 +538,7 @@ export default function ExternalRegistration() {
             className="mt-6"
           >
             <p className="text-sm font-mono text-gray-400 bg-black/40 border border-[#ff2d55]/30 inline-block px-4 py-2 rounded-md shadow-[0_0_15px_rgba(255,45,85,0.1)]">
-              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration. 
+              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration.
               Shortlisted teams must pay a registration fee of <span className="text-white font-bold">₹500 per team</span>.
             </p>
           </motion.div>
