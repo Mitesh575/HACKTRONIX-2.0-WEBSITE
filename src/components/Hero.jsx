@@ -274,6 +274,20 @@ export default function Hero() {
         }}
       />
 
+      {/* Mobile Only: Video Background */}
+      <div className="md:hidden absolute inset-0 -z-20">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full h-full object-cover opacity-80"
+        >
+          <source src="/mobile-hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+      
       {/* Mobile Only: Original Grid and Orbs */}
       <div className="md:hidden absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
       <div className="md:hidden">
