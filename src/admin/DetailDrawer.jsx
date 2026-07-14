@@ -47,9 +47,9 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-white/10 z-50 overflow-y-auto"
+        className="fixed right-0 top-0 bottom-0 h-full w-full max-w-md bg-black/90 backdrop-blur-2xl border-l border-white/10 z-[100] overflow-y-auto custom-scrollbar shadow-[-20px_0_40px_rgba(0,0,0,0.5)]"
       >
-        <div className="p-6">
+        <div className="p-6 pb-24">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl font-bold text-white">Participant Details</h2>
             <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
