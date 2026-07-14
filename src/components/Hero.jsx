@@ -343,13 +343,13 @@ export default function Hero() {
           <div className="flex flex-col gap-4 mb-12 w-full max-w-[280px] mx-auto px-4" data-collapse>
             <button
               {...whiteHoleBind('/internal-registration')}
-              className="w-full px-6 py-3.5 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+              className="w-full px-6 py-3.5 bg-white/10 border border-white/20 backdrop-blur-md text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
               Internal Registration
             </button>
             <button
               {...transitionBind}
-              className="w-full px-6 py-3.5 bg-transparent border border-white/30 text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/10 transition-all"
+              className="w-full px-6 py-3.5 bg-black/30 border border-white/10 backdrop-blur-md text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-black/50 hover:border-white/20 transition-all shadow-[0_0_20px_rgba(0,0,0,0.2)]"
             >
               External Registration
             </button>
@@ -386,7 +386,7 @@ export default function Hero() {
               </p>
               <button
                 {...whiteHoleBind('/internal-registration')}
-                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/90 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                className="px-8 py-4 bg-white/10 border border-white/20 backdrop-blur-md text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-white/20 transition-all mb-12 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
               >
                 Internal Registration
               </button>
@@ -418,7 +418,7 @@ export default function Hero() {
               </p>
               <button
                 {...transitionBind}
-                className="inline-block px-8 py-4 bg-black text-white font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-black/90 transition-all mb-12 shadow-[0_0_20px_rgba(0,0,0,0.2)] border border-white/10"
+                className="inline-block px-8 py-4 bg-black/10 border border-black/20 backdrop-blur-md text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-black/20 transition-all mb-12 shadow-[0_0_20px_rgba(0,0,0,0.1)]"
               >
                 External Registration
               </button>
