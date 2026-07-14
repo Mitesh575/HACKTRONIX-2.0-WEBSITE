@@ -33,7 +33,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 gap-3 md:gap-6 relative">
-          <Link to="/" className="wh-nav cursor-target flex items-center gap-2 md:gap-3" data-collapse>
+          <Link to="/" className="wh-nav cursor-target flex items-center gap-2 md:gap-3">
             <img
               id="nav-logo-slot"
               src={hackLogo}
@@ -56,7 +56,6 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     className="wh-nav group"
-                    data-collapse
                   >
                     <Link
                       to={link.href}
@@ -75,7 +74,6 @@ export default function Navbar() {
           <button
             className="wh-nav md:hidden p-2 text-gray-300 hover:text-[var(--neon-cyan)] transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            data-collapse
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (

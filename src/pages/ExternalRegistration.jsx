@@ -454,7 +454,7 @@ export default function ExternalRegistration() {
         ))}
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pb-24">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -530,30 +530,43 @@ export default function ExternalRegistration() {
             </motion.a>
           </div>
 
-          {/* Scroll hint */}
-          <AnimatePresence>
-            {showScrollHint && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 2 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2"
-              >
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="flex flex-col items-center gap-2"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500">
-                    Scroll for intel
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Fee Notice */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: loadDelay + 1.4 }}
+            className="mt-6"
+          >
+            <p className="text-sm font-mono text-gray-400 bg-black/40 border border-[#ff2d55]/30 inline-block px-4 py-2 rounded-md shadow-[0_0_15px_rgba(255,45,85,0.1)]">
+              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration. 
+              Shortlisted teams must pay a registration fee of <span className="text-white font-bold">₹500 per team</span>.
+            </p>
+          </motion.div>
         </div>
+
+        {/* Scroll hint */}
+        <AnimatePresence>
+          {showScrollHint && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 2 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="flex flex-col items-center gap-2"
+              >
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500">
+                  Scroll for intel
+                </span>
+                <ChevronDown className="w-4 h-4 text-gray-500" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
 

@@ -166,7 +166,7 @@ export function createEngine({
       }
 
       // Environmental collapse targets: grab all images and data-collapse elements
-      const allElements = Array.from(document.querySelectorAll("img, [data-collapse]"));
+      const allElements = Array.from(document.querySelectorAll("img:not(nav img), [data-collapse]"));
       
       const isInViewport = (el: Element) => {
         const rect = el.getBoundingClientRect();
@@ -375,7 +375,7 @@ export function createEngine({
 
       // Restore collapsed elements dynamically
       tl.to(
-        "img, [data-collapse]",
+        "img:not(nav img), [data-collapse]",
         {
           opacity: 1,
           scale: 1,

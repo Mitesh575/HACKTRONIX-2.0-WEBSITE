@@ -14,6 +14,9 @@ import {
   Aperture,
   ExternalLink,
   ChevronDown,
+  Trophy,
+  Medal,
+  Award
 } from "lucide-react";
 import TargetCursor from "../components/TargetCursor";
 import GlassCard from "../components/ui/GlassCard";
@@ -317,13 +320,6 @@ function FloatingParticle({ delay, x, y, size = 2 }) {
 /* ── Perks data ── */
 const perks = [
   {
-    icon: Swords,
-    title: "Bounty: ₹30,000",
-    description: "1st Prize: ₹15,000 | 2nd Prize: ₹10,000 | 3rd Prize: ₹5,000",
-    gradient: "from-yellow-500 to-amber-400",
-    image: "/cards/prize-pool.png",
-  },
-  {
     icon: Satellite,
     title: "Alliances",
     description: "Team up with awesome developers and hardware hackers.",
@@ -453,7 +449,7 @@ export default function InternalRegistration() {
         ))}
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pb-24">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -511,30 +507,44 @@ export default function InternalRegistration() {
           {/* CTA Button */}
           <RegisterButton loadDelay={loadDelay} onClick={() => window.open('https://forms.gle/BeM11evVkda1sm5N8', '_blank')} />
 
-          {/* Scroll hint */}
-          <AnimatePresence>
-            {showScrollHint && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 2 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2"
-              >
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="flex flex-col items-center gap-2"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500">
-                    Scroll for intel
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Fee Notice */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: loadDelay + 1.4 }}
+            className="mt-6"
+          >
+            <p className="text-sm font-mono text-gray-400 bg-black/40 border border-[#ff2d55]/30 inline-block px-4 py-2 rounded-md shadow-[0_0_15px_rgba(255,45,85,0.1)]">
+              <span className="text-[#ff2d55] font-bold">Note:</span> Teams will be shortlisted after registration. 
+              Shortlisted teams must pay a registration fee of <span className="text-white font-bold">₹500 per team</span>.
+            </p>
+          </motion.div>
+
         </div>
+
+        {/* Scroll hint */}
+        <AnimatePresence>
+          {showScrollHint && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 2 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="flex flex-col items-center gap-2"
+              >
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500">
+                  Scroll for intel
+                </span>
+                <ChevronDown className="w-4 h-4 text-gray-500" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
 
@@ -567,6 +577,51 @@ export default function InternalRegistration() {
               <EventDetailCard key={detail.label} {...detail} index={idx} />
             ))}
           </div>
+
+          {/* Prize Pool Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 mt-8">
+              Prize <span className="text-[#ff2d55] font-['Exo_2']">Pool</span>
+            </h2>
+            <p className="muted max-w-xl mx-auto text-lg mb-10">
+              Total Bounty: ₹30,000
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {/* 2nd Prize */}
+              <GlassCard className="flex flex-col items-center justify-center p-8 border border-gray-400/50 hover:border-gray-300 transition-colors md:order-1 order-2 md:mt-8 bg-black/40">
+                <Medal className="w-16 h-16 text-gray-300 mb-4 drop-shadow-[0_0_10px_rgba(209,213,219,0.5)]" />
+                <h3 className="text-xl font-bold text-white mb-2">2nd Prize</h3>
+                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-100">
+                  ₹10,000
+                </p>
+              </GlassCard>
+              
+              {/* 1st Prize */}
+              <GlassCard className="flex flex-col items-center justify-center p-8 border border-yellow-500/80 hover:border-yellow-400 border-2 shadow-[0_0_30px_rgba(234,179,8,0.2)] md:order-2 order-1 transform md:-translate-y-4 bg-black/50">
+                <Trophy className="w-20 h-20 text-yellow-400 mb-4 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)]" />
+                <h3 className="text-2xl font-bold text-white mb-2">1st Prize</h3>
+                <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200 drop-shadow-sm">
+                  ₹15,000
+                </p>
+              </GlassCard>
+
+              {/* 3rd Prize */}
+              <GlassCard className="flex flex-col items-center justify-center p-8 border border-amber-700/50 hover:border-amber-600 transition-colors md:order-3 order-3 md:mt-8 bg-black/40">
+                <Award className="w-16 h-16 text-amber-600 mb-4 drop-shadow-[0_0_10px_rgba(217,119,6,0.5)]" />
+                <h3 className="text-xl font-bold text-white mb-2">3rd Prize</h3>
+                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-400">
+                  ₹5,000
+                </p>
+              </GlassCard>
+            </div>
+          </motion.div>
 
           {/* Perks heading */}
           <motion.div
