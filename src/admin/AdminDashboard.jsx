@@ -118,9 +118,14 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-bg flex">
-      <aside className="w-64 bg-surface border-r border-white/10 p-4 flex flex-col">
-        <Link to="/" className="flex flex-col items-center gap-2 mb-8 px-2 py-4 hover:opacity-80 transition-opacity">
+    <div className="min-h-screen bg-[#050505] flex relative overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <aside className="w-72 bg-white/[0.02] border-r border-white/5 backdrop-blur-2xl p-6 flex flex-col relative z-10">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/20 rounded-full blur-[80px] pointer-events-none" />
+        <Link to="/" className="flex flex-col items-center gap-2 mb-10 px-2 py-4 hover:scale-105 transition-transform relative z-10">
           <img src={hackLogo} alt="HackTronix" className="w-16 h-auto object-contain drop-shadow-[0_0_10px_rgba(0,245,255,0.3)]" />
           <span className="text-xl font-bold text-white font-mono tracking-wider" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
             Hack<span className="text-[var(--neon-cyan)]">Tronix</span>
@@ -132,10 +137,10 @@ export default function AdminDashboard() {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+              className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-left transition-all duration-300 ${
                 activeTab === item.id
-                  ? "bg-primary/20 text-primary"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  ? "bg-primary/10 text-primary border border-primary/20 shadow-[0_0_20px_rgba(0,245,255,0.1)]"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
               }`}
             >
               <item.icon className="w-5 h-5" />
@@ -146,7 +151,7 @@ export default function AdminDashboard() {
 
         <button
           onClick={handleExport}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors mb-2"
+          className="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 mb-2 border border-transparent"
         >
           <Download className="w-5 h-5" />
           <span className="font-medium">Export CSV</span>
@@ -154,36 +159,36 @@ export default function AdminDashboard() {
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors mb-4"
+          className="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 hover:border-red-500/20 transition-all duration-300 mb-6 border border-transparent"
         >
           <LogOut className="w-5 h-5" />
           <span className="font-medium">Logout</span>
         </button>
 
-        <div className="mt-auto border-t border-white/10 pt-4">
+        <div className="mt-auto border-t border-white/5 pt-6">
           <Link
             to="/"
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-gray-400 hover:text-[var(--neon-cyan)] transition-colors group cursor-target"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:text-[var(--neon-cyan)] transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-mono text-xs uppercase tracking-wider">Back to Website</span>
+            <span className="font-mono text-xs uppercase tracking-widest font-semibold">Back to Website</span>
           </Link>
         </div>
       </aside>
 
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-10 relative z-10 h-screen overflow-y-auto custom-scrollbar">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <>
-            <div className="mb-6 flex items-center justify-between">
+            <div className="mb-8 flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-white">
-                  {activeTab === "overview" ? "Dashboard" : "Participants"}
+                <h1 className="text-3xl font-bold text-white tracking-tight mb-2">
+                  {activeTab === "overview" ? "Dashboard Overview" : "Participants Management"}
                 </h1>
-                <p className="muted">
+                <p className="text-white/50 text-sm font-medium">
                   {registrations.length} total registration{registrations.length !== 1 ? "s" : ""}
                 </p>
               </div>
@@ -202,10 +207,13 @@ export default function AdminDashboard() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="mb-4 flex items-center gap-3 p-4 bg-surface border border-white/10 rounded-xl"
+                      className="mb-6 flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl"
                     >
-                      <span className="text-white text-sm font-medium">
-                        {selectedIds.size} selected
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-white text-sm font-bold">
+                        {selectedIds.size}
+                      </div>
+                      <span className="text-white/70 text-sm font-medium uppercase tracking-wider">
+                        Selected
                       </span>
                       <div className="flex-1" />
                       <button

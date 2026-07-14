@@ -33,8 +33,8 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
   const allPageSelected = paginated.length > 0 && paginated.every((r) => selectedIds?.has(r.id));
 
   return (
-    <div className="bg-surface border border-white/10 rounded-xl overflow-hidden">
-      <div className="p-4 border-b border-white/10 flex flex-col md:flex-row gap-4">
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+      <div className="p-5 border-b border-white/10 flex flex-col md:flex-row gap-4 bg-white/[0.02]">
         <input
           type="text"
           placeholder="Search by name, team, college, email, or reg ID..."
@@ -43,7 +43,7 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
             setSearch(e.target.value);
             setPage(1);
           }}
-          className="flex-1 px-4 py-2 bg-bg border border-white/10 rounded-lg text-white focus:border-primary focus:outline-none"
+          className="flex-1 px-4 py-2.5 bg-black/20 border border-white/10 rounded-xl text-white focus:border-primary focus:ring-1 focus:ring-primary/50 focus:outline-none transition-all placeholder:text-white/30"
         />
         <select
           value={trackFilter}
@@ -51,7 +51,7 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
             setTrackFilter(e.target.value);
             setPage(1);
           }}
-          className="px-4 py-2 bg-bg border border-white/10 rounded-lg text-white focus:border-primary focus:outline-none"
+          className="px-4 py-2.5 bg-black/20 border border-white/10 rounded-xl text-white focus:border-primary focus:ring-1 focus:ring-primary/50 focus:outline-none transition-all cursor-pointer"
         >
           {tracks.map((t) => (
             <option key={t} value={t}>{t === "All" ? "All Tracks" : t}</option>
@@ -63,7 +63,7 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-4 py-2 bg-bg border border-white/10 rounded-lg text-white focus:border-primary focus:outline-none"
+          className="px-4 py-2.5 bg-black/20 border border-white/10 rounded-xl text-white focus:border-primary focus:ring-1 focus:ring-primary/50 focus:outline-none transition-all cursor-pointer"
         >
           {statuses.map((s) => (
             <option key={s} value={s}>{s === "All" ? "All Status" : s.charAt(0).toUpperCase() + s.slice(1)}</option>
@@ -73,7 +73,7 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-bg">
+          <thead className="bg-black/40 backdrop-blur-sm border-b border-white/10">
             <tr>
               {onToggleSelect && (
                 <th className="px-4 py-3 w-10">
@@ -85,13 +85,13 @@ export default function ParticipantsTable({ registrations, onRowClick, selectedI
                   />
                 </th>
               )}
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Reg ID</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Name</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Team</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Track</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">College</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Date</th>
-              <th className="px-4 py-3 text-left text-gray-400 text-sm font-medium">Status</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Reg ID</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Name</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Team</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Track</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">College</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Date</th>
+              <th className="px-5 py-4 text-left text-white/50 text-[11px] font-semibold uppercase tracking-wider">Status</th>
             </tr>
           </thead>
           <tbody>
