@@ -155,6 +155,9 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
                       </div>
                       <div className="text-right">
                         <p className="text-white/70 text-sm">{member.phone}</p>
+                        {(member.department || participant.type === 'internal') && (
+                          <p className="text-white/50 text-xs mt-0.5">{member.department || "N/A"}</p>
+                        )}
                       </div>
                     </div>
                   ))}
