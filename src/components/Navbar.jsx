@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import hackLogo from "../images/hack-logo.png";
 
 export default function Navbar() {
@@ -15,7 +15,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const location = useLocation();
+  const isRegistrationPage = location.pathname.includes('registration');
+
   const navLinks = [
+    ...(isRegistrationPage ? [{ label: "Domains", href: "#domains" }] : []),
     { label: "Team", href: "/team" },
     { label: "Guidelines", href: "/guidelines" },
     { label: "FAQ", href: "/faq" },
@@ -59,6 +63,19 @@ export default function Navbar() {
                   >
                     <Link
                       to={link.href}
+                      onClick={(e) => {
+                        if (link.href.startsWith('#')) {
+                          e.preventDefault();
+                          const element = document.getElementById(link.href.substring(1));
+                          if (element) {
+                            const offset = 80;
+                            const elementPosition = element.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - offset;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                          }
+                          setMobileOpen(false);
+                        }
+                      }}
                       className="cursor-target relative block px-4 py-2 text-red-600 hover:text-red-500 transition-all text-[11px] font-bold font-mono tracking-widest uppercase"
                     >
                       {link.label}
@@ -101,7 +118,19 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      if (link.href.startsWith('#')) {
+                        e.preventDefault();
+                        const element = document.getElementById(link.href.substring(1));
+                        if (element) {
+                          const offset = 80;
+                          const elementPosition = element.getBoundingClientRect().top;
+                          const offsetPosition = elementPosition + window.pageYOffset - offset;
+                          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        }
+                      }
+                      setMobileOpen(false);
+                    }}
                     className="block px-4 py-3 text-red-600 hover:text-red-400 hover:bg-white/5 rounded-sm transition-colors font-mono text-xs tracking-wider uppercase"
                   >
                     {link.label}
