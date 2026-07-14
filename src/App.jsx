@@ -9,6 +9,7 @@ import Guidelines from "./pages/Guidelines";
 import FAQPage from "./pages/FAQPage";
 import ExternalRegistration from "./pages/ExternalRegistration";
 import InternalRegistration from "./pages/InternalRegistration";
+import Results from "./pages/Results";
 import SingularityOverlay from "./components/singularity-transition/SingularityOverlay";
 import WhiteHoleOverlay from "./components/white-hole-transition/WhiteHoleOverlay";
 import Footer from "./components/Footer";
@@ -57,6 +58,7 @@ export default function App() {
         <div className={showNavbar && !isHomePage ? "pt-16 md:pt-20" : ""}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/results" element={<Results />} />
             <Route path="/team" element={<Team />} />
             <Route path="/guidelines" element={<Guidelines />} />
             <Route path="/faq" element={<FAQPage />} />

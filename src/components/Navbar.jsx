@@ -20,6 +20,7 @@ export default function Navbar() {
 
   const navLinks = [
     ...(isRegistrationPage ? [{ label: "Domains", href: "#domains" }] : []),
+    { label: "Results", href: "/results" },
     { label: "Team", href: "/team" },
     { label: "Guidelines", href: "/guidelines" },
     { label: "FAQ", href: "/faq" },
