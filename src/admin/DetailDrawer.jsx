@@ -6,6 +6,15 @@ import { Trash2 } from "lucide-react";
 
 const statusOptions = ["pending", "confirmed", "rejected"];
 
+const getDriveEmbedUrl = (url) => {
+  if (!url) return null;
+  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) {
+    return `https://drive.google.com/file/d/${match[1]}/preview`;
+  }
+  return url;
+};
+
 export default function DetailDrawer({ participant, onClose, onDeleted }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -174,6 +183,36 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
                 </p>
               </div>
             </div>
+
+            {/* Presentation Document (PPT) */}
+            {participant.pptUrl && (
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-semibold text-white/70 uppercase tracking-wider">Presentation (PPT/PDF)</h3>
+                  <a
+                    href={participant.pptUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] uppercase tracking-wider text-[var(--neon-cyan)] hover:text-white transition-colors"
+                  >
+                    Open in New Tab ↗
+                  </a>
+                </div>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-2 h-[400px]">
+                  <iframe
+                    src={getDriveEmbedUrl(participant.pptUrl)}
+                    width="100%"
+                    height="100%"
+                    className="rounded-lg border-none"
+                    allow="autoplay"
+                    title="Presentation Preview"
+                  ></iframe>
+                </div>
+                <p className="text-white/40 text-[10px] mt-2 text-center">
+                  * Note: Google Drive files must have "Anyone with the link can view" permissions to display in this preview.
+                </p>
+              </div>
+            )}
 
             {/* Delete Registration */}
             <div className="pt-2">
