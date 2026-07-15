@@ -97,20 +97,22 @@ function ModalShell({ children, onClose, isDarkPopup }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 16 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 overflow-y-auto"
       >
-        <div
-          ref={modalRef}
-          className={`relative w-full max-w-5xl max-h-[90vh] !overflow-y-auto overscroll-contain rounded-lg transition-colors duration-500 sw-panel shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)]`}
-          style={{
-            backgroundImage: "linear-gradient(rgba(10, 10, 15, 0.8), rgba(10, 10, 15, 0.95)), url('/src/assets/bg-normal.jpeg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {/* Holographic background decoration */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-          {children}
+        <div className="flex min-h-full items-center justify-center p-4">
+          <div
+            ref={modalRef}
+            className={`relative w-full max-w-5xl shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)] rounded-lg transition-colors duration-500 sw-panel`}
+            style={{
+              backgroundImage: "linear-gradient(rgba(10, 10, 15, 0.8), rgba(10, 10, 15, 0.95)), url('/src/assets/bg-normal.jpeg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* Holographic background decoration */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+            {children}
+          </div>
         </div>
       </motion.div>
     </>

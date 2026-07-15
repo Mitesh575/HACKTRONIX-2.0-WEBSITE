@@ -122,21 +122,21 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] flex relative overflow-hidden">
+    <div className="min-h-screen bg-[#050505] flex flex-col md:flex-row relative overflow-hidden">
       {/* Background ambient light */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <aside className="w-72 bg-white/[0.02] border-r border-white/5 backdrop-blur-2xl p-6 flex flex-col relative z-10">
+      <aside className="w-full md:w-72 bg-white/[0.02] border-b md:border-b-0 md:border-r border-white/5 backdrop-blur-2xl p-4 md:p-6 flex flex-col md:h-screen relative z-10 overflow-y-auto custom-scrollbar">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/20 rounded-full blur-[80px] pointer-events-none" />
-        <Link to="/" className="flex flex-col items-center gap-2 mb-10 px-2 py-4 hover:scale-105 transition-transform relative z-10">
-          <img src={hackLogo} alt="HackTronix" className="w-16 h-auto object-contain drop-shadow-[0_0_10px_rgba(0,245,255,0.3)]" />
-          <span className="text-xl font-bold text-white font-mono tracking-wider" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
+        <Link to="/" className="flex flex-row md:flex-col items-center gap-2 mb-6 md:mb-10 px-2 py-2 hover:scale-105 transition-transform relative z-10">
+          <img src={hackLogo} alt="HackTronix" className="w-12 md:w-16 h-auto object-contain drop-shadow-[0_0_10px_rgba(0,245,255,0.3)]" />
+          <span className="text-lg md:text-xl font-bold text-white font-mono tracking-wider" style={{ fontFamily: "'Star Jedi', sans-serif" }}>
             Hack<span className="text-[var(--neon-cyan)]">Tronix</span>
           </span>
         </Link>
 
-        <nav className="flex-1 space-y-2">
+        <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0 mb-4 md:mb-0 md:flex-1 w-full">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
@@ -153,34 +153,35 @@ export default function AdminDashboard() {
           ))}
         </nav>
 
-        <button
-          onClick={handleExport}
-          className="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 mb-2 border border-transparent"
-        >
-          <Download className="w-5 h-5" />
-          <span className="font-medium">Export CSV</span>
-        </button>
+        <div className="flex flex-row md:flex-col gap-2 md:gap-0 mt-auto border-t border-white/5 pt-4 md:pt-6">
+          <button
+            onClick={handleExport}
+            className="flex-1 md:w-full flex items-center justify-center md:justify-start gap-2 md:gap-4 px-3 md:px-5 py-2 md:py-3.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 md:mb-2 border border-transparent bg-white/5 md:bg-transparent"
+          >
+            <Download className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-sm md:text-base">Export</span>
+          </button>
 
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 hover:border-red-500/20 transition-all duration-300 mb-6 border border-transparent"
-        >
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium">Logout</span>
-        </button>
+          <button
+            onClick={handleLogout}
+            className="flex-1 md:w-full flex items-center justify-center md:justify-start gap-2 md:gap-4 px-3 md:px-5 py-2 md:py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 hover:border-red-500/20 transition-all duration-300 md:mb-6 border border-transparent bg-white/5 md:bg-transparent"
+          >
+            <LogOut className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-sm md:text-base">Logout</span>
+          </button>
 
-        <div className="mt-auto border-t border-white/5 pt-6">
           <Link
             to="/"
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:text-[var(--neon-cyan)] transition-colors group"
+            className="flex-1 md:w-full flex items-center justify-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-gray-500 hover:text-[var(--neon-cyan)] transition-colors group bg-white/5 md:bg-transparent"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-mono text-xs uppercase tracking-widest font-semibold">Back to Website</span>
+            <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest font-semibold hidden md:inline">Back to Website</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest font-semibold md:hidden">Back</span>
           </Link>
         </div>
       </aside>
 
-      <main className="flex-1 p-10 relative z-10 h-screen overflow-y-auto custom-scrollbar">
+      <main className="flex-1 p-4 md:p-10 relative z-10 h-screen overflow-y-auto custom-scrollbar">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
