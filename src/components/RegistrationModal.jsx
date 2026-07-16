@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { collection, addDoc, serverTimestamp, query, where, getDocs, runTransaction, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ArrowLeft, Check, ChevronRight, ChevronDown, Bot, Terminal, Zap, Orbit, Plus, X, Upload } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, ChevronDown, Bot, Terminal, Zap, Orbit, Plus, X, Upload, AlertTriangle } from "lucide-react";
 import { db, storage } from "../lib/firebase";
 import { sendConfirmationEmail } from "../lib/emailjs";
 import GlassCard from "./ui/GlassCard";
@@ -1076,6 +1076,18 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       {duplicateError && (
                         <div className="rounded-md border border-red-600 bg-red-600/10 px-4 py-3 text-sm font-bold text-red-600">
                           {duplicateError}
+                        </div>
+                      )}
+
+                      {submitting && (
+                        <div className="mb-4 p-3 bg-[var(--neon-cyan)]/10 border border-[var(--neon-cyan)]/30 rounded-lg flex items-start gap-3">
+                          <AlertTriangle className="w-5 h-5 text-[var(--neon-cyan)] shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="text-sm font-medium text-white mb-1">Upload in Progress</h4>
+                            <p className="text-xs text-white/70 leading-relaxed">
+                              Please do not close or refresh this page. It may take up to a minute to securely upload your presentation to Google Drive and finalize your registration.
+                            </p>
+                          </div>
                         </div>
                       )}
 
