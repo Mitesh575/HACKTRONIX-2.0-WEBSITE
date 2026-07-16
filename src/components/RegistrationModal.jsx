@@ -97,9 +97,10 @@ function ModalShell({ children, onClose, isDarkPopup }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 16 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
-        className="fixed inset-0 z-50 overflow-y-auto"
+        className="fixed inset-0 z-50 overflow-y-auto custom-scrollbar"
+        data-lenis-prevent="true"
       >
-        <div className="flex min-h-full items-center justify-center p-4">
+        <div className="flex min-h-full items-start justify-center p-4 py-12 md:py-16">
           <div
             ref={modalRef}
             className={`relative w-full max-w-5xl shadow-[0_0_50px_rgba(0,245,255,0.15)] text-white border border-[var(--sw-holo-bright)] rounded-lg transition-colors duration-500 sw-panel`}
