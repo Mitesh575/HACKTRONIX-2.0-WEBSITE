@@ -30,7 +30,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --color-primary: #6366f1;
   --color-secondary: #8b5cf6;
@@ -157,6 +156,7 @@ input, textarea, select {
   padding: 1px;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;

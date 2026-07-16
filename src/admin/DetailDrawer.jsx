@@ -57,6 +57,7 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="fixed right-0 top-0 bottom-0 h-full w-full max-w-md bg-black/90 backdrop-blur-2xl border-l border-white/10 z-[100] overflow-y-auto custom-scrollbar shadow-[-20px_0_40px_rgba(0,0,0,0.5)]"
+        data-lenis-prevent="true"
       >
         <div className="p-6 pb-24">
           <div className="flex items-center justify-between mb-8">
