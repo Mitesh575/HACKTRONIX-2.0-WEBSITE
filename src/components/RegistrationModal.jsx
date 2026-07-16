@@ -393,6 +393,7 @@ function MemberBlock({ index, error, theme, isDarkPopup, register }) {
 
 export default function RegistrationModal({ isOpen, onClose, initialTrack = null }) {
   const [submitting, setSubmitting] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("Submitting...");
   const [success, setSuccess] = useState(false);
   const [regId, setRegId] = useState("");
   const [step, setStep] = useState("track");
@@ -501,6 +502,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
 
   const onSubmit = async (data) => {
     setSubmitting(true);
+    setLoadingMessage("Checking email...");
     setDuplicateError("");
 
     const withTimeout = (promise, ms, errorMsg) => {
@@ -542,6 +544,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       if (data.pptFile && data.pptFile.length > 0) {
         const file = data.pptFile[0];
         pptName = file.name;
+        setLoadingMessage("Uploading Presentation (this may take a minute)...");
         const googleScriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
         
         if (!googleScriptUrl) {
@@ -583,6 +586,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       // Remove pptFile and otherDepartment from payload before saving
       const { pptFile, otherDepartment, department, ...submitData } = data;
       const finalDepartment = department === "Other" ? (otherDepartment || "Other") : department;
+      setLoadingMessage("Saving Registration...");
 
       await withTimeout(
         addDoc(collection(db, "registrations"), {
@@ -610,6 +614,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       setDuplicateError(error.message || "Failed to submit registration. Please try again.");
     } finally {
       setSubmitting(false);
+      setLoadingMessage("Submitting...");
     }
   };
 
@@ -1091,7 +1096,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                           disabled={submitting}
                           className="btn-sw-primary disabled:opacity-50"
                         >
-                          <span>{submitting ? "Submitting..." : "Submit Registration"}</span>
+                          <span>{submitting ? loadingMessage : "Submit Registration"}</span>
                         </button>
                       </div>
                     </form>
