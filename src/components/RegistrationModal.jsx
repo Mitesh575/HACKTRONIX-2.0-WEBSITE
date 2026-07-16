@@ -538,8 +538,10 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
       const generatedRegId = `HX-${randomPart}`;
 
       let pptUrl = "";
+      let pptName = "";
       if (data.pptFile && data.pptFile.length > 0) {
         const file = data.pptFile[0];
+        pptName = file.name;
         const googleScriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
         
         if (!googleScriptUrl) {
@@ -587,6 +589,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
           ...submitData,
           department: finalDepartment,
           pptUrl,
+          pptName,
           regId: generatedRegId,
           status: "pending",
           hackathonYear: "2.0",

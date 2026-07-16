@@ -188,7 +188,14 @@ export default function DetailDrawer({ participant, onClose, onDeleted }) {
             {participant.pptUrl && (
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-semibold text-white/70 uppercase tracking-wider">Presentation (PPT/PDF)</h3>
+                  <div className="flex flex-col">
+                    <h3 className="text-xs font-semibold text-white/70 uppercase tracking-wider">Presentation</h3>
+                    {participant.pptName && (
+                      <span className="text-[10px] text-white/40 mt-0.5 max-w-[200px] truncate" title={participant.pptName}>
+                        {participant.pptName}
+                      </span>
+                    )}
+                  </div>
                   <a
                     href={participant.pptUrl}
                     target="_blank"
