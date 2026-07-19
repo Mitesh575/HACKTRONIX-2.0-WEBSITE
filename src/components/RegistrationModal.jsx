@@ -63,7 +63,9 @@ const registrationSchema = z.object({
   }),
   problemStatement: z.string().min(1, "Please select a problem statement"),
   problemStatementId: z.string().min(1, "Please select a problem statement"),
-  pptFile: z.any().optional(),
+  pptFile: z.instanceof(FileList).refine((files) => files && files.length > 0, {
+    message: "PPT upload is required",
+  }),
   members: z.array(memberSchema).min(1, "At least 1 additional member required").max(4, "Maximum 4 additional members allowed"),
 });
 
@@ -1002,7 +1004,7 @@ export default function RegistrationModal({ isOpen, onClose, initialTrack = null
                       <Field
                         label={
                           <>
-                            PPT Upload{" "}
+                            PPT Upload <span className="text-[#ff2d55]">*</span>{" "}
                             <a
                               href="https://docs.google.com/presentation/d/1QruGJ4kA4G-QTM7ozqO1cci-7jzy2mCEVwumGuRhrsE/edit?usp=sharing"
                               target="_blank"
