@@ -16,7 +16,8 @@ import {
   ChevronDown,
   Trophy,
   Medal,
-  Award
+  Award,
+  Calendar
 } from "lucide-react";
 import TargetCursor from "../components/TargetCursor";
 import GlassCard from "../components/ui/GlassCard";
@@ -362,6 +363,7 @@ const eventDetails = [
   { icon: Crosshair, label: "Venue", value: "REVEALING SOON.." },
   { icon: Bot, label: "Team Size", value: "2 – 3 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
+  { icon: Calendar, label: "Deadline", value: "July 25th" },
 ];
 
 

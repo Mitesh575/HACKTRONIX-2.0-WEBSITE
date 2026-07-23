@@ -14,6 +14,7 @@ import {
   Aperture,
   ExternalLink,
   ChevronDown,
+  Calendar,
 } from "lucide-react";
 import TargetCursor from "../components/TargetCursor";
 import RegistrationModal from "../components/RegistrationModal";
@@ -365,6 +366,7 @@ const eventDetails = [
   { icon: Crosshair, label: "Venue", value: "REVEALING SOON.." },
   { icon: Bot, label: "Team Size", value: "2 – 5 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
+  { icon: Calendar, label: "Deadline", value: "August 1st" },
 ];
 
 /* ── Track Domains ── */
