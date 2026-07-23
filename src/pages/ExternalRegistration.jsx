@@ -366,7 +366,7 @@ const eventDetails = [
   { icon: Crosshair, label: "Venue", value: "REVEALING SOON.." },
   { icon: Bot, label: "Team Size", value: "2 – 5 Members" },
   { icon: Aperture, label: "Tracks", value: "Software & Hardware" },
-  { icon: Calendar, label: "Deadline", value: "August 1st" },
+  { icon: Calendar, label: "Registration Deadline", value: "August 1st" },
 ];
 
 /* ── Track Domains ── */
